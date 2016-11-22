@@ -1,0 +1,509 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>QconfException &#8212; UGE Python Configuration Library 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="UGE Python Configuration Library 0.1 documentation" href="index.html" />
+    <link rel="prev" title="QconfObject" href="uge.objects.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="uge.objects.html" title="QconfObject"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">UGE Python Configuration Library 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-uge.exceptions"></span><div class="section" id="qconfexception">
+<h1>QconfException<a class="headerlink" href="#qconfexception" title="Permalink to this headline">¶</a></h1>
+<dl class="exception">
+<dt id="uge.exceptions.QconfException">
+<em class="property">exception </em><code class="descclassname">uge.exceptions.</code><code class="descname">QconfException</code><a class="reference internal" href="_modules/uge/exceptions/qconf_exception.html#QconfException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.QconfException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
+<p>Base Qconf exception class.</p>
+<p>Error code: uge_status.UGE_ERROR</p>
+<p>Usage examples:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">raise</span> <span class="n">QconfException</span><span class="p">(</span><span class="n">error_message</span><span class="p">,</span> <span class="n">error_code</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">raise</span> <span class="n">QconfException</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">error_message</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">raise</span> <span class="n">QconfException</span><span class="p">(</span><span class="n">exception</span><span class="o">=</span><span class="n">exception_object</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="uge.exceptions.QconfException.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>error=''</em>, <em>error_code=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/qconf_exception.html#QconfException.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.QconfException.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>error</strong> (<em>str</em>) &#8211; Error message.</li>
+<li><strong>error_code</strong> (<em>int</em>) &#8211; Error code.</li>
+<li><strong>kwargs</strong> &#8211; Keyword arguments, may contain &#8216;args=error_message&#8217;, &#8216;exception=exception_object&#8217;, or &#8216;error_details=details&#8217;.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.exceptions.QconfException.get_args">
+<code class="descname">get_args</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/qconf_exception.html#QconfException.get_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.QconfException.get_args" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Exception arguments.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.exceptions.QconfException.get_error_code">
+<code class="descname">get_error_code</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/qconf_exception.html#QconfException.get_error_code"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.QconfException.get_error_code" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Exception error code.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.exceptions.QconfException.get_error_details">
+<code class="descname">get_error_details</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/qconf_exception.html#QconfException.get_error_details"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.QconfException.get_error_details" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Exception error details.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.exceptions.QconfException.get_error_message">
+<code class="descname">get_error_message</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/qconf_exception.html#QconfException.get_error_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.QconfException.get_error_message" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Exception error message.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.exceptions.QconfException.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/qconf_exception.html#QconfException.to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.QconfException.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Exception data dictionary.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.exceptions.QconfException.to_json">
+<code class="descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/qconf_exception.html#QconfException.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.QconfException.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">JSON string with exception data.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="authorizationerror">
+<h1>AuthorizationError<a class="headerlink" href="#authorizationerror" title="Permalink to this headline">¶</a></h1>
+<dl class="exception">
+<dt id="uge.exceptions.AuthorizationError">
+<em class="property">exception </em><code class="descclassname">uge.exceptions.</code><code class="descname">AuthorizationError</code><a class="reference internal" href="_modules/uge/exceptions/authorization_error.html#AuthorizationError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.AuthorizationError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">uge.exceptions.qconf_exception.QconfException</span></code></p>
+<p>Authorization error class.</p>
+<p>Error code: uge_status.UGE_AUTHORIZATION_ERROR</p>
+<dl class="method">
+<dt id="uge.exceptions.AuthorizationError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>error=''</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/authorization_error.html#AuthorizationError.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.AuthorizationError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>error</strong> (<em>str</em>) &#8211; Error message.</li>
+<li><strong>kwargs</strong> &#8211; Keyword arguments, may contain &#8216;args=error_message&#8217;, &#8216;exception=exception_object&#8217;, or &#8216;error_details=details&#8217;.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="commandfailed">
+<h1>CommandFailed<a class="headerlink" href="#commandfailed" title="Permalink to this headline">¶</a></h1>
+<dl class="exception">
+<dt id="uge.exceptions.CommandFailed">
+<em class="property">exception </em><code class="descclassname">uge.exceptions.</code><code class="descname">CommandFailed</code><a class="reference internal" href="_modules/uge/exceptions/command_failed.html#CommandFailed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.CommandFailed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">uge.exceptions.qconf_exception.QconfException</span></code></p>
+<p>Command failed error class.</p>
+<p>Error code: uge_status.UGE_COMMAND_FAILED</p>
+<dl class="method">
+<dt id="uge.exceptions.CommandFailed.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>error=''</em>, <em>command_stdout=None</em>, <em>command_stderr=None</em>, <em>command_exit_status=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/command_failed.html#CommandFailed.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.CommandFailed.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>error</strong> (<em>str</em>) &#8211; Error message.</li>
+<li><strong>command_stdout</strong> (<em>str</em>) &#8211; Command standard output.</li>
+<li><strong>command_stderr</strong> (<em>str</em>) &#8211; Command standard error.</li>
+<li><strong>command_exit_status</strong> (<em>int</em>) &#8211; Command exit status.</li>
+<li><strong>kwargs</strong> &#8211; Keyword arguments, may contain &#8216;args=error_message&#8217;, &#8216;exception=exception_object&#8217;, or &#8216;error_details=details&#8217;.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.exceptions.CommandFailed.get_command_exit_status">
+<code class="descname">get_command_exit_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/command_failed.html#CommandFailed.get_command_exit_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.CommandFailed.get_command_exit_status" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Command exit status.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.exceptions.CommandFailed.get_command_stderr">
+<code class="descname">get_command_stderr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/command_failed.html#CommandFailed.get_command_stderr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.CommandFailed.get_command_stderr" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Command standard error.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.exceptions.CommandFailed.get_command_stdout">
+<code class="descname">get_command_stdout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/command_failed.html#CommandFailed.get_command_stdout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.CommandFailed.get_command_stdout" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Command standard output.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="configurationerror">
+<h1>ConfigurationError<a class="headerlink" href="#configurationerror" title="Permalink to this headline">¶</a></h1>
+<dl class="exception">
+<dt id="uge.exceptions.ConfigurationError">
+<em class="property">exception </em><code class="descclassname">uge.exceptions.</code><code class="descname">ConfigurationError</code><a class="reference internal" href="_modules/uge/exceptions/configuration_error.html#ConfigurationError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.ConfigurationError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">uge.exceptions.qconf_exception.QconfException</span></code></p>
+<p>Configuration error class.</p>
+<p>Error code: uge_status.UGE_CONFIGURATION_ERROR</p>
+<dl class="method">
+<dt id="uge.exceptions.ConfigurationError.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>error=''</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/configuration_error.html#ConfigurationError.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.ConfigurationError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>error</strong> (<em>str</em>) &#8211; Error message.</li>
+<li><strong>kwargs</strong> &#8211; Keyword arguments, may contain &#8216;args=error_message&#8217;, &#8216;exception=exception_object&#8217;, or &#8216;error_details=details&#8217;.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="invalidargument">
+<h1>InvalidArgument<a class="headerlink" href="#invalidargument" title="Permalink to this headline">¶</a></h1>
+<dl class="exception">
+<dt id="uge.exceptions.InvalidArgument">
+<em class="property">exception </em><code class="descclassname">uge.exceptions.</code><code class="descname">InvalidArgument</code><a class="reference internal" href="_modules/uge/exceptions/invalid_argument.html#InvalidArgument"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.InvalidArgument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">uge.exceptions.qconf_exception.QconfException</span></code></p>
+<p>Invalid argument error class.</p>
+<p>Error code: uge_status.UGE_INVALID_ARGUMENT</p>
+<dl class="method">
+<dt id="uge.exceptions.InvalidArgument.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>error=''</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/invalid_argument.html#InvalidArgument.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.InvalidArgument.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>error</strong> (<em>str</em>) &#8211; Error message.</li>
+<li><strong>kwargs</strong> &#8211; Keyword arguments, may contain &#8216;args=error_message&#8217;, &#8216;exception=exception_object&#8217;, or &#8216;error_details=details&#8217;.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="invalidrequest">
+<h1>InvalidRequest<a class="headerlink" href="#invalidrequest" title="Permalink to this headline">¶</a></h1>
+<dl class="exception">
+<dt id="uge.exceptions.InvalidRequest">
+<em class="property">exception </em><code class="descclassname">uge.exceptions.</code><code class="descname">InvalidRequest</code><a class="reference internal" href="_modules/uge/exceptions/invalid_request.html#InvalidRequest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.InvalidRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">uge.exceptions.qconf_exception.QconfException</span></code></p>
+<p>Invalid request error class.</p>
+<p>Error code: uge_status.UGE_INVALID_REQUEST</p>
+<dl class="method">
+<dt id="uge.exceptions.InvalidRequest.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>error=''</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/invalid_request.html#InvalidRequest.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.InvalidRequest.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>error</strong> (<em>str</em>) &#8211; Error message.</li>
+<li><strong>kwargs</strong> &#8211; Keyword arguments, may contain &#8216;args=error_message&#8217;, &#8216;exception=exception_object&#8217;, or &#8216;error_details=details&#8217;.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="objectalreadyexists">
+<h1>ObjectAlreadyExists<a class="headerlink" href="#objectalreadyexists" title="Permalink to this headline">¶</a></h1>
+<dl class="exception">
+<dt id="uge.exceptions.ObjectAlreadyExists">
+<em class="property">exception </em><code class="descclassname">uge.exceptions.</code><code class="descname">ObjectAlreadyExists</code><a class="reference internal" href="_modules/uge/exceptions/object_already_exists.html#ObjectAlreadyExists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.ObjectAlreadyExists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">uge.exceptions.qconf_exception.QconfException</span></code></p>
+<p>Object not found error class.</p>
+<p>Error code: uge_status.UGE_OBJECT_ALREADY_EXISTS</p>
+<dl class="method">
+<dt id="uge.exceptions.ObjectAlreadyExists.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>error=''</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/object_already_exists.html#ObjectAlreadyExists.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.ObjectAlreadyExists.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>error</strong> (<em>str</em>) &#8211; Error message.</li>
+<li><strong>kwargs</strong> &#8211; Keyword arguments, may contain &#8216;args=error_message&#8217;, &#8216;exception=exception_object&#8217;, or &#8216;error_details=details&#8217;.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="objectnotfound">
+<h1>ObjectNotFound<a class="headerlink" href="#objectnotfound" title="Permalink to this headline">¶</a></h1>
+<dl class="exception">
+<dt id="uge.exceptions.ObjectNotFound">
+<em class="property">exception </em><code class="descclassname">uge.exceptions.</code><code class="descname">ObjectNotFound</code><a class="reference internal" href="_modules/uge/exceptions/object_not_found.html#ObjectNotFound"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.ObjectNotFound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">uge.exceptions.qconf_exception.QconfException</span></code></p>
+<p>Object not found error class.</p>
+<p>Error code: uge_status.UGE_OBJECT_NOT_FOUND</p>
+<dl class="method">
+<dt id="uge.exceptions.ObjectNotFound.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>error=''</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/object_not_found.html#ObjectNotFound.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.ObjectNotFound.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>error</strong> (<em>str</em>) &#8211; Error message.</li>
+<li><strong>kwargs</strong> &#8211; Keyword arguments, may contain &#8216;args=error_message&#8217;, &#8216;exception=exception_object&#8217;, or &#8216;error_details=details&#8217;.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="qmasterunreachable">
+<h1>QmasterUnreachable<a class="headerlink" href="#qmasterunreachable" title="Permalink to this headline">¶</a></h1>
+<dl class="exception">
+<dt id="uge.exceptions.QmasterUnreachable">
+<em class="property">exception </em><code class="descclassname">uge.exceptions.</code><code class="descname">QmasterUnreachable</code><a class="reference internal" href="_modules/uge/exceptions/qmaster_unreachable.html#QmasterUnreachable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.QmasterUnreachable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">uge.exceptions.qconf_exception.QconfException</span></code></p>
+<p>Qmaster unreachable error class.</p>
+<p>Error code: uge_status.UGE_QMASTER_UNREACHABLE</p>
+<dl class="method">
+<dt id="uge.exceptions.QmasterUnreachable.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>error=''</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/exceptions/qmaster_unreachable.html#QmasterUnreachable.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.exceptions.QmasterUnreachable.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>error</strong> (<em>str</em>) &#8211; Error message.</li>
+<li><strong>kwargs</strong> &#8211; Keyword arguments, may contain &#8216;args=error_message&#8217;, &#8216;exception=exception_object&#8217;, or &#8216;error_details=details&#8217;.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QconfException</a></li>
+<li><a class="reference internal" href="#authorizationerror">AuthorizationError</a></li>
+<li><a class="reference internal" href="#commandfailed">CommandFailed</a></li>
+<li><a class="reference internal" href="#configurationerror">ConfigurationError</a></li>
+<li><a class="reference internal" href="#invalidargument">InvalidArgument</a></li>
+<li><a class="reference internal" href="#invalidrequest">InvalidRequest</a></li>
+<li><a class="reference internal" href="#objectalreadyexists">ObjectAlreadyExists</a></li>
+<li><a class="reference internal" href="#objectnotfound">ObjectNotFound</a></li>
+<li><a class="reference internal" href="#qmasterunreachable">QmasterUnreachable</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="uge.objects.html"
+                        title="previous chapter">QconfObject</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/uge.exceptions.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="uge.objects.html" title="QconfObject"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">UGE Python Configuration Library 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Univa.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

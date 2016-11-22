@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>uge.objects.qconf_name_list &#8212; UGE Python Configuration Library 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="UGE Python Configuration Library 0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">UGE Python Configuration Library 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for uge.objects.qconf_name_list</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># </span>
+<span class="c1">#___INFO__MARK_BEGIN__ </span>
+<span class="c1">########################################################################## </span>
+<span class="c1"># Copyright 2016,2017 Univa Corporation</span>
+<span class="c1"># </span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1"># </span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0 </span>
+<span class="c1"># </span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software </span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS, </span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. </span>
+<span class="c1"># See the License for the specific language governing permissions and </span>
+<span class="c1"># limitations under the License. </span>
+<span class="c1">########################################################################### </span>
+<span class="c1">#___INFO__MARK_END__ </span>
+<span class="c1"># </span>
+<span class="kn">import</span> <span class="nn">types</span>
+<span class="kn">import</span> <span class="nn">UserList</span>
+<span class="kn">from</span> <span class="nn">qconf_object</span> <span class="k">import</span> <span class="n">QconfObject</span>
+<span class="kn">from</span> <span class="nn">uge.exceptions.invalid_argument</span> <span class="k">import</span> <span class="n">InvalidArgument</span>
+
+<div class="viewcode-block" id="QconfNameList"><a class="viewcode-back" href="../../../uge.objects.html#uge.objects.qconf_name_list.QconfNameList">[docs]</a><span class="k">class</span> <span class="nc">QconfNameList</span><span class="p">(</span><span class="n">QconfObject</span><span class="p">,</span> <span class="n">UserList</span><span class="o">.</span><span class="n">UserList</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    This class represents list of names returned by various qconf commands. It supports</span>
+<span class="sd">    all standard python list interfaces.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="QconfNameList.__init__"><a class="viewcode-back" href="../../../uge.objects.html#uge.objects.qconf_name_list.QconfNameList.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">json_string</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Class constructor. </span>
+
+<span class="sd">        :param name: List name. </span>
+<span class="sd">        :type name: str</span>
+
+<span class="sd">        :param data: Name list data. If provided, it will override corresponding data from object&#39;s JSON string representation.</span>
+<span class="sd">        :type data: list</span>
+
+<span class="sd">        :param metadata: Name list metadata. If provided, it will override corresponding metadata from object&#39;s JSON string representation.</span>
+<span class="sd">        :type metadata: dict</span>
+
+<span class="sd">        :param json_string: Name list JSON string representation.</span>
+<span class="sd">        :type json_string: str</span>
+
+<span class="sd">        :raises: **InvalidArgument** - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a QconfNameList object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">UserList</span><span class="o">.</span><span class="n">UserList</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">QconfObject</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="n">json_string</span><span class="o">=</span><span class="n">json_string</span><span class="p">)</span></div>
+    
+    <span class="k">def</span> <span class="nf">check_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="n">types</span><span class="o">.</span><span class="n">ListType</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidArgument</span><span class="p">(</span><span class="s1">&#39;Provided data is not a list: </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">convert_data_to_uge_keywords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<span class="c1">#############################################################################</span>
+<span class="c1"># Testing.</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">name_list</span> <span class="o">=</span> <span class="n">QconfNameList</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;xyz&#39;</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">])</span>
+    <span class="nb">print</span> <span class="n">name_list</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+    <span class="n">name_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;admin1&#39;</span><span class="p">)</span>
+    <span class="n">name_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;admin2&#39;</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="n">name_list</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">name_list</span><span class="p">:</span>
+        <span class="nb">print</span> <span class="s1">&#39;NAME: &#39;</span><span class="p">,</span> <span class="n">n</span>
+
+    
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">UGE Python Configuration Library 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Univa.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

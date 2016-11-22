@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>uge.objects.cluster_queue_v1_0 &#8212; UGE Python Configuration Library 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="UGE Python Configuration Library 0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">UGE Python Configuration Library 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for uge.objects.cluster_queue_v1_0</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># </span>
+<span class="c1">#___INFO__MARK_BEGIN__ </span>
+<span class="c1">########################################################################## </span>
+<span class="c1"># Copyright 2016,2017 Univa Corporation</span>
+<span class="c1"># </span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1"># </span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0 </span>
+<span class="c1"># </span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software </span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS, </span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. </span>
+<span class="c1"># See the License for the specific language governing permissions and </span>
+<span class="c1"># limitations under the License. </span>
+<span class="c1">########################################################################### </span>
+<span class="c1">#___INFO__MARK_END__ </span>
+<span class="c1"># </span>
+<span class="kn">from</span> <span class="nn">qconf_object</span> <span class="k">import</span> <span class="n">QconfObject</span>
+
+<div class="viewcode-block" id="ClusterQueue"><a class="viewcode-back" href="../../../uge.objects.html#uge.objects.cluster_queue_v1_0.ClusterQueue">[docs]</a><span class="k">class</span> <span class="nc">ClusterQueue</span><span class="p">(</span><span class="n">QconfObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; This class encapsulates UGE cluster queue object. &quot;&quot;&quot;</span>
+
+    <span class="c1">#: Object version. </span>
+    <span class="n">VERSION</span> <span class="o">=</span> <span class="s1">&#39;1.0&#39;</span>
+
+    <span class="c1">#: Object name key.</span>
+    <span class="n">NAME_KEY</span> <span class="o">=</span> <span class="s1">&#39;qname&#39;</span>
+ 
+    <span class="c1">#: Object keys that must be provided by user.</span>
+    <span class="n">USER_PROVIDED_KEYS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;qname&#39;</span><span class="p">]</span>
+
+    <span class="c1">#: Default values for required data keys.</span>
+    <span class="n">REQUIRED_DATA_DEFAULTS</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;hostlist&#39;</span>           <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;seq_no&#39;</span>             <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s1">&#39;load_thresholds&#39;</span>    <span class="p">:</span> <span class="s1">&#39;np_load_avg=1.75&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;suspend_thresholds&#39;</span> <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;nsuspend&#39;</span>           <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">&#39;suspend_interval&#39;</span>   <span class="p">:</span> <span class="s1">&#39;00:05:00&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;priority&#39;</span>           <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s1">&#39;min_cpu_interval&#39;</span>   <span class="p">:</span> <span class="s1">&#39;00:05:00&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;qtype&#39;</span>              <span class="p">:</span> <span class="s1">&#39;BATCH INTERACTIVE&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ckpt_list&#39;</span>          <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;pe_list&#39;</span>            <span class="p">:</span> <span class="s1">&#39;make&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;jc_list&#39;</span>            <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;NO_JC&#39;</span><span class="p">,</span><span class="s1">&#39;ANY_JC&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;rerun&#39;</span>              <span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s1">&#39;slots&#39;</span>              <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">&#39;tmpdir&#39;</span>             <span class="p">:</span> <span class="s1">&#39;/tmp&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;shell&#39;</span>              <span class="p">:</span> <span class="s1">&#39;/bin/csh&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;prolog&#39;</span>             <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;epilog&#39;</span>             <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;shell_start_mode&#39;</span>   <span class="p">:</span> <span class="s1">&#39;unix_behavior&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;starter_method&#39;</span>     <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;suspend_method&#39;</span>     <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;resume_method&#39;</span>      <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;terminate_method&#39;</span>   <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;notify&#39;</span>             <span class="p">:</span> <span class="s1">&#39;00:00:60&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;owner_list&#39;</span>         <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;user_lists&#39;</span>         <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;xuser_lists&#39;</span>        <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;subordinate_list&#39;</span>   <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;complex_values&#39;</span>     <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;projects&#39;</span>           <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;xprojects&#39;</span>          <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;calendar&#39;</span>           <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;initial_state&#39;</span>      <span class="p">:</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;s_rt&#39;</span>               <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;h_rt&#39;</span>               <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;d_rt&#39;</span>               <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;s_cpu&#39;</span>              <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;h_cpu&#39;</span>              <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;s_fsize&#39;</span>            <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;h_fsize&#39;</span>            <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;s_data&#39;</span>             <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;h_data&#39;</span>             <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;s_stack&#39;</span>            <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;h_stack&#39;</span>            <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;s_core&#39;</span>             <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;h_core&#39;</span>             <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;s_rss&#39;</span>              <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;h_rss&#39;</span>              <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;s_vmem&#39;</span>             <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;h_vmem&#39;</span>             <span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="n">INT_KEY_MAP</span> <span class="o">=</span> <span class="n">QconfObject</span><span class="o">.</span><span class="n">get_int_key_map</span><span class="p">(</span><span class="n">REQUIRED_DATA_DEFAULTS</span><span class="p">)</span>
+    <span class="n">FLOAT_KEY_MAP</span> <span class="o">=</span> <span class="n">QconfObject</span><span class="o">.</span><span class="n">get_float_key_map</span><span class="p">(</span><span class="n">REQUIRED_DATA_DEFAULTS</span><span class="p">)</span>
+    <span class="n">DEFAULT_LIST_DELIMITER</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span>
+    <span class="n">LIST_KEY_MAP</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;slots&#39;</span>              <span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;load_thresholds&#39;</span>    <span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;suspend_thresholds&#39;</span> <span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ckpt_list&#39;</span>          <span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;pe_list&#39;</span>            <span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;jc_list&#39;</span>            <span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;owner_list&#39;</span>         <span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;user_lists&#39;</span>         <span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;xuser_lists&#39;</span>        <span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;subordinate_list&#39;</span>   <span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;complex_values&#39;</span>     <span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;projects&#39;</span>           <span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;xprojects&#39;</span>          <span class="p">:</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+
+<div class="viewcode-block" id="ClusterQueue.__init__"><a class="viewcode-back" href="../../../uge.objects.html#uge.objects.cluster_queue_v1_0.ClusterQueue.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">json_string</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Class constructor. </span>
+
+<span class="sd">        :param name: Queue name. If provided, it will override queue name from data or JSON string parameters (&#39;qname&#39; key).</span>
+<span class="sd">        :type name: str</span>
+
+<span class="sd">        :param data: Queue data. If provided, it will override corresponding data from queue JSON string representation.</span>
+<span class="sd">        :type data: dict</span>
+
+<span class="sd">        :param metadata: Queue metadata. If provided, it will override corresponding metadata from queue JSON string representation.</span>
+<span class="sd">        :type metadata: dict</span>
+
+<span class="sd">        :param json_string: Queue JSON string representation.</span>
+<span class="sd">        :type json_string: str</span>
+
+<span class="sd">        :raises: **InvalidArgument** - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a ClusterQueue object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">QconfObject</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="n">json_string</span><span class="o">=</span><span class="n">json_string</span><span class="p">)</span></div></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">UGE Python Configuration Library 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Univa.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

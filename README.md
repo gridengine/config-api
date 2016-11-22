@@ -1,5 +1,4 @@
-# config-api
-(c) Copyright 2016 Univa Corporation
+(c) Copyright 2016, 2017 Univa Corporation
 This software is licensed using Apache License 2.0 
 Please read the LICENSE file for a complete listing of the License.
 
@@ -76,3 +75,4 @@ This step is not needed if UGE PyCL egg package is installed.
 ```sh
   $ make test 
 ```
+

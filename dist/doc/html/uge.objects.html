@@ -1,0 +1,1322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>QconfObject &#8212; UGE Python Configuration Library 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="UGE Python Configuration Library 0.1 documentation" href="index.html" />
+    <link rel="next" title="QconfException" href="uge.exceptions.html" />
+    <link rel="prev" title="QconfApi" href="uge.api.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="uge.exceptions.html" title="QconfException"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="uge.api.html" title="QconfApi"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">UGE Python Configuration Library 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-uge.objects"></span><div class="section" id="qconfobject">
+<h1>QconfObject<a class="headerlink" href="#qconfobject" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.qconf_object.QconfObject">
+<em class="property">class </em><code class="descclassname">uge.objects.qconf_object.</code><code class="descname">QconfObject</code><a class="reference internal" href="_modules/uge/objects/qconf_object.html#QconfObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_object.QconfObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This class encapsulates data and functionality common to all Qconf API objects.</p>
+<dl class="method">
+<dt id="uge.objects.qconf_object.QconfObject.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name=None</em>, <em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/qconf_object.html#QconfObject.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_object.QconfObject.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; Object name. If provided, it will override object&#8217;s name from data or JSON string parameters.</li>
+<li><strong>data</strong> (<em>varies</em>) &#8211; Object data. If provided, it will override corresponding data from object&#8217;s JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Object metadata. If provided, it will override corresponding metadata from object&#8217;s JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Object&#8217;s JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a Qconf object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.qconf_object.QconfObject.check_user_provided_keys">
+<code class="descname">check_user_provided_keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/qconf_object.html#QconfObject.check_user_provided_keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_object.QconfObject.check_user_provided_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks for presence of all data keys that must be provided by user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>InvalidRequest</strong> - in case object&#8217;s data is not a dictionary, or if any of the required keys are missing.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.qconf_object.QconfObject.remove_optional_keys">
+<code class="descname">remove_optional_keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/qconf_object.html#QconfObject.remove_optional_keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_object.QconfObject.remove_optional_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes values for keys that are not required from object&#8217;s data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>InvalidRequest</strong> - in case object&#8217;s data is not a dictionary.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.qconf_object.QconfObject.set_add_metadata">
+<code class="descname">set_add_metadata</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/qconf_object.html#QconfObject.set_add_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_object.QconfObject.set_add_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets default object metadata (user/timestamp) for API add operations.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.qconf_object.QconfObject.set_get_metadata">
+<code class="descname">set_get_metadata</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/qconf_object.html#QconfObject.set_get_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_object.QconfObject.set_get_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets default object metadata (user/timestamp) for API get operations.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.qconf_object.QconfObject.set_modify_metadata">
+<code class="descname">set_modify_metadata</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/qconf_object.html#QconfObject.set_modify_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_object.QconfObject.set_modify_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets default object metadata (user/timestamp) for API modify operations.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.qconf_object.QconfObject.to_json">
+<code class="descname">to_json</code><span class="sig-paren">(</span><em>use_uge_keywords=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/qconf_object.html#QconfObject.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_object.QconfObject.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts object to JSON string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>use_uge_keywords</strong> &#8211; if True, UGE keywords (e.g. &#8216;NONE&#8217;) are restored before conversion to JSON; otherwise, no changes are made to object&#8217;s data. Default is False.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Object&#8217;s JSON representation.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.qconf_object.QconfObject.to_uge">
+<code class="descname">to_uge</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/qconf_object.html#QconfObject.to_uge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_object.QconfObject.to_uge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts object to string acceptable as input for UGE qconf command.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Object&#8217;s UGE-formatted string.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.qconf_object.QconfObject.update_with_required_data_defaults">
+<code class="descname">update_with_required_data_defaults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/qconf_object.html#QconfObject.update_with_required_data_defaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_object.QconfObject.update_with_required_data_defaults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates object with default values for required data keys.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>InvalidArgument</strong> - in case object&#8217;s data is not a dictionary.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="qconfdictlist">
+<h1>QconfDictList<a class="headerlink" href="#qconfdictlist" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.qconf_dict_list.QconfDictList">
+<em class="property">class </em><code class="descclassname">uge.objects.qconf_dict_list.</code><code class="descname">QconfDictList</code><a class="reference internal" href="_modules/uge/objects/qconf_dict_list.html#QconfDictList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_dict_list.QconfDictList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_object.QconfObject" title="uge.objects.qconf_object.QconfObject"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_object.QconfObject</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">UserList.UserList</span></code></p>
+<p>This class encapsulates data and functionality common to all Qconf objects based on a list of dictionaries.</p>
+<dl class="method">
+<dt id="uge.objects.qconf_dict_list.QconfDictList.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/qconf_dict_list.html#QconfDictList.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_dict_list.QconfDictList.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>dict</em>) &#8211; Configuration data. If provided, it will override corresponding data from JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Configuration metadata. If provided, it will override corresponding metadata from JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Configuration JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not represent a list of dictionaries object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.qconf_dict_list.QconfDictList.check_user_provided_keys">
+<code class="descname">check_user_provided_keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/qconf_dict_list.html#QconfDictList.check_user_provided_keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_dict_list.QconfDictList.check_user_provided_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks for presence of all data keys that must be provided by user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>InvalidRequest</strong> - in case object&#8217;s data is not a dictionary, or if any of the required keys are missing.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.qconf_dict_list.QconfDictList.to_uge">
+<code class="descname">to_uge</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/qconf_dict_list.html#QconfDictList.to_uge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_dict_list.QconfDictList.to_uge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts object to string acceptable as input for UGE qconf command.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Object&#8217;s UGE-formatted string.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.qconf_dict_list.QconfDictList.update_with_required_data_defaults">
+<code class="descname">update_with_required_data_defaults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/qconf_dict_list.html#QconfDictList.update_with_required_data_defaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_dict_list.QconfDictList.update_with_required_data_defaults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates list objects with default values for required data keys.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>InvalidArgument</strong> - in case object&#8217;s data is not a list, or one of the list members is not a dictionary.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="qconfnamelist">
+<h1>QconfNameList<a class="headerlink" href="#qconfnamelist" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.qconf_name_list.QconfNameList">
+<em class="property">class </em><code class="descclassname">uge.objects.qconf_name_list.</code><code class="descname">QconfNameList</code><a class="reference internal" href="_modules/uge/objects/qconf_name_list.html#QconfNameList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_name_list.QconfNameList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_object.QconfObject" title="uge.objects.qconf_object.QconfObject"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_object.QconfObject</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">UserList.UserList</span></code></p>
+<p>This class represents list of names returned by various qconf commands. It supports
+all standard python list interfaces.</p>
+<dl class="method">
+<dt id="uge.objects.qconf_name_list.QconfNameList.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name=None</em>, <em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/qconf_name_list.html#QconfNameList.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.qconf_name_list.QconfNameList.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; List name.</li>
+<li><strong>data</strong> (<em>list</em>) &#8211; Name list data. If provided, it will override corresponding data from object&#8217;s JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Name list metadata. If provided, it will override corresponding metadata from object&#8217;s JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Name list JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a QconfNameList object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="accesslist-v1-0">
+<h1>AccessList v1.0<a class="headerlink" href="#accesslist-v1-0" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.access_list_v1_0.AccessList">
+<em class="property">class </em><code class="descclassname">uge.objects.access_list_v1_0.</code><code class="descname">AccessList</code><a class="reference internal" href="_modules/uge/objects/access_list_v1_0.html#AccessList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.access_list_v1_0.AccessList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_object.QconfObject" title="uge.objects.qconf_object.QconfObject"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_object.QconfObject</span></code></a></p>
+<p>This class encapsulates UGE access list object.</p>
+<dl class="attribute">
+<dt id="uge.objects.access_list_v1_0.AccessList.VERSION">
+<code class="descname">VERSION</code><em class="property"> = '1.0'</em><a class="headerlink" href="#uge.objects.access_list_v1_0.AccessList.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object version.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.access_list_v1_0.AccessList.NAME_KEY">
+<code class="descname">NAME_KEY</code><em class="property"> = 'name'</em><a class="headerlink" href="#uge.objects.access_list_v1_0.AccessList.NAME_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object name key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.access_list_v1_0.AccessList.USER_PROVIDED_KEYS">
+<code class="descname">USER_PROVIDED_KEYS</code><em class="property"> = ['name']</em><a class="headerlink" href="#uge.objects.access_list_v1_0.AccessList.USER_PROVIDED_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object keys that must be provided by access list.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.access_list_v1_0.AccessList.REQUIRED_DATA_DEFAULTS">
+<code class="descname">REQUIRED_DATA_DEFAULTS</code><em class="property"> = {'oticket': 0, 'type': 'ACL', 'fshare': 0, 'entries': None}</em><a class="headerlink" href="#uge.objects.access_list_v1_0.AccessList.REQUIRED_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required data keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.access_list_v1_0.AccessList.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name=None</em>, <em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/access_list_v1_0.html#AccessList.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.access_list_v1_0.AccessList.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; Access list name. If provided, it will override access list name from data or JSON string parameters (&#8216;name&#8217; key).</li>
+<li><strong>data</strong> (<em>dict</em>) &#8211; Access list data. If provided, it will override corresponding data from access list JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Access list metadata. If provided, it will override corresponding metadata from access list JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Access list JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing an AccessList object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="calendar-v1-0">
+<h1>Calendar v1.0<a class="headerlink" href="#calendar-v1-0" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.calendar_v1_0.Calendar">
+<em class="property">class </em><code class="descclassname">uge.objects.calendar_v1_0.</code><code class="descname">Calendar</code><a class="reference internal" href="_modules/uge/objects/calendar_v1_0.html#Calendar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.calendar_v1_0.Calendar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_object.QconfObject" title="uge.objects.qconf_object.QconfObject"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_object.QconfObject</span></code></a></p>
+<p>This class encapsulates UGE calendar object.</p>
+<dl class="attribute">
+<dt id="uge.objects.calendar_v1_0.Calendar.VERSION">
+<code class="descname">VERSION</code><em class="property"> = '1.0'</em><a class="headerlink" href="#uge.objects.calendar_v1_0.Calendar.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object version.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.calendar_v1_0.Calendar.NAME_KEY">
+<code class="descname">NAME_KEY</code><em class="property"> = 'calendar_name'</em><a class="headerlink" href="#uge.objects.calendar_v1_0.Calendar.NAME_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object name key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.calendar_v1_0.Calendar.USER_PROVIDED_KEYS">
+<code class="descname">USER_PROVIDED_KEYS</code><em class="property"> = ['calendar_name']</em><a class="headerlink" href="#uge.objects.calendar_v1_0.Calendar.USER_PROVIDED_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object keys that must be provided by user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.calendar_v1_0.Calendar.REQUIRED_DATA_DEFAULTS">
+<code class="descname">REQUIRED_DATA_DEFAULTS</code><em class="property"> = {'week': None, 'year': None}</em><a class="headerlink" href="#uge.objects.calendar_v1_0.Calendar.REQUIRED_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required data keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.calendar_v1_0.Calendar.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name=None</em>, <em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/calendar_v1_0.html#Calendar.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.calendar_v1_0.Calendar.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; Calendar name. If provided, it will override calendar name from data or JSON string parameters (&#8216;name&#8217; key).</li>
+<li><strong>data</strong> (<em>dict</em>) &#8211; Calendar data. If provided, it will override corresponding data from calendar JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Calendar metadata. If provided, it will override corresponding metadata from calendar JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Calendar JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing an Calendar object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="checkpointingenvironment-v1-0">
+<h1>CheckpointingEnvironment v1.0<a class="headerlink" href="#checkpointingenvironment-v1-0" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.checkpointing_environment_v1_0.CheckpointingEnvironment">
+<em class="property">class </em><code class="descclassname">uge.objects.checkpointing_environment_v1_0.</code><code class="descname">CheckpointingEnvironment</code><a class="reference internal" href="_modules/uge/objects/checkpointing_environment_v1_0.html#CheckpointingEnvironment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.checkpointing_environment_v1_0.CheckpointingEnvironment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_object.QconfObject" title="uge.objects.qconf_object.QconfObject"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_object.QconfObject</span></code></a></p>
+<p>This class encapsulates UGE checkpointing environment object.</p>
+<dl class="attribute">
+<dt id="uge.objects.checkpointing_environment_v1_0.CheckpointingEnvironment.VERSION">
+<code class="descname">VERSION</code><em class="property"> = '1.0'</em><a class="headerlink" href="#uge.objects.checkpointing_environment_v1_0.CheckpointingEnvironment.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object version.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.checkpointing_environment_v1_0.CheckpointingEnvironment.NAME_KEY">
+<code class="descname">NAME_KEY</code><em class="property"> = 'ckpt_name'</em><a class="headerlink" href="#uge.objects.checkpointing_environment_v1_0.CheckpointingEnvironment.NAME_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object name key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.checkpointing_environment_v1_0.CheckpointingEnvironment.USER_PROVIDED_KEYS">
+<code class="descname">USER_PROVIDED_KEYS</code><em class="property"> = ['ckpt_name']</em><a class="headerlink" href="#uge.objects.checkpointing_environment_v1_0.CheckpointingEnvironment.USER_PROVIDED_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object keys that must be provided by user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.checkpointing_environment_v1_0.CheckpointingEnvironment.REQUIRED_DATA_DEFAULTS">
+<code class="descname">REQUIRED_DATA_DEFAULTS</code><em class="property"> = {'ckpt_command': None, 'restart_command': None, 'interface': 'userdefined', 'when': 'sx', 'ckpt_dir': '/tmp', 'clean_command': None, 'signal': None, 'migr_command': None}</em><a class="headerlink" href="#uge.objects.checkpointing_environment_v1_0.CheckpointingEnvironment.REQUIRED_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required data keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.checkpointing_environment_v1_0.CheckpointingEnvironment.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name=None</em>, <em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/checkpointing_environment_v1_0.html#CheckpointingEnvironment.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.checkpointing_environment_v1_0.CheckpointingEnvironment.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; Checkpointing environment name. If provided, it will override environment name from data or JSON string parameters (&#8216;ckpt_name&#8217; key).</li>
+<li><strong>data</strong> (<em>dict</em>) &#8211; Checkpointing environment data. If provided, it will override corresponding data from environment JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Checkpointing environment metadata. If provided, it will override corresponding metadata from environment JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Checkpointing environment JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a PE object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="clusterconfiguration-v1-0">
+<h1>ClusterConfiguration v1.0<a class="headerlink" href="#clusterconfiguration-v1-0" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.cluster_configuration_v1_0.ClusterConfiguration">
+<em class="property">class </em><code class="descclassname">uge.objects.cluster_configuration_v1_0.</code><code class="descname">ClusterConfiguration</code><a class="reference internal" href="_modules/uge/objects/cluster_configuration_v1_0.html#ClusterConfiguration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.cluster_configuration_v1_0.ClusterConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_object.QconfObject" title="uge.objects.qconf_object.QconfObject"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_object.QconfObject</span></code></a></p>
+<p>This class encapsulates UGE cluster configuration object.</p>
+<dl class="attribute">
+<dt id="uge.objects.cluster_configuration_v1_0.ClusterConfiguration.VERSION">
+<code class="descname">VERSION</code><em class="property"> = '1.0'</em><a class="headerlink" href="#uge.objects.cluster_configuration_v1_0.ClusterConfiguration.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object version.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.cluster_configuration_v1_0.ClusterConfiguration.NAME_KEY">
+<code class="descname">NAME_KEY</code><em class="property"> = None</em><a class="headerlink" href="#uge.objects.cluster_configuration_v1_0.ClusterConfiguration.NAME_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object name key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.cluster_configuration_v1_0.ClusterConfiguration.USER_PROVIDED_KEYS">
+<code class="descname">USER_PROVIDED_KEYS</code><em class="property"> = []</em><a class="headerlink" href="#uge.objects.cluster_configuration_v1_0.ClusterConfiguration.USER_PROVIDED_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object keys that must be provided by user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.cluster_configuration_v1_0.ClusterConfiguration.REQUIRED_GLOBAL_DATA_DEFAULTS">
+<code class="descname">REQUIRED_GLOBAL_DATA_DEFAULTS</code><em class="property"> = {'rlogin_command': 'builtin', 'enforce_user': 'auto', 'auto_user_delete_time': 86400, 'max_unheard': '00:04:00', 'execd_params': ['KEEP_ACTIVE=ERROR'], 'max_aj_instances': 2000, 'lost_job_timeout': '00:00:00', 'max_jobs': 0, 'set_token_cmd': None, 'login_shells': ['sh', 'bash', 'ksh', 'csh', 'tcsh'], 'enforce_project': False, 'qlogin_daemon': 'builtin', 'default_jc': None, 'rsh_command': 'builtin', 'mailer': '/bin/mail', 'xterm': '/usr/bin/xterm', 'finished_jobs': 0, 'min_gid': 0, 'epilog': None, 'projects': None, 'shell_start_mode': 'unix_behavior', 'xprojects': None, 'auto_user_default_project': None, 'delegated_file_staging': False, 'execd_spool_dir': 'SGE_ROOT/SGE_CELL/spool', 'max_aj_tasks': 75000, 'enforce_jc': False, 'enable_lost_job_reschedule': False, 'rlogin_daemon': 'builtin', 'shepherd_cmd': None, 'auto_user_oticket': 0, 'load_report_time': '00:00:40', 'gid_range': '20000-20100', 'reprioritize': 0, 'cgroups_params': {'m_mem_free_soft': False, 'h_vmem_limit': False, 'forced_numa': False, 'killing': False, 'min_memory_limit': 0, 'm_mem_free_hard': False, 'freeze_pe_tasks': False, 'cgroup_path': None, 'mount': False, 'freezer': False, 'cpuset': False}, 'user_lists': None, 'max_u_jobs': 0, 'reporting_params': {'sharelog': '00:00:00', 'accounting': True, 'reporting': False, 'flush_time': '00:00:13', 'joblog': False}, 'qlogin_command': 'builtin', 'token_extend_time': None, 'administrator_mail': None, 'xuser_lists': None, 'max_advance_reservations': 0, 'reschedule_unknown': '00:00:00', 'jsv_url': None, 'load_sensor': None, 'auto_user_fshare': 0, 'pag_cmd': None, 'min_uid': 0, 'qmaster_params': None, 'loglevel': 'log_warning', 'jsv_allowed_mod': ['ac', 'h', 'i', 'e', 'o', 'j', 'M', 'N', 'p', 'w'], 'rsh_daemon': 'builtin', 'prolog': None}</em><a class="headerlink" href="#uge.objects.cluster_configuration_v1_0.ClusterConfiguration.REQUIRED_GLOBAL_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required data keys for the global configuration.
+Value for execd_spool_dir key will depend on $SGE_ROOT and $SGE_CELL.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.cluster_configuration_v1_0.ClusterConfiguration.REQUIRED_HOST_DATA_DEFAULTS">
+<code class="descname">REQUIRED_HOST_DATA_DEFAULTS</code><em class="property"> = {'mailer': '/bin/mail', 'xterm': '/usr/bin/xterm'}</em><a class="headerlink" href="#uge.objects.cluster_configuration_v1_0.ClusterConfiguration.REQUIRED_HOST_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required data keys for the host configuration.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.cluster_configuration_v1_0.ClusterConfiguration.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name='global'</em>, <em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/cluster_configuration_v1_0.html#ClusterConfiguration.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.cluster_configuration_v1_0.ClusterConfiguration.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; Configuration name (default: &#8216;global&#8217;).</li>
+<li><strong>data</strong> (<em>dict</em>) &#8211; Configuration data. If provided, it will override corresponding data from JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Configuration metadata. If provided, it will override corresponding metadata from JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Configuration JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a ClusterConfiguration object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="clusterqueue-v1-0">
+<h1>ClusterQueue v1.0<a class="headerlink" href="#clusterqueue-v1-0" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.cluster_queue_v1_0.ClusterQueue">
+<em class="property">class </em><code class="descclassname">uge.objects.cluster_queue_v1_0.</code><code class="descname">ClusterQueue</code><a class="reference internal" href="_modules/uge/objects/cluster_queue_v1_0.html#ClusterQueue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.cluster_queue_v1_0.ClusterQueue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_object.QconfObject" title="uge.objects.qconf_object.QconfObject"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_object.QconfObject</span></code></a></p>
+<p>This class encapsulates UGE cluster queue object.</p>
+<dl class="attribute">
+<dt id="uge.objects.cluster_queue_v1_0.ClusterQueue.VERSION">
+<code class="descname">VERSION</code><em class="property"> = '1.0'</em><a class="headerlink" href="#uge.objects.cluster_queue_v1_0.ClusterQueue.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object version.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.cluster_queue_v1_0.ClusterQueue.NAME_KEY">
+<code class="descname">NAME_KEY</code><em class="property"> = 'qname'</em><a class="headerlink" href="#uge.objects.cluster_queue_v1_0.ClusterQueue.NAME_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object name key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.cluster_queue_v1_0.ClusterQueue.USER_PROVIDED_KEYS">
+<code class="descname">USER_PROVIDED_KEYS</code><em class="property"> = ['qname']</em><a class="headerlink" href="#uge.objects.cluster_queue_v1_0.ClusterQueue.USER_PROVIDED_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object keys that must be provided by user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.cluster_queue_v1_0.ClusterQueue.REQUIRED_DATA_DEFAULTS">
+<code class="descname">REQUIRED_DATA_DEFAULTS</code><em class="property"> = {'s_stack': inf, 'subordinate_list': None, 's_rss': inf, 'notify': '00:00:60', 's_vmem': inf, 'slots': 1, 'qtype': 'BATCH INTERACTIVE', 'h_data': inf, 'h_rt': inf, 'priority': 0, 'owner_list': None, 'initial_state': 'default', 'h_core': inf, 'h_fsize': inf, 'min_cpu_interval': '00:05:00', 'resume_method': None, 'shell': '/bin/csh', 'ckpt_list': None, 'h_vmem': inf, 's_cpu': inf, 'epilog': None, 'projects': None, 'shell_start_mode': 'unix_behavior', 'h_cpu': inf, 'xprojects': None, 'suspend_interval': '00:05:00', 'd_rt': inf, 'hostlist': None, 'seq_no': 0, 'rerun': False, 'starter_method': None, 'prolog': None, 'h_rss': inf, 'nsuspend': 1, 's_rt': inf, 'calendar': None, 'suspend_method': None, 'tmpdir': '/tmp', 'user_lists': None, 'complex_values': None, 'suspend_thresholds': None, 'load_thresholds': 'np_load_avg=1.75', 's_core': inf, 'terminate_method': None, 'xuser_lists': None, 's_data': inf, 's_fsize': inf, 'h_stack': inf, 'pe_list': 'make', 'jc_list': ['NO_JC', 'ANY_JC']}</em><a class="headerlink" href="#uge.objects.cluster_queue_v1_0.ClusterQueue.REQUIRED_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required data keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.cluster_queue_v1_0.ClusterQueue.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name=None</em>, <em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/cluster_queue_v1_0.html#ClusterQueue.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.cluster_queue_v1_0.ClusterQueue.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; Queue name. If provided, it will override queue name from data or JSON string parameters (&#8216;qname&#8217; key).</li>
+<li><strong>data</strong> (<em>dict</em>) &#8211; Queue data. If provided, it will override corresponding data from queue JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Queue metadata. If provided, it will override corresponding metadata from queue JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Queue JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a ClusterQueue object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="complexconfigurationbase">
+<h1>ComplexConfigurationBase<a class="headerlink" href="#complexconfigurationbase" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.complex_configuration_base.ComplexConfigurationBase">
+<em class="property">class </em><code class="descclassname">uge.objects.complex_configuration_base.</code><code class="descname">ComplexConfigurationBase</code><a class="reference internal" href="_modules/uge/objects/complex_configuration_base.html#ComplexConfigurationBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.complex_configuration_base.ComplexConfigurationBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_object.QconfObject" title="uge.objects.qconf_object.QconfObject"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_object.QconfObject</span></code></a></p>
+<p>This class serves as a base for UGE complex configuration objects.</p>
+<dl class="method">
+<dt id="uge.objects.complex_configuration_base.ComplexConfigurationBase.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/complex_configuration_base.html#ComplexConfigurationBase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.complex_configuration_base.ComplexConfigurationBase.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>dict</em>) &#8211; Configuration data. If provided, it will override corresponding data from JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Configuration metadata. If provided, it will override corresponding metadata from JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Configuration JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a ClusterConfiguration object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="complexconfiguration-v1-0">
+<h1>ComplexConfiguration v1.0<a class="headerlink" href="#complexconfiguration-v1-0" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.complex_configuration_v1_0.ComplexConfiguration">
+<em class="property">class </em><code class="descclassname">uge.objects.complex_configuration_v1_0.</code><code class="descname">ComplexConfiguration</code><a class="reference internal" href="_modules/uge/objects/complex_configuration_v1_0.html#ComplexConfiguration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.complex_configuration_v1_0.ComplexConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.complex_configuration_base.ComplexConfigurationBase" title="uge.objects.complex_configuration_base.ComplexConfigurationBase"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.complex_configuration_base.ComplexConfigurationBase</span></code></a></p>
+<p>This class encapsulates UGE complex configuration object.</p>
+<dl class="attribute">
+<dt id="uge.objects.complex_configuration_v1_0.ComplexConfiguration.VERSION">
+<code class="descname">VERSION</code><em class="property"> = '1.0'</em><a class="headerlink" href="#uge.objects.complex_configuration_v1_0.ComplexConfiguration.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object version.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.complex_configuration_v1_0.ComplexConfiguration.NAME_KEY">
+<code class="descname">NAME_KEY</code><em class="property"> = None</em><a class="headerlink" href="#uge.objects.complex_configuration_v1_0.ComplexConfiguration.NAME_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object name key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.complex_configuration_v1_0.ComplexConfiguration.USER_PROVIDED_KEYS">
+<code class="descname">USER_PROVIDED_KEYS</code><em class="property"> = []</em><a class="headerlink" href="#uge.objects.complex_configuration_v1_0.ComplexConfiguration.USER_PROVIDED_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object keys that must be provided by user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.complex_configuration_v1_0.ComplexConfiguration.REQUIRED_DATA_DEFAULTS">
+<code class="descname">REQUIRED_DATA_DEFAULTS</code><em class="property"> = {'s_stack': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 's_stack'}, 'swap_rsvd': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'srsv'}, 'h_rss': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'h_rss'}, 'min_cpu_interval': {'requestable': False, 'aapre': False, 'relop': '&lt;=', 'default': '0:0:0', 'urgency': 0, 'consumable': False, 'type': 'TIME', 'shortcut': 'mci'}, 'm_mem_total_n3': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mmem3'}, 'm_mem_total_n2': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mmem2'}, 'm_mem_total_n1': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mmem1'}, 'm_mem_total_n0': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mmem0'}, 'swap_used': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'su'}, 'qname': {'requestable': True, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'RESTRING', 'shortcut': 'q'}, 'm_mem_used_n3': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mused3'}, 'm_mem_used_n2': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mused2'}, 'm_mem_used_n1': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mused1'}, 'm_mem_used_n0': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mused0'}, 'load_avg': {'requestable': False, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'la'}, 'np_load_short': {'requestable': False, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'nls'}, 'm_cache_l3': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mcache3'}, 'm_cache_l2': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mcache2'}, 'calendar': {'requestable': True, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'RESTRING', 'shortcut': 'c'}, 's_data': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 's_data'}, 'm_cache_l1': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mcache1'}, 'tmpdir': {'requestable': False, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'RESTRING', 'shortcut': 'tmp'}, 'm_topology_inuse': {'requestable': True, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'RESTRING', 'shortcut': 'utopo'}, 'h_data': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'h_data'}, 'm_mem_free': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mfree'}, 'np_load_medium': {'requestable': False, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'nlm'}, 'h_rt': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0:0:0', 'urgency': 0, 'consumable': False, 'type': 'TIME', 'shortcut': 'h_rt'}, 'swap_total': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'st'}, 'hostname': {'requestable': True, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'HOST', 'shortcut': 'h'}, 'load_medium': {'requestable': False, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'lm'}, 'h_vmem': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'h_vmem'}, 's_core': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 's_core'}, 'rerun': {'requestable': False, 'aapre': False, 'relop': '==', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'BOOL', 'shortcut': 're'}, 'load_long': {'requestable': False, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'll'}, 'slots': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': 1, 'urgency': 1000, 'consumable': True, 'type': 'INT', 'shortcut': 's'}, 'virtual_total': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'vt'}, 'h_core': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'h_core'}, 'virtual_free': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'vf'}, 'h_fsize': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'h_fsize'}, 'm_thread': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'INT', 'shortcut': 'thread'}, 'load_short': {'requestable': False, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'ls'}, 'display_win_gui': {'requestable': True, 'aapre': False, 'relop': '==', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'BOOL', 'shortcut': 'dwg'}, 'm_mem_used': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mused'}, 'swap_free': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'sf'}, 'm_core': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'INT', 'shortcut': 'core'}, 'virtual_used': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'vu'}, 'mem_total': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mt'}, 'm_socket': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'INT', 'shortcut': 'socket'}, 's_rt': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0:0:0', 'urgency': 0, 'consumable': False, 'type': 'TIME', 'shortcut': 's_rt'}, 'np_load_avg': {'requestable': False, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'nla'}, 's_cpu': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0:0:0', 'urgency': 0, 'consumable': False, 'type': 'TIME', 'shortcut': 's_cpu'}, 'num_proc': {'requestable': True, 'aapre': False, 'relop': '==', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'INT', 'shortcut': 'p'}, 's_rss': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 's_rss'}, 'arch': {'requestable': True, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'RESTRING', 'shortcut': 'a'}, 's_fsize': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 's_fsize'}, 'm_topology_numa': {'requestable': True, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'RESTRING', 'shortcut': 'unuma'}, 'h_stack': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'h_stack'}, 'h_cpu': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0:0:0', 'urgency': 0, 'consumable': False, 'type': 'TIME', 'shortcut': 'h_cpu'}, 'mem_used': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mu'}, 'mem_free': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mf'}, 'm_mem_free_n0': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mfree0'}, 'm_mem_free_n1': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mfree1'}, 'm_mem_free_n2': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mfree2'}, 'm_mem_free_n3': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mfree3'}, 'd_rt': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0:0:0', 'urgency': 0, 'consumable': False, 'type': 'TIME', 'shortcut': 'd_rt'}, 'seq_no': {'requestable': False, 'aapre': False, 'relop': '==', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'INT', 'shortcut': 'seq'}, 's_vmem': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 's_vmem'}, 'm_topology': {'requestable': True, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'RESTRING', 'shortcut': 'topo'}, 'm_numa_nodes': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'INT', 'shortcut': 'nodes'}, 'np_load_long': {'requestable': False, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'nll'}, 'swap_rate': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'sr'}, 'cpu': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'cpu'}, 'm_mem_total': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mtotal'}}</em><a class="headerlink" href="#uge.objects.complex_configuration_v1_0.ComplexConfiguration.REQUIRED_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required data keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.complex_configuration_v1_0.ComplexConfiguration.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/complex_configuration_v1_0.html#ComplexConfiguration.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.complex_configuration_v1_0.ComplexConfiguration.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>dict</em>) &#8211; Configuration data. If provided, it will override corresponding data from JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Configuration metadata. If provided, it will override corresponding metadata from JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Configuration JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a ClusterConfiguration object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="complexconfiguration-v2-0">
+<h1>ComplexConfiguration v2.0<a class="headerlink" href="#complexconfiguration-v2-0" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.complex_configuration_v2_0.ComplexConfiguration">
+<em class="property">class </em><code class="descclassname">uge.objects.complex_configuration_v2_0.</code><code class="descname">ComplexConfiguration</code><a class="reference internal" href="_modules/uge/objects/complex_configuration_v2_0.html#ComplexConfiguration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.complex_configuration_v2_0.ComplexConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.complex_configuration_base.ComplexConfigurationBase" title="uge.objects.complex_configuration_base.ComplexConfigurationBase"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.complex_configuration_base.ComplexConfigurationBase</span></code></a></p>
+<p>This class encapsulates UGE complex configuration object.</p>
+<dl class="attribute">
+<dt id="uge.objects.complex_configuration_v2_0.ComplexConfiguration.VERSION">
+<code class="descname">VERSION</code><em class="property"> = '2.0'</em><a class="headerlink" href="#uge.objects.complex_configuration_v2_0.ComplexConfiguration.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object version.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.complex_configuration_v2_0.ComplexConfiguration.NAME_KEY">
+<code class="descname">NAME_KEY</code><em class="property"> = None</em><a class="headerlink" href="#uge.objects.complex_configuration_v2_0.ComplexConfiguration.NAME_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object name key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.complex_configuration_v2_0.ComplexConfiguration.USER_PROVIDED_KEYS">
+<code class="descname">USER_PROVIDED_KEYS</code><em class="property"> = []</em><a class="headerlink" href="#uge.objects.complex_configuration_v2_0.ComplexConfiguration.USER_PROVIDED_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object keys that must be provided by user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.complex_configuration_v2_0.ComplexConfiguration.REQUIRED_DATA_DEFAULTS">
+<code class="descname">REQUIRED_DATA_DEFAULTS</code><em class="property"> = {'s_stack': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 's_stack'}, 'swap_rsvd': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'srsv'}, 'h_rss': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'h_rss'}, 'min_cpu_interval': {'requestable': False, 'aapre': False, 'relop': '&lt;=', 'default': '0:0:0', 'urgency': 0, 'consumable': False, 'type': 'TIME', 'shortcut': 'mci'}, 'm_mem_total_n3': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mmem3'}, 'm_mem_total_n2': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mmem2'}, 'm_mem_total_n1': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mmem1'}, 'm_mem_total_n0': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mmem0'}, 'swap_used': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'su'}, 'qname': {'requestable': True, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'RESTRING', 'shortcut': 'q'}, 'm_mem_used_n3': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mused3'}, 'm_mem_used_n2': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mused2'}, 'm_mem_used_n1': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mused1'}, 'm_mem_used_n0': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mused0'}, 'load_avg': {'requestable': False, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'la'}, 'np_load_short': {'requestable': False, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'nls'}, 'm_cache_l3': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mcache3'}, 'm_cache_l2': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mcache2'}, 'calendar': {'requestable': True, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'RESTRING', 'shortcut': 'c'}, 's_data': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 's_data'}, 'm_cache_l1': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mcache1'}, 'tmpdir': {'requestable': False, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'RESTRING', 'shortcut': 'tmp'}, 'm_topology_inuse': {'requestable': True, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'RESTRING', 'shortcut': 'utopo'}, 'h_data': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'h_data'}, 'm_mem_free': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mfree'}, 'np_load_medium': {'requestable': False, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'nlm'}, 'h_rt': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0:0:0', 'urgency': 0, 'consumable': False, 'type': 'TIME', 'shortcut': 'h_rt'}, 'swap_total': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'st'}, 'hostname': {'requestable': True, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'HOST', 'shortcut': 'h'}, 'load_medium': {'requestable': False, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'lm'}, 'h_vmem': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'h_vmem'}, 's_core': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 's_core'}, 'rerun': {'requestable': False, 'aapre': False, 'relop': '==', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'BOOL', 'shortcut': 're'}, 'load_long': {'requestable': False, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'll'}, 'slots': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': 1, 'urgency': 1000, 'consumable': True, 'type': 'INT', 'shortcut': 's'}, 'virtual_total': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'vt'}, 'h_core': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'h_core'}, 'virtual_free': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'vf'}, 'h_fsize': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'h_fsize'}, 'm_thread': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'INT', 'shortcut': 'thread'}, 'load_short': {'requestable': False, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'ls'}, 'display_win_gui': {'requestable': True, 'aapre': False, 'relop': '==', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'BOOL', 'shortcut': 'dwg'}, 'm_mem_used': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mused'}, 'swap_free': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'sf'}, 'docker_images': {'requestable': True, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'RESTRING', 'shortcut': 'dockimg'}, 'm_core': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'INT', 'shortcut': 'core'}, 'virtual_used': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'vu'}, 'mem_total': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mt'}, 'm_socket': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'INT', 'shortcut': 'socket'}, 's_rt': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0:0:0', 'urgency': 0, 'consumable': False, 'type': 'TIME', 'shortcut': 's_rt'}, 'np_load_avg': {'requestable': False, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'nla'}, 's_cpu': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0:0:0', 'urgency': 0, 'consumable': False, 'type': 'TIME', 'shortcut': 's_cpu'}, 'num_proc': {'requestable': True, 'aapre': False, 'relop': '==', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'INT', 'shortcut': 'p'}, 's_rss': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 's_rss'}, 'arch': {'requestable': True, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'RESTRING', 'shortcut': 'a'}, 'np_load_long': {'requestable': False, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'nll'}, 's_fsize': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 's_fsize'}, 'm_topology_numa': {'requestable': True, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'RESTRING', 'shortcut': 'unuma'}, 'h_stack': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'h_stack'}, 'h_cpu': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0:0:0', 'urgency': 0, 'consumable': False, 'type': 'TIME', 'shortcut': 'h_cpu'}, 'mem_used': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mu'}, 'mem_free': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'mf'}, 'm_mem_free_n0': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mfree0'}, 'm_mem_free_n1': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mfree1'}, 'm_mem_free_n2': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mfree2'}, 'm_mem_free_n3': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mfree3'}, 'd_rt': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0:0:0', 'urgency': 0, 'consumable': False, 'type': 'TIME', 'shortcut': 'd_rt'}, 'seq_no': {'requestable': False, 'aapre': False, 'relop': '==', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'INT', 'shortcut': 'seq'}, 's_vmem': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 's_vmem'}, 'm_topology': {'requestable': True, 'aapre': False, 'relop': '==', 'default': None, 'urgency': 0, 'consumable': False, 'type': 'RESTRING', 'shortcut': 'topo'}, 'm_numa_nodes': {'requestable': True, 'aapre': False, 'relop': '&lt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'INT', 'shortcut': 'nodes'}, 'docker': {'requestable': True, 'aapre': False, 'relop': '==', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'BOOL', 'shortcut': 'dock'}, 'swap_rate': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': '0', 'urgency': 0, 'consumable': False, 'type': 'MEMORY', 'shortcut': 'sr'}, 'cpu': {'requestable': True, 'aapre': False, 'relop': '&gt;=', 'default': 0, 'urgency': 0, 'consumable': False, 'type': 'DOUBLE', 'shortcut': 'cpu'}, 'm_mem_total': {'requestable': True, 'aapre': True, 'relop': '&lt;=', 'default': '0', 'urgency': 0, 'consumable': True, 'type': 'MEMORY', 'shortcut': 'mtotal'}}</em><a class="headerlink" href="#uge.objects.complex_configuration_v2_0.ComplexConfiguration.REQUIRED_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required data keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.complex_configuration_v2_0.ComplexConfiguration.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/complex_configuration_v2_0.html#ComplexConfiguration.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.complex_configuration_v2_0.ComplexConfiguration.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>dict</em>) &#8211; Configuration data. If provided, it will override corresponding data from JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Configuration metadata. If provided, it will override corresponding metadata from JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Configuration JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a ClusterConfiguration object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="executionhost-v1-0">
+<h1>ExecutionHost v1.0<a class="headerlink" href="#executionhost-v1-0" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.execution_host_v1_0.ExecutionHost">
+<em class="property">class </em><code class="descclassname">uge.objects.execution_host_v1_0.</code><code class="descname">ExecutionHost</code><a class="reference internal" href="_modules/uge/objects/execution_host_v1_0.html#ExecutionHost"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.execution_host_v1_0.ExecutionHost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_object.QconfObject" title="uge.objects.qconf_object.QconfObject"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_object.QconfObject</span></code></a></p>
+<p>This class encapsulates UGE execution host object.</p>
+<dl class="attribute">
+<dt id="uge.objects.execution_host_v1_0.ExecutionHost.VERSION">
+<code class="descname">VERSION</code><em class="property"> = '1.0'</em><a class="headerlink" href="#uge.objects.execution_host_v1_0.ExecutionHost.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object version.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.execution_host_v1_0.ExecutionHost.NAME_KEY">
+<code class="descname">NAME_KEY</code><em class="property"> = 'hostname'</em><a class="headerlink" href="#uge.objects.execution_host_v1_0.ExecutionHost.NAME_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object name key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.execution_host_v1_0.ExecutionHost.USER_PROVIDED_KEYS">
+<code class="descname">USER_PROVIDED_KEYS</code><em class="property"> = ['hostname']</em><a class="headerlink" href="#uge.objects.execution_host_v1_0.ExecutionHost.USER_PROVIDED_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object keys that must be provided by user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.execution_host_v1_0.ExecutionHost.REQUIRED_DATA_DEFAULTS">
+<code class="descname">REQUIRED_DATA_DEFAULTS</code><em class="property"> = {'report_variables': None, 'license_oversubscription': None, 'projects': None, 'license_constraints': None, 'user_lists': None, 'xprojects': None, 'complex_values': None, 'xuser_lists': None, 'usage_scaling': None, 'load_scaling': None}</em><a class="headerlink" href="#uge.objects.execution_host_v1_0.ExecutionHost.REQUIRED_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required data keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.execution_host_v1_0.ExecutionHost.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name=None</em>, <em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/execution_host_v1_0.html#ExecutionHost.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.execution_host_v1_0.ExecutionHost.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; Execution host name. If provided, it will override execution host name from data or JSON string parameters (&#8216;hostname&#8217; key).</li>
+<li><strong>data</strong> (<em>dict</em>) &#8211; Execution host data. If provided, it will override corresponding data from execution host JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Execution host metadata. If provided, it will override corresponding metadata from execution host JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Execution host JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing an ExecutionHost object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="hostgroup-v1-0">
+<h1>HostGroup v1.0<a class="headerlink" href="#hostgroup-v1-0" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.host_group_v1_0.HostGroup">
+<em class="property">class </em><code class="descclassname">uge.objects.host_group_v1_0.</code><code class="descname">HostGroup</code><a class="reference internal" href="_modules/uge/objects/host_group_v1_0.html#HostGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.host_group_v1_0.HostGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_object.QconfObject" title="uge.objects.qconf_object.QconfObject"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_object.QconfObject</span></code></a></p>
+<p>This class encapsulates UGE host group object.</p>
+<dl class="attribute">
+<dt id="uge.objects.host_group_v1_0.HostGroup.VERSION">
+<code class="descname">VERSION</code><em class="property"> = '1.0'</em><a class="headerlink" href="#uge.objects.host_group_v1_0.HostGroup.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object version.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.host_group_v1_0.HostGroup.NAME_KEY">
+<code class="descname">NAME_KEY</code><em class="property"> = 'group_name'</em><a class="headerlink" href="#uge.objects.host_group_v1_0.HostGroup.NAME_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object name key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.host_group_v1_0.HostGroup.USER_PROVIDED_KEYS">
+<code class="descname">USER_PROVIDED_KEYS</code><em class="property"> = ['group_name']</em><a class="headerlink" href="#uge.objects.host_group_v1_0.HostGroup.USER_PROVIDED_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object keys that must be provided by user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.host_group_v1_0.HostGroup.REQUIRED_DATA_DEFAULTS">
+<code class="descname">REQUIRED_DATA_DEFAULTS</code><em class="property"> = {'hostlist': None}</em><a class="headerlink" href="#uge.objects.host_group_v1_0.HostGroup.REQUIRED_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required data keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.host_group_v1_0.HostGroup.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name=None</em>, <em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/host_group_v1_0.html#HostGroup.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.host_group_v1_0.HostGroup.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; Host group name. If provided, it will override host group name from data or JSON string parameters (&#8216;group_name&#8217; key).</li>
+<li><strong>data</strong> (<em>dict</em>) &#8211; Host group data. If provided, it will override corresponding data from host group JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Host group metadata. If provided, it will override corresponding metadata from host group JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Host group JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a HostGroup object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="jobclass-v1-0">
+<h1>JobClass v1.0<a class="headerlink" href="#jobclass-v1-0" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.job_class_v1_0.JobClass">
+<em class="property">class </em><code class="descclassname">uge.objects.job_class_v1_0.</code><code class="descname">JobClass</code><a class="reference internal" href="_modules/uge/objects/job_class_v1_0.html#JobClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.job_class_v1_0.JobClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_object.QconfObject" title="uge.objects.qconf_object.QconfObject"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_object.QconfObject</span></code></a></p>
+<p>This class encapsulates UGE job class object.</p>
+<dl class="attribute">
+<dt id="uge.objects.job_class_v1_0.JobClass.VERSION">
+<code class="descname">VERSION</code><em class="property"> = '1.0'</em><a class="headerlink" href="#uge.objects.job_class_v1_0.JobClass.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object version.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.job_class_v1_0.JobClass.NAME_KEY">
+<code class="descname">NAME_KEY</code><em class="property"> = 'jcname'</em><a class="headerlink" href="#uge.objects.job_class_v1_0.JobClass.NAME_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object name key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.job_class_v1_0.JobClass.USER_PROVIDED_KEYS">
+<code class="descname">USER_PROVIDED_KEYS</code><em class="property"> = ['jcname']</em><a class="headerlink" href="#uge.objects.job_class_v1_0.JobClass.USER_PROVIDED_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object keys that must be provided by user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.job_class_v1_0.JobClass.REQUIRED_DATA_DEFAULTS">
+<code class="descname">REQUIRED_DATA_DEFAULTS</code><em class="property"> = {'c_occasion': '{+}UNSPECIFIED', 'CMDNAME': '{+}UNSPECIFIED', 'ckpt': '{+}UNSPECIFIED', 'notify': '{+}UNSPECIFIED', 'owner': None, 'rou': '{+}UNSPECIFIED', 'tc': '{+}UNSPECIFIED', 'dl': '{+}UNSPECIFIED', 'shell': '{+}UNSPECIFIED', 'l_soft': '{+}UNSPECIFIED', 'CMDARG': '{+}UNSPECIFIED', 'N': '{+}UNSPECIFIED', 'P': '{+}UNSPECIFIED', 'R': '{+}UNSPECIFIED', 'q_hard': '{+}UNSPECIFIED', 'V': '{+}UNSPECIFIED', 'now': '{+}UNSPECIFIED', 'masterq': '{+}UNSPECIFIED', 'b': '{+}UNSPECIFIED', 'l_hard': '{+}UNSPECIFIED', 'h': '{+}UNSPECIFIED', 'j': '{+}UNSPECIFIED', 'variant_list': None, 'p': '{+}UNSPECIFIED', 'r': '{+}UNSPECIFIED', 't': '{+}UNSPECIFIED', 'v': '{+}UNSPECIFIED', 'q_soft': '{+}UNSPECIFIED', 'masterl': '{+}UNSPECIFIED', 'pe_range': '{+}UNSPECIFIED', 'ac': '{+}UNSPECIFIED', 'binding': '{+}UNSPECIFIED', 'ar': '{+}UNSPECIFIED', 'mbind': '{+}UNSPECIFIED', 'c_interval': '{+}UNSPECIFIED', 'user_lists': None, 'hold_jid_ad': '{+}UNSPECIFIED', 'hold_jid': '{+}UNSPECIFIED', 'xuser_lists': None, 'cwd': '{+}UNSPECIFIED', 'A': '{+}UNSPECIFIED', 'M': '{+}UNSPECIFIED', 'js': '{+}UNSPECIFIED', 'S': '{+}UNSPECIFIED', 'a': '{+}UNSPECIFIED', 'e': '{+}UNSPECIFIED', 'pe_name': '{+}UNSPECIFIED', 'i': '{+}UNSPECIFIED', 'm': '{+}UNSPECIFIED', 'o': '{+}UNSPECIFIED'}</em><a class="headerlink" href="#uge.objects.job_class_v1_0.JobClass.REQUIRED_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required data keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.job_class_v1_0.JobClass.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name=None</em>, <em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/job_class_v1_0.html#JobClass.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.job_class_v1_0.JobClass.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; Job class name. If provided, it will override job class name from data or JSON string parameters (&#8216;jcname&#8217; key).</li>
+<li><strong>data</strong> (<em>dict</em>) &#8211; Job class data. If provided, it will override corresponding data from job class JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Job class metadata. If provided, it will override corresponding metadata from job class JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Job class JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a JobClass object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="parallelenvironment-v1-0">
+<h1>ParallelEnvironment v1.0<a class="headerlink" href="#parallelenvironment-v1-0" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.parallel_environment_v1_0.ParallelEnvironment">
+<em class="property">class </em><code class="descclassname">uge.objects.parallel_environment_v1_0.</code><code class="descname">ParallelEnvironment</code><a class="reference internal" href="_modules/uge/objects/parallel_environment_v1_0.html#ParallelEnvironment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.parallel_environment_v1_0.ParallelEnvironment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_object.QconfObject" title="uge.objects.qconf_object.QconfObject"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_object.QconfObject</span></code></a></p>
+<p>This class encapsulates UGE parallel environment object.</p>
+<dl class="attribute">
+<dt id="uge.objects.parallel_environment_v1_0.ParallelEnvironment.VERSION">
+<code class="descname">VERSION</code><em class="property"> = '1.0'</em><a class="headerlink" href="#uge.objects.parallel_environment_v1_0.ParallelEnvironment.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object version.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.parallel_environment_v1_0.ParallelEnvironment.NAME_KEY">
+<code class="descname">NAME_KEY</code><em class="property"> = 'pe_name'</em><a class="headerlink" href="#uge.objects.parallel_environment_v1_0.ParallelEnvironment.NAME_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object name key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.parallel_environment_v1_0.ParallelEnvironment.USER_PROVIDED_KEYS">
+<code class="descname">USER_PROVIDED_KEYS</code><em class="property"> = ['pe_name']</em><a class="headerlink" href="#uge.objects.parallel_environment_v1_0.ParallelEnvironment.USER_PROVIDED_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object keys that must be provided by user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.parallel_environment_v1_0.ParallelEnvironment.REQUIRED_DATA_DEFAULTS">
+<code class="descname">REQUIRED_DATA_DEFAULTS</code><em class="property"> = {'allocation_rule': '$pe_slots', 'job_is_first_task': True, 'urgency_slots': 'min', 'stop_proc_args': None, 'accounting_summary': False, 'slots': 0, 'start_proc_args': None, 'daemon_forks_slaves': False, 'user_lists': None, 'master_forks_slaves': False, 'control_slaves': False, 'xuser_lists': None}</em><a class="headerlink" href="#uge.objects.parallel_environment_v1_0.ParallelEnvironment.REQUIRED_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required data keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.parallel_environment_v1_0.ParallelEnvironment.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name=None</em>, <em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/parallel_environment_v1_0.html#ParallelEnvironment.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.parallel_environment_v1_0.ParallelEnvironment.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; PE name. If provided, it will override PE name from data or JSON string parameters (&#8216;pe_name&#8217; key).</li>
+<li><strong>data</strong> (<em>dict</em>) &#8211; PE data. If provided, it will override corresponding data from PE JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; PE metadata. If provided, it will override corresponding metadata from PE JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; PE JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a PE object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="project-v1-0">
+<h1>Project v1.0<a class="headerlink" href="#project-v1-0" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.project_v1_0.Project">
+<em class="property">class </em><code class="descclassname">uge.objects.project_v1_0.</code><code class="descname">Project</code><a class="reference internal" href="_modules/uge/objects/project_v1_0.html#Project"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.project_v1_0.Project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_object.QconfObject" title="uge.objects.qconf_object.QconfObject"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_object.QconfObject</span></code></a></p>
+<p>This class encapsulates UGE project object.</p>
+<dl class="attribute">
+<dt id="uge.objects.project_v1_0.Project.VERSION">
+<code class="descname">VERSION</code><em class="property"> = '1.0'</em><a class="headerlink" href="#uge.objects.project_v1_0.Project.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object version.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.project_v1_0.Project.NAME_KEY">
+<code class="descname">NAME_KEY</code><em class="property"> = 'name'</em><a class="headerlink" href="#uge.objects.project_v1_0.Project.NAME_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object name key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.project_v1_0.Project.USER_PROVIDED_KEYS">
+<code class="descname">USER_PROVIDED_KEYS</code><em class="property"> = ['name']</em><a class="headerlink" href="#uge.objects.project_v1_0.Project.USER_PROVIDED_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object keys that must be provided by user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.project_v1_0.Project.REQUIRED_DATA_DEFAULTS">
+<code class="descname">REQUIRED_DATA_DEFAULTS</code><em class="property"> = {'oticket': 0, 'xacl': None, 'fshare': 0, 'acl': None}</em><a class="headerlink" href="#uge.objects.project_v1_0.Project.REQUIRED_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required data keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.project_v1_0.Project.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name=None</em>, <em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/project_v1_0.html#Project.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.project_v1_0.Project.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; Project name. If provided, it will override project name from data or JSON string parameters (&#8216;name&#8217; key).</li>
+<li><strong>data</strong> (<em>dict</em>) &#8211; Project data. If provided, it will override corresponding data from project JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Project metadata. If provided, it will override corresponding metadata from project JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Project JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing an Project object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="resourcequotaset-v1-0">
+<h1>ResourceQuotaSet v1.0<a class="headerlink" href="#resourcequotaset-v1-0" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.resource_quota_set_v1_0.ResourceQuotaSet">
+<em class="property">class </em><code class="descclassname">uge.objects.resource_quota_set_v1_0.</code><code class="descname">ResourceQuotaSet</code><a class="reference internal" href="_modules/uge/objects/resource_quota_set_v1_0.html#ResourceQuotaSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.resource_quota_set_v1_0.ResourceQuotaSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_object.QconfObject" title="uge.objects.qconf_object.QconfObject"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_object.QconfObject</span></code></a></p>
+<p>This class encapsulates UGE resource quota set object.</p>
+<dl class="attribute">
+<dt id="uge.objects.resource_quota_set_v1_0.ResourceQuotaSet.VERSION">
+<code class="descname">VERSION</code><em class="property"> = '1.0'</em><a class="headerlink" href="#uge.objects.resource_quota_set_v1_0.ResourceQuotaSet.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object version.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.resource_quota_set_v1_0.ResourceQuotaSet.NAME_KEY">
+<code class="descname">NAME_KEY</code><em class="property"> = 'name'</em><a class="headerlink" href="#uge.objects.resource_quota_set_v1_0.ResourceQuotaSet.NAME_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object name key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.resource_quota_set_v1_0.ResourceQuotaSet.USER_PROVIDED_KEYS">
+<code class="descname">USER_PROVIDED_KEYS</code><em class="property"> = ['name']</em><a class="headerlink" href="#uge.objects.resource_quota_set_v1_0.ResourceQuotaSet.USER_PROVIDED_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object keys that must be provided by set.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.resource_quota_set_v1_0.ResourceQuotaSet.REQUIRED_DATA_DEFAULTS">
+<code class="descname">REQUIRED_DATA_DEFAULTS</code><em class="property"> = {'limit': ['to slots=0'], 'enabled': False, 'description': None}</em><a class="headerlink" href="#uge.objects.resource_quota_set_v1_0.ResourceQuotaSet.REQUIRED_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required data keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.resource_quota_set_v1_0.ResourceQuotaSet.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name=None</em>, <em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/resource_quota_set_v1_0.html#ResourceQuotaSet.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.resource_quota_set_v1_0.ResourceQuotaSet.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; Resource quota set name. If provided, it will override set name from data or JSON string parameters (&#8216;name&#8217; key).</li>
+<li><strong>data</strong> (<em>dict</em>) &#8211; Resource quota set data. If provided, it will override corresponding data from set JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Resource quota set metadata. If provided, it will override corresponding metadata from set JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Resource quota set JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing an ResourceQuotaList object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="schedulerconfiguration-v1-0">
+<h1>SchedulerConfiguration v1.0<a class="headerlink" href="#schedulerconfiguration-v1-0" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.scheduler_configuration_v1_0.SchedulerConfiguration">
+<em class="property">class </em><code class="descclassname">uge.objects.scheduler_configuration_v1_0.</code><code class="descname">SchedulerConfiguration</code><a class="reference internal" href="_modules/uge/objects/scheduler_configuration_v1_0.html#SchedulerConfiguration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.scheduler_configuration_v1_0.SchedulerConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_object.QconfObject" title="uge.objects.qconf_object.QconfObject"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_object.QconfObject</span></code></a></p>
+<p>This class encapsulates UGE scheduler configuration object.</p>
+<dl class="attribute">
+<dt id="uge.objects.scheduler_configuration_v1_0.SchedulerConfiguration.VERSION">
+<code class="descname">VERSION</code><em class="property"> = '1.0'</em><a class="headerlink" href="#uge.objects.scheduler_configuration_v1_0.SchedulerConfiguration.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object version.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.scheduler_configuration_v1_0.SchedulerConfiguration.NAME_KEY">
+<code class="descname">NAME_KEY</code><em class="property"> = None</em><a class="headerlink" href="#uge.objects.scheduler_configuration_v1_0.SchedulerConfiguration.NAME_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object name key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.scheduler_configuration_v1_0.SchedulerConfiguration.USER_PROVIDED_KEYS">
+<code class="descname">USER_PROVIDED_KEYS</code><em class="property"> = []</em><a class="headerlink" href="#uge.objects.scheduler_configuration_v1_0.SchedulerConfiguration.USER_PROVIDED_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object keys that must be provided by user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.scheduler_configuration_v1_0.SchedulerConfiguration.REQUIRED_DATA_DEFAULTS">
+<code class="descname">REQUIRED_DATA_DEFAULTS</code><em class="property"> = {'weight_deadline': 3600000.0, 'maxujobs': 0, 'queue_sort_method': 'load', 'prioritize_preemptees': False, 'load_formula': 'np_load_avg', 'job_load_adjustments': 'np_load_avg=0.50', 'flush_submit_sec': 1, 'share_override_tickets': True, 'halflife_decay_list': None, 'max_pending_tasks_per_job': 50, 'weight_department': 0.25, 'preemption_distance': '00:15:00', 'weight_waiting_time': 0.0, 'schedd_job_info': False, 'flush_finish_sec': 1, 'usage_weight_list': ['wallclock=0.000000', 'cpu=1.000000', 'mem=0.000000', 'io=0.000000'], 'backfilling': 'ON', 'schedule_interval': '0:0:15', 'load_adjustment_decay_time': '0:7:30', 'compensation_factor': 5.0, 'policy_hierarchy': 'OFS', 'weight_tickets_share': 0, 'algorithm': 'default', 'preemptees_keep_resources': False, 'max_preemptees': 0, 'report_pjob_tickets': True, 'preemption_priority_adjustments': None, 'share_functional_shares': True, 'max_reservation': 0, 'fair_urgency_list': None, 'weight_ticket': 0.01, 'max_functional_jobs_to_schedule': 200, 'params': None, 'reprioritize_interval': '0:0:0', 'weight_job': 0.25, 'halftime': 168, 'weight_priority': 1.0, 'weight_urgency': 0.1, 'weight_tickets_functional': 0, 'weight_project': 0.25, 'default_duration': inf, 'weight_user': 0.25}</em><a class="headerlink" href="#uge.objects.scheduler_configuration_v1_0.SchedulerConfiguration.REQUIRED_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required data keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.scheduler_configuration_v1_0.SchedulerConfiguration.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/scheduler_configuration_v1_0.html#SchedulerConfiguration.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.scheduler_configuration_v1_0.SchedulerConfiguration.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>dict</em>) &#8211; Configuration data. If provided, it will override corresponding data from JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Configuration metadata. If provided, it will override corresponding metadata from JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Configuration JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a SchedulerConfiguration object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="sharetree-v1-0">
+<h1>ShareTree v1.0<a class="headerlink" href="#sharetree-v1-0" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.share_tree_v1_0.ShareTree">
+<em class="property">class </em><code class="descclassname">uge.objects.share_tree_v1_0.</code><code class="descname">ShareTree</code><a class="reference internal" href="_modules/uge/objects/share_tree_v1_0.html#ShareTree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.share_tree_v1_0.ShareTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_dict_list.QconfDictList" title="uge.objects.qconf_dict_list.QconfDictList"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_dict_list.QconfDictList</span></code></a></p>
+<p>This class encapsulates UGE share tree object.</p>
+<dl class="attribute">
+<dt id="uge.objects.share_tree_v1_0.ShareTree.VERSION">
+<code class="descname">VERSION</code><em class="property"> = '1.0'</em><a class="headerlink" href="#uge.objects.share_tree_v1_0.ShareTree.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object version.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.share_tree_v1_0.ShareTree.FIRST_KEY">
+<code class="descname">FIRST_KEY</code><em class="property"> = 'id'</em><a class="headerlink" href="#uge.objects.share_tree_v1_0.ShareTree.FIRST_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Key that designates start of an object in a list</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.share_tree_v1_0.ShareTree.NAME_KEY">
+<code class="descname">NAME_KEY</code><em class="property"> = None</em><a class="headerlink" href="#uge.objects.share_tree_v1_0.ShareTree.NAME_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object name key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.share_tree_v1_0.ShareTree.USER_PROVIDED_KEYS">
+<code class="descname">USER_PROVIDED_KEYS</code><em class="property"> = ['name']</em><a class="headerlink" href="#uge.objects.share_tree_v1_0.ShareTree.USER_PROVIDED_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object keys that must be provided by user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.share_tree_v1_0.ShareTree.REQUIRED_DATA_DEFAULTS">
+<code class="descname">REQUIRED_DATA_DEFAULTS</code><em class="property"> = {'childnodes': None, 'type': 1, 'id': 0, 'shares': 0, 'name': None}</em><a class="headerlink" href="#uge.objects.share_tree_v1_0.ShareTree.REQUIRED_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required dictionary data keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.share_tree_v1_0.ShareTree.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/share_tree_v1_0.html#ShareTree.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.share_tree_v1_0.ShareTree.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>dict</em>) &#8211; Configuration data. If provided, it will override corresponding data from JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; Configuration metadata. If provided, it will override corresponding metadata from JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; Configuration JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not represent a ShareTree object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="user-v1-0">
+<h1>User v1.0<a class="headerlink" href="#user-v1-0" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="uge.objects.user_v1_0.User">
+<em class="property">class </em><code class="descclassname">uge.objects.user_v1_0.</code><code class="descname">User</code><a class="reference internal" href="_modules/uge/objects/user_v1_0.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.user_v1_0.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uge.objects.qconf_object.QconfObject" title="uge.objects.qconf_object.QconfObject"><code class="xref py py-class docutils literal"><span class="pre">uge.objects.qconf_object.QconfObject</span></code></a></p>
+<p>This class encapsulates UGE user object.</p>
+<dl class="attribute">
+<dt id="uge.objects.user_v1_0.User.VERSION">
+<code class="descname">VERSION</code><em class="property"> = '1.0'</em><a class="headerlink" href="#uge.objects.user_v1_0.User.VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object version.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.user_v1_0.User.NAME_KEY">
+<code class="descname">NAME_KEY</code><em class="property"> = 'name'</em><a class="headerlink" href="#uge.objects.user_v1_0.User.NAME_KEY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object name key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.user_v1_0.User.USER_PROVIDED_KEYS">
+<code class="descname">USER_PROVIDED_KEYS</code><em class="property"> = ['name']</em><a class="headerlink" href="#uge.objects.user_v1_0.User.USER_PROVIDED_KEYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object keys that must be provided by user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="uge.objects.user_v1_0.User.REQUIRED_DATA_DEFAULTS">
+<code class="descname">REQUIRED_DATA_DEFAULTS</code><em class="property"> = {'oticket': 0, 'default_project': None, 'delete_time': 0, 'fshare': 0}</em><a class="headerlink" href="#uge.objects.user_v1_0.User.REQUIRED_DATA_DEFAULTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default values for required data keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="uge.objects.user_v1_0.User.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>name=None</em>, <em>data=None</em>, <em>metadata=None</em>, <em>json_string=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/uge/objects/user_v1_0.html#User.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#uge.objects.user_v1_0.User.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; User name. If provided, it will override user name from data or JSON string parameters (&#8216;name&#8217; key).</li>
+<li><strong>data</strong> (<em>dict</em>) &#8211; User data. If provided, it will override corresponding data from user JSON string representation.</li>
+<li><strong>metadata</strong> (<em>dict</em>) &#8211; User metadata. If provided, it will override corresponding metadata from user JSON string representation.</li>
+<li><strong>json_string</strong> (<em>str</em>) &#8211; User JSON string representation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>InvalidArgument</strong> - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing an User object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QconfObject</a></li>
+<li><a class="reference internal" href="#qconfdictlist">QconfDictList</a></li>
+<li><a class="reference internal" href="#qconfnamelist">QconfNameList</a></li>
+<li><a class="reference internal" href="#accesslist-v1-0">AccessList v1.0</a></li>
+<li><a class="reference internal" href="#calendar-v1-0">Calendar v1.0</a></li>
+<li><a class="reference internal" href="#checkpointingenvironment-v1-0">CheckpointingEnvironment v1.0</a></li>
+<li><a class="reference internal" href="#clusterconfiguration-v1-0">ClusterConfiguration v1.0</a></li>
+<li><a class="reference internal" href="#clusterqueue-v1-0">ClusterQueue v1.0</a></li>
+<li><a class="reference internal" href="#complexconfigurationbase">ComplexConfigurationBase</a></li>
+<li><a class="reference internal" href="#complexconfiguration-v1-0">ComplexConfiguration v1.0</a></li>
+<li><a class="reference internal" href="#complexconfiguration-v2-0">ComplexConfiguration v2.0</a></li>
+<li><a class="reference internal" href="#executionhost-v1-0">ExecutionHost v1.0</a></li>
+<li><a class="reference internal" href="#hostgroup-v1-0">HostGroup v1.0</a></li>
+<li><a class="reference internal" href="#jobclass-v1-0">JobClass v1.0</a></li>
+<li><a class="reference internal" href="#parallelenvironment-v1-0">ParallelEnvironment v1.0</a></li>
+<li><a class="reference internal" href="#project-v1-0">Project v1.0</a></li>
+<li><a class="reference internal" href="#resourcequotaset-v1-0">ResourceQuotaSet v1.0</a></li>
+<li><a class="reference internal" href="#schedulerconfiguration-v1-0">SchedulerConfiguration v1.0</a></li>
+<li><a class="reference internal" href="#sharetree-v1-0">ShareTree v1.0</a></li>
+<li><a class="reference internal" href="#user-v1-0">User v1.0</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="uge.api.html"
+                        title="previous chapter">QconfApi</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="uge.exceptions.html"
+                        title="next chapter">QconfException</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/uge.objects.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="uge.exceptions.html" title="QconfException"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="uge.api.html" title="QconfApi"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">UGE Python Configuration Library 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Univa.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>
