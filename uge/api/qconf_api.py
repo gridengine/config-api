@@ -2035,8 +2035,8 @@ class QconfApi(object):
         :raises QconfException: for any other errors.
 
         >>> sconf = api.generate_sconf()
-        >>> sconf.data['queue_sort_method']
-        'load'
+        >>> sconf.data['algorithm']
+        'default'
         """
         return self.scheduler_configuration_manager.generate_object(
             data=data, metadata=metadata, 
