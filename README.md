@@ -18,7 +18,10 @@ UGE PyCL requires recent versions of the following software:
 
 The software versions listed above were used for prototype development and
 testing, on CentOS 7.2 (64-bit). It is likely that any recent version of 
-Python (such as those that come with current linux distributions) should work. UGE versions 8.3.1p9 or later or 8.4.0 and later will work with the Configuration API. Minor modifications to the code that checks versions will have to be made to support versions greater than 8.4.0.  
+Python (such as those that come with current linux distributions) should work.
+UGE versions 8.3.1p9 or later or 8.4.0 and later will work with the Configuration API.
+Minor modifications to the code that checks versions will have to be made to support
+versions greater than 8.4.0.  
 
 ## Build
 

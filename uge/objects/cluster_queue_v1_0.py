@@ -49,7 +49,7 @@ class ClusterQueue(QconfObject):
         'rerun'              : False,
         'slots'              : 1,
         'tmpdir'             : '/tmp',
-        'shell'              : '/bin/csh',
+        'shell'              : '/bin/sh',
         'prolog'             : None,
         'epilog'             : None,
         'shell_start_mode'   : 'unix_behavior',

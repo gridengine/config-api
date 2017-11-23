@@ -31,11 +31,11 @@ API = QconfApi()
 @needs_uge
 def test_generate_sconf():
     sconf = API.generate_sconf()
-    assert(sconf.data.has_key('queue_sort_method'))
+    assert(sconf.data.has_key('schedule_interval'))
 
 def test_get_sconf():
     sconf = API.get_sconf()
-    assert(sconf.data.has_key('queue_sort_method'))
+    assert(sconf.data.has_key('schedule_interval'))
 
 def test_generate_sconf_from_json():
     sconf = API.get_sconf()

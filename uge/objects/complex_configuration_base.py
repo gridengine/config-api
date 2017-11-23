@@ -35,6 +35,11 @@ class ComplexConfigurationBase(QconfObject):
         'NO'       : False,
     }
 
+    UGE_PYTHON_BOOL_VALUE_MAP = {
+        'TRUE'     : True,
+        'FALSE'    : False,
+    }
+
     UGE_PYTHON_TYPE_MAP = {
         'BOOL'     : int,
         'INT'      : int,
@@ -74,17 +79,20 @@ class ComplexConfigurationBase(QconfObject):
         for (key, value_dict) in self.data.items():
             lines += '%s' % (key)
             for key2 in ['shortcut', 'type', 'relop', 'requestable', 'consumable', 'default', 'urgency', 'aapre']:
-                lines += ' %s' % (self.py_to_uge(key2, value_dict[key2]))
+                lines += ' %s' % (self.py_to_uge(key2, value_dict[key2], value_dict.get('default_is_bool', False)))
             lines += '\n' 
         return lines
 
     def convert_data_to_uge_keywords(self, data):
         for (data_key, value_dict) in data.items():
             for (key, value) in value_dict.items():
-                value_dict[key] = self.py_to_uge(key, value)
+                value_dict[key] = self.py_to_uge(key, value, value_dict.get('default_is_bool', False))
 
     def py_to_uge(self, key, value):
-        for (uge_value, py_value) in self.UGE_PYTHON_OBJECT_MAP.items():
+        items = self.UGE_PYTHON_OBJECT_MAP.items()
+        if key == 'default' and default_is_bool:
+            items = self.UGE_PYTHON_BOOL_VALUE_MAP.items()
+        for (uge_value, py_value) in items:
             if value == py_value and type(value) == type(py_value):
                 return uge_value
         return value
@@ -94,10 +102,20 @@ class ComplexConfigurationBase(QconfObject):
         for (uge_value, py_value) in self.UGE_PYTHON_OBJECT_MAP.items():
             if uge_value == uppercase_value:
                 return py_value
+        for (uge_value, py_value) in self.UGE_PYTHON_BOOL_VALUE_MAP.items():
+            if uge_value == uppercase_value:
+                return py_value
         if uge_type and self.UGE_PYTHON_TYPE_MAP.has_key(uge_type):
             py_value = self.UGE_PYTHON_TYPE_MAP[uge_type](value)
             return py_value
         return value
+
+    def is_uge_value_bool(self, value):
+        uppercase_value = value.upper()
+        for (uge_value, py_value) in self.UGE_PYTHON_BOOL_VALUE_MAP.items():
+            if uge_value == uppercase_value:
+                return True
+        return False
 
     def to_dict(self, input_string):
         lines = input_string.split('\n')
@@ -115,6 +133,7 @@ class ComplexConfigurationBase(QconfObject):
             requestable = self.uge_to_py(key, key_value[4])
             consumable = self.uge_to_py(key, key_value[5])
             default = self.uge_to_py(key, key_value[6], uge_type)
+            default_is_bool = self.is_uge_value_bool(key_value[6])
             urgency = self.uge_to_py(key, key_value[7], 'INT')
             aapre = self.uge_to_py(key, key_value[8])
             object_data[key] = { 
@@ -126,6 +145,7 @@ class ComplexConfigurationBase(QconfObject):
                 'default' : default, 
                 'urgency' : urgency, 
                 'aapre' : aapre
+                'default_is_bool' : default_is_bool
             }
         return object_data
 
