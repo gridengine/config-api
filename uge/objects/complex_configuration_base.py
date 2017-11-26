@@ -144,7 +144,7 @@ class ComplexConfigurationBase(QconfObject):
                 'consumable' : consumable, 
                 'default' : default, 
                 'urgency' : urgency, 
-                'aapre' : aapre
+                'aapre' : aapre,
                 'default_is_bool' : default_is_bool
             }
         return object_data
