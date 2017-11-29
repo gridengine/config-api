@@ -156,6 +156,18 @@ JobClass v1.0
     .. autoattribute:: uge.objects.job_class_v1_0.JobClass.USER_PROVIDED_KEYS
     .. autoattribute:: uge.objects.job_class_v1_0.JobClass.REQUIRED_DATA_DEFAULTS
 
+JobClass v2.0
+-------------
+
+.. autoclass:: uge.objects.job_class_v2_0.JobClass()
+    :members: __init__
+    :show-inheritance:
+
+    .. autoattribute:: uge.objects.job_class_v2_0.JobClass.VERSION 
+    .. autoattribute:: uge.objects.job_class_v2_0.JobClass.NAME_KEY
+    .. autoattribute:: uge.objects.job_class_v2_0.JobClass.USER_PROVIDED_KEYS
+    .. autoattribute:: uge.objects.job_class_v2_0.JobClass.REQUIRED_DATA_DEFAULTS
+
 ParallelEnvironment v1.0
 ------------------------
 
