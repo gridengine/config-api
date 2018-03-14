@@ -23,19 +23,19 @@ import json
 
 from uge.constants import uge_status
 
-class QconfException(exceptions.Exception):
+class AdvanceReservationException(exceptions.Exception):
     """
-    Base Qconf exception class. 
+    Base Qrdel exception class. 
 
     Error code: uge_status.UGE_ERROR
 
     Usage examples:
     
-    >>> raise QconfException(error_message, error_code)
+    >>> raise AdvanceReservationException(error_message, error_code)
   
-    >>> raise QconfException(args=error_message)
+    >>> raise AdvanceReservationException(args=error_message)
 
-    >>> raise QconfException(exception=exception_object)
+    >>> raise AdvanceReservationException(exception=exception_object)
     """
 
     def __init__(self, error='', error_code=uge_status.UGE_ERROR, **kwargs):

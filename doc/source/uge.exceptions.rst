@@ -9,6 +9,12 @@ QconfException
     :members: __init__, to_json, to_dict, get_error_code, get_error_message, get_args, get_error_details
     :show-inheritance:
 
+AdvanceReservationException
+---------------------------
+
+.. autoexception:: uge.exceptions.AdvanceReservationException()
+    :members: __init__, to_json, to_dict, get_error_code, get_error_message, get_args, get_error_details
+    :show-inheritance:
 
 AuthorizationError
 ------------------

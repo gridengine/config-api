@@ -48,3 +48,12 @@ QconfApi
               add_shosts, delete_shosts, list_shosts
     :show-inheritance:
 
+AdvanceReservationApi
+---------------------
+
+.. autoclass:: uge.api.AdvanceReservationApi()
+    :members: __init__,
+              get_uge_version, get_ar, get_ar_summary,
+              get_ar_list, request_ar, delete_ar
+    :show-inheritance:
+

@@ -77,6 +77,19 @@ ClusterConfiguration v1.0
     .. autoattribute:: uge.objects.cluster_configuration_v1_0.ClusterConfiguration.REQUIRED_GLOBAL_DATA_DEFAULTS
     .. autoattribute:: uge.objects.cluster_configuration_v1_0.ClusterConfiguration.REQUIRED_HOST_DATA_DEFAULTS
 
+ClusterConfiguration v2.0
+-------------------------
+
+.. autoclass:: uge.objects.cluster_configuration_v2_0.ClusterConfiguration()
+    :members: __init__
+    :show-inheritance:
+
+    .. autoattribute:: uge.objects.cluster_configuration_v2_0.ClusterConfiguration.VERSION 
+    .. autoattribute:: uge.objects.cluster_configuration_v2_0.ClusterConfiguration.NAME_KEY
+    .. autoattribute:: uge.objects.cluster_configuration_v2_0.ClusterConfiguration.USER_PROVIDED_KEYS
+    .. autoattribute:: uge.objects.cluster_configuration_v2_0.ClusterConfiguration.REQUIRED_GLOBAL_DATA_DEFAULTS
+    .. autoattribute:: uge.objects.cluster_configuration_v2_0.ClusterConfiguration.REQUIRED_HOST_DATA_DEFAULTS
+
 ClusterQueue v1.0
 -----------------
 
@@ -139,7 +152,7 @@ HostGroup v1.0
     :members: __init__
     :show-inheritance:
 
-    .. autoattribute:: uge.objects.host_group_v1_0.HostGroup.VERSION 
+    .. autoattribute:: uge.objects.host_group_v1_0.HostGroup.VERSION
     .. autoattribute:: uge.objects.host_group_v1_0.HostGroup.NAME_KEY
     .. autoattribute:: uge.objects.host_group_v1_0.HostGroup.USER_PROVIDED_KEYS
     .. autoattribute:: uge.objects.host_group_v1_0.HostGroup.REQUIRED_DATA_DEFAULTS
@@ -151,7 +164,7 @@ JobClass v1.0
     :members: __init__
     :show-inheritance:
 
-    .. autoattribute:: uge.objects.job_class_v1_0.JobClass.VERSION 
+    .. autoattribute:: uge.objects.job_class_v1_0.JobClass.VERSION
     .. autoattribute:: uge.objects.job_class_v1_0.JobClass.NAME_KEY
     .. autoattribute:: uge.objects.job_class_v1_0.JobClass.USER_PROVIDED_KEYS
     .. autoattribute:: uge.objects.job_class_v1_0.JobClass.REQUIRED_DATA_DEFAULTS
@@ -163,10 +176,22 @@ JobClass v2.0
     :members: __init__
     :show-inheritance:
 
-    .. autoattribute:: uge.objects.job_class_v2_0.JobClass.VERSION 
+    .. autoattribute:: uge.objects.job_class_v2_0.JobClass.VERSION
     .. autoattribute:: uge.objects.job_class_v2_0.JobClass.NAME_KEY
     .. autoattribute:: uge.objects.job_class_v2_0.JobClass.USER_PROVIDED_KEYS
     .. autoattribute:: uge.objects.job_class_v2_0.JobClass.REQUIRED_DATA_DEFAULTS
+
+JobClass v3.0
+-------------
+
+.. autoclass:: uge.objects.job_class_v3_0.JobClass()
+    :members: __init__
+    :show-inheritance:
+
+    .. autoattribute:: uge.objects.job_class_v3_0.JobClass.VERSION
+    .. autoattribute:: uge.objects.job_class_v3_0.JobClass.NAME_KEY
+    .. autoattribute:: uge.objects.job_class_v3_0.JobClass.USER_PROVIDED_KEYS
+    .. autoattribute:: uge.objects.job_class_v3_0.JobClass.REQUIRED_DATA_DEFAULTS
 
 ParallelEnvironment v1.0
 ------------------------
@@ -175,10 +200,22 @@ ParallelEnvironment v1.0
     :members: __init__
     :show-inheritance:
 
-    .. autoattribute:: uge.objects.parallel_environment_v1_0.ParallelEnvironment.VERSION 
+    .. autoattribute:: uge.objects.parallel_environment_v1_0.ParallelEnvironment.VERSION
     .. autoattribute:: uge.objects.parallel_environment_v1_0.ParallelEnvironment.NAME_KEY
     .. autoattribute:: uge.objects.parallel_environment_v1_0.ParallelEnvironment.USER_PROVIDED_KEYS
     .. autoattribute:: uge.objects.parallel_environment_v1_0.ParallelEnvironment.REQUIRED_DATA_DEFAULTS
+
+ParallelEnvironment v2.0
+------------------------
+
+.. autoclass:: uge.objects.parallel_environment_v2_0.ParallelEnvironment()
+    :members: __init__
+    :show-inheritance:
+
+    .. autoattribute:: uge.objects.parallel_environment_v2_0.ParallelEnvironment.VERSION
+    .. autoattribute:: uge.objects.parallel_environment_v2_0.ParallelEnvironment.NAME_KEY
+    .. autoattribute:: uge.objects.parallel_environment_v2_0.ParallelEnvironment.USER_PROVIDED_KEYS
+    .. autoattribute:: uge.objects.parallel_environment_v2_0.ParallelEnvironment.REQUIRED_DATA_DEFAULTS
 
 Project v1.0
 ------------
@@ -215,6 +252,18 @@ SchedulerConfiguration v1.0
     .. autoattribute:: uge.objects.scheduler_configuration_v1_0.SchedulerConfiguration.NAME_KEY
     .. autoattribute:: uge.objects.scheduler_configuration_v1_0.SchedulerConfiguration.USER_PROVIDED_KEYS
     .. autoattribute:: uge.objects.scheduler_configuration_v1_0.SchedulerConfiguration.REQUIRED_DATA_DEFAULTS
+
+SchedulerConfiguration v2.0
+---------------------------
+
+.. autoclass:: uge.objects.scheduler_configuration_v2_0.SchedulerConfiguration()
+    :members: __init__
+    :show-inheritance:
+
+    .. autoattribute:: uge.objects.scheduler_configuration_v2_0.SchedulerConfiguration.VERSION 
+    .. autoattribute:: uge.objects.scheduler_configuration_v2_0.SchedulerConfiguration.NAME_KEY
+    .. autoattribute:: uge.objects.scheduler_configuration_v2_0.SchedulerConfiguration.USER_PROVIDED_KEYS
+    .. autoattribute:: uge.objects.scheduler_configuration_v2_0.SchedulerConfiguration.REQUIRED_DATA_DEFAULTS
 
 ShareTree v1.0
 --------------

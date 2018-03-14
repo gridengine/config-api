@@ -78,12 +78,36 @@ UGE_RELEASE_OBJECT_MAP['8.5.3_C104_1']['ParallelEnvironment'] = '2.0'
 # 8.5.4
 UGE_RELEASE_OBJECT_MAP['8.5.4'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.5.0'])
 
+# 8.5.4_C104_1
+UGE_RELEASE_OBJECT_MAP['8.5.4_C104_1'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.5.4'])
+UGE_RELEASE_OBJECT_MAP['8.5.4_C104_1']['ParallelEnvironment'] = '2.0'
+
+# 8.5.4_C104_2
+UGE_RELEASE_OBJECT_MAP['8.5.4_C104_2'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.5.4_C104_1'])
+
+# 8.5.4_C104_3
+UGE_RELEASE_OBJECT_MAP['8.5.4_C104_3'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.5.4_C104_2'])
+
+# 8.5.4_C104_4
+UGE_RELEASE_OBJECT_MAP['8.5.4_C104_4'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.5.4_C104_3'])
+
+# 8.5.4_C104_5
+UGE_RELEASE_OBJECT_MAP['8.5.4_C104_5'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.5.4_C104_4'])
+
+# 8.5.4_C104_6
+UGE_RELEASE_OBJECT_MAP['8.5.4_C104_6'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.5.4_C104_5'])
+
+# 8.5.5
+UGE_RELEASE_OBJECT_MAP['8.5.5'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.5.0'])
+
+
 # 8.6.0 (with affinity support)
 UGE_RELEASE_OBJECT_MAP['8.6.0'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.5.0'])
 UGE_RELEASE_OBJECT_MAP['8.6.0']['ComplexConfiguration'] = '3.0'
 UGE_RELEASE_OBJECT_MAP['8.6.0']['SchedulerConfiguration'] = '2.0'
 UGE_RELEASE_OBJECT_MAP['8.6.0']['ClusterConfiguration'] = '3.0'
 UGE_RELEASE_OBJECT_MAP['8.6.0']['ParallelEnvironment'] = '2.0'
+UGE_RELEASE_OBJECT_MAP['8.6.0']['JobClass'] = '3.0'
 
-# 8.6.0alpha
-UGE_RELEASE_OBJECT_MAP['8.6.0alpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.0'])
+# 8.6.0prealpha
+UGE_RELEASE_OBJECT_MAP['8.6.0prealpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.0'])

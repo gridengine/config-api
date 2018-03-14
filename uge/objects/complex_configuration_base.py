@@ -88,7 +88,7 @@ class ComplexConfigurationBase(QconfObject):
             for (key, value) in value_dict.items():
                 value_dict[key] = self.py_to_uge(key, value, value_dict.get('default_is_bool', False))
 
-    def py_to_uge(self, key, value):
+    def py_to_uge(self, key, value, default_is_bool=False):
         items = self.UGE_PYTHON_OBJECT_MAP.items()
         if key == 'default' and default_is_bool:
             items = self.UGE_PYTHON_BOOL_VALUE_MAP.items()

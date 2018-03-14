@@ -21,7 +21,7 @@ doc:
 pdf:
 	(cd doc/UserDocumentation; pandoc -R -N --template=template.tex --listings -H listings.tex\
 		--variable mainfont=Georgia --variable sansfont=Arial \
-        --variable fontsize=10pt --variable version="$(REVISION)" \
+		--variable fontsize=10pt --variable version="$(REVISION)" \
 		--variable title="Grid Engine Configuration API User Guide" \
 		--variable author="Univa Engineering" --variable company="Univa Corporation" \
 		--variable UGELongVersion="$(REVISION)" --variable UGEShortVersion="$(REVISION)" \
@@ -44,6 +44,7 @@ test: uge/__init__.py
 
 clean:
 	make -C doc clean
+	rm -f doc/UserDocumentation/UGEConfigLibraryDoc.pdf
 	rm -rf build *.egg-info `find . -name '*.pyc'`
 	rm -rf dist
 
