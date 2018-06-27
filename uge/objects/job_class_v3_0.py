@@ -86,6 +86,7 @@ class JobClass(QconfObject):
         'V'                : '{+}UNSPECIFIED',
         'v'                : '{+}UNSPECIFIED',
         'xd'               : '{+}UNSPECIFIED',
+        'rdi'              : '{+}UNSPECIFIED',
     }
 
     INT_KEY_MAP = QconfObject.get_int_key_map(REQUIRED_DATA_DEFAULTS)
