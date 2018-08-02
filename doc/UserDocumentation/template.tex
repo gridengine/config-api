@@ -1,3 +1,11 @@
+% CR - Define tightlist at top of template
+% This one is from https://github.com/jgm/pandoc-templates/blob/master/default.latex 
+% default most up-to-date LaTeX default template
+% (see https://tex.stackexchange.com/questions/257418/error-tightlist-converting-md-file-into-pdf-using-pandoc)
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% additional definitions ...
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$]{$documentclass$}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
@@ -22,8 +30,6 @@
 \newcommand{\UGEShortVersion}{$UGEShortVersion$}
 \newcommand{\UGEFullName}{$UGEFullName$}
 \newcommand{\UGEShortName}{$UGEShortName$}
-\providecommand{\tightlist}{%
-   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 % End Macro section
 
 $if(euro)$

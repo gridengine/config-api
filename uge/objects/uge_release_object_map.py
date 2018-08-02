@@ -100,6 +100,9 @@ UGE_RELEASE_OBJECT_MAP['8.5.4_C104_6'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.5.4
 # 8.5.5
 UGE_RELEASE_OBJECT_MAP['8.5.5'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.5.0'])
 
+# 8.5.6
+UGE_RELEASE_OBJECT_MAP['8.5.6'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.5.0'])
+UGE_RELEASE_OBJECT_MAP['8.5.6alpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.5.0'])
 
 # 8.6.0 (with affinity support)
 UGE_RELEASE_OBJECT_MAP['8.6.0'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.5.0'])
@@ -109,7 +112,4 @@ UGE_RELEASE_OBJECT_MAP['8.6.0']['SchedulerConfiguration'] = '2.0'
 UGE_RELEASE_OBJECT_MAP['8.6.0']['ParallelEnvironment'] = '2.0'
 UGE_RELEASE_OBJECT_MAP['8.6.0']['JobClass'] = '3.0'
 
-# 8.6.0prealpha
-UGE_RELEASE_OBJECT_MAP['8.6.0prealpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.0'])
-UGE_RELEASE_OBJECT_MAP['8.6.0alpha1'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.0'])
-UGE_RELEASE_OBJECT_MAP['8.6.0alpha2'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.0'])
+UGE_RELEASE_OBJECT_MAP['8.6.1'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.0'])

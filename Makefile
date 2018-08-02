@@ -19,7 +19,7 @@ doc:
 	PYTHONPATH=$(PWD) make -C doc html
 
 pdf:
-	(cd doc/UserDocumentation; pandoc -R -N --template=template.tex --listings -H listings.tex\
+	(cd doc/UserDocumentation; pandoc -R -N --template=template.tex --listings -H listings.tex \
 		--variable mainfont=Georgia --variable sansfont=Arial \
 		--variable fontsize=10pt --variable version="$(REVISION)" \
 		--variable title="Grid Engine Configuration API User Guide" \
