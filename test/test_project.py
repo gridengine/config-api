@@ -19,9 +19,11 @@
 #___INFO__MARK_END__ 
 # 
 import types
+import tempfile
 from utils import needs_uge
 from utils import generate_random_string
 from utils import create_config_file
+from utils import load_values
 
 from uge.api.qconf_api import QconfApi
 from uge.config.config_manager import ConfigManager
@@ -34,6 +36,8 @@ API = QconfApi()
 PROJECT_NAME = '%s' % generate_random_string(6)
 CONFIG_MANAGER = ConfigManager.get_instance()
 LOG_MANAGER = LogManager.get_instance()
+VALUES_DICT = load_values('test_values.json')
+print VALUES_DICT
 
 @needs_uge
 def test_object_not_found():
@@ -111,4 +115,114 @@ def test_delete_prj():
         project_list2 = []
     assert(len(project_list2) == len(project_list) - 1)
     assert(project_list2.count(PROJECT_NAME) == 0)
+
+def test_get_prjs():
+    prjl = API.list_prjs()
+    print "Project Names: " + prjl
+    prjs = API.get_prjs()
+    print "Projects: " + str(prjs)
+    for prj in prjs:
+        print "#############################################"
+        print prj.to_uge()
+        assert(prj.data['name'] in prjl)
+
+def test_write_prjs():
+    try:
+        tprj = 'prj_xyz'
+        #tdir = '/tmp/uge/prjs'
+        tdir = tempfile.mkdtemp()
+        print "*************************** " + tdir
+        prjs = API.get_prjs()
+        for prj in prjs:
+            print "Before #############################################"
+            print prj.to_uge()
+
+        add_projects = []
+        nprj = API.generate_prj(name='prj_xyz')
+        add_projects.append(nprj)
+        API.mk_prjs_dir(tdir)
+        API.write_prjs(add_projects, tdir)
+        API.add_prjs_from_dir(tdir)
+        API.modify_prjs_from_dir(tdir)
+        prjs = API.get_prjs()
+        for prj in prjs:
+            print "After #############################################"
+            print prj.to_uge()
+    finally:
+        API.delete_prjs(['prj_xyz'])
+        API.rm_prjs_dir(tdir)
+
+def test_add_prjs():
+    try:
+        add_projects = []
+        prj_names = VALUES_DICT['prj_names']
+        # prj_names = ['tp1', 'tp2']
+        for name in prj_names:
+            nprj = API.generate_prj(name=name)
+            add_projects.append(nprj)
+
+        # print all projects currently in the cluster
+        prjs = API.get_prjs()
+        for prj in prjs:
+            print "Before #############################################"
+            print prj.to_uge()
+
+        # add projects
+        API.add_prjs(add_projects)
+
+        # print all projects currently in the cluster
+        prjs = API.get_prjs()
+        for prj in prjs:
+            print "After #############################################"
+            print prj.to_uge()
+
+        # check that projects have been added
+        prjs = API.list_prjs()
+        for p in prj_names:
+            assert(p in prjs)
+            print "project found: " + p
+
+    finally:
+        API.delete_prjs(prj_names)
+
+def test_modify_prjs():
+    try:
+        add_projects = []
+        prj_names = VALUES_DICT['prj_names']
+        # prj_names = ['tp1', 'tp2']
+        for name in prj_names:
+            nprj = API.generate_prj(name=name)
+            add_projects.append(nprj)
+
+        # print all projects currently in the cluster
+        print "Before #############################################"
+        prjs = API.get_prjs()
+        for prj in prjs:
+            print prj.to_uge()
+
+        # add projects
+        API.add_prjs(add_projects)
+
+        # modify added projects
+        print "Before modify #############################################"
+        prjs = API.get_prjs()
+        for prj in prjs:
+            if prj.data['name'] in prj_names:
+                prj.data['oticket'] += 1
+            else:
+                print "project not found: " + prj.data['name']
+            print prj.to_uge()
+        API.modify_prjs(prjs)        
+
+        # check that projects have been changed
+        print "After #############################################"
+        prjs = API.get_prjs()
+        for p in prjs:
+            print p.to_uge()
+            if p.data['name'] in prj_names:
+                print "project found: " + p.data['name'] + " with oticket=" + str(p.data['oticket'])
+                # assert(p.data['oticket'] == 1)
+
+    finally:
+        API.delete_prjs(prj_names)
 

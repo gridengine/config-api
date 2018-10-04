@@ -75,6 +75,8 @@ This step is not needed if UGE PyCL egg package is installed.
 
 3) Run test suite:
 
+  adjust test_values.json according to your needs, esp. the host_names have to be resolvable,
+  otherwise some execution host tests might fail
 ```sh
   $ make test 
 ```

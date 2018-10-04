@@ -112,4 +112,11 @@ UGE_RELEASE_OBJECT_MAP['8.6.0']['SchedulerConfiguration'] = '2.0'
 UGE_RELEASE_OBJECT_MAP['8.6.0']['ParallelEnvironment'] = '2.0'
 UGE_RELEASE_OBJECT_MAP['8.6.0']['JobClass'] = '3.0'
 
+# 8.6.0prealpha
+UGE_RELEASE_OBJECT_MAP['8.6.0prealpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.0'])
+UGE_RELEASE_OBJECT_MAP['8.6.0alpha1'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.0'])
+UGE_RELEASE_OBJECT_MAP['8.6.0alpha2'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.0'])
+
 UGE_RELEASE_OBJECT_MAP['8.6.1'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.0'])
+
+UGE_RELEASE_OBJECT_MAP['8.7.0alpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.0'])

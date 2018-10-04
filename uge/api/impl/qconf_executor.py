@@ -115,6 +115,12 @@ class QconfExecutor(object):
                 os.remove(tmp_file_path)
             if tmp_dir_path is not None:
                 os.rmdir(tmp_dir_path)
+
+    def execute_qconf_with_dir(self, cmd, dir, error_regex_list=[]):
+        if not os.path.isdir(dir):
+            raise QconfException('%s is not a directory' % dir)
+        full_cmd = '%s %s' % (cmd, dir)
+        self.execute_qconf(full_cmd, error_regex_list=error_regex_list)
             
 #############################################################################
 # Testing.

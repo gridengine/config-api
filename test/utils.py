@@ -22,6 +22,7 @@ import string
 import random
 import os
 import os.path
+import json
 from tempfile import NamedTemporaryFile
 
 from nose import SkipTest
@@ -113,6 +114,12 @@ def generate_random_string_list(n_strings, string_length, delimiter=',', string_
         string_delimiter = delimiter
     return string_list
 
+def load_values(value_file):
+    tpd = {}
+    if os.path.exists(value_file):
+        tpd = json.load(open(value_file))
+    return tpd
+    
 # Common decorators
 def needs_setup(func):
     def inner(*args, **kwargs):
@@ -149,4 +156,6 @@ def needs_uge(func):
 if __name__ == '__main__':
     #print 'Last line: ', read_last_line('/tmp/uge.log')
     create_config_file()
+    d = load_test_values('test_values.json')
+    print d
 

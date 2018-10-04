@@ -620,6 +620,17 @@ class QconfApi(object):
                   metadata=metadata, json_string=json_string)
 
     @api_call
+    def add_ehosts(self, ehost_list):
+        """ Adds all UGE execution hosts from ehost_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_ehosts(ehost_list)
+        """
+        return self.execution_host_manager.add_objects(ehost_list)
+
+    @api_call
     def modify_ehost(self, pycl_object=None, name=None, data=None,
                   metadata=None, json_string=None):
         """ Modify UGE execution host object.
@@ -657,6 +668,17 @@ class QconfApi(object):
                   metadata=metadata, json_string=json_string)
 
     @api_call
+    def modify_ehosts(self, ehost_list):
+        """ Modifies all UGE execution hosts from ehost_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_ehosts(ehost_list)
+        """
+        return self.execution_host_manager.modify_objects(ehost_list)
+
+    @api_call
     def get_ehost(self, name):
         """ Retrieve UGE execution host configuration.
 
@@ -680,6 +702,20 @@ class QconfApi(object):
         return self.execution_host_manager.get_object(name)
 
     @api_call
+    def get_ehosts(self):
+        """ Retrieve all UGE execution hosts configuration details.
+
+        :returns: array of ExecutionHost dict objects.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> ehost_dict_list = api.get_ehosts()
+
+        """
+        return self.execution_host_manager.get_objects()
+
+    @api_call
     def delete_ehost(self, name):
         """ Delete UGE execution host.
 
@@ -694,6 +730,22 @@ class QconfApi(object):
         >>> api.delete_ehost('univa2')
         """
         return self.execution_host_manager.delete_object(name)
+
+    @api_call
+    def delete_ehosts(self, name_list):
+        """ Delete UGE execution host.
+
+        :param name: Execution host name list.
+        :type name: string list
+
+        :raises ObjectNotFound: in case execution host object with a given name does not exist.
+        :raises InvalidRequest: if execution host is still referenced in other objects (e.g., hostlists).
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.delete_ehosts(['univa1', 'univa2'])
+        """
+        return self.execution_host_manager.delete_objects(name_list)
 
     @api_call
     def list_ehosts(self):
@@ -711,6 +763,55 @@ class QconfApi(object):
         'QconfNameList'
         """
         return self.execution_host_manager.list_objects()
+
+    @api_call
+    def mk_ehosts_dir(self, dirname):
+        """ Make a temporary directory to write ehost data.
+
+        >>> api.mk_ehosts_dir('/tmp/ehosts_test')
+        """
+        self.execution_host_manager.mk_object_dir(dirname)
+
+    @api_call
+    def rm_ehosts_dir(self, dirname):
+        """ Remove temporary ehosts directory.
+
+        >>> api.rm_prjs_dir('/tmp/ehosts_test')
+        """
+        self.execution_host_manager.rm_object_dir(dirname)
+
+    @api_call
+    def write_ehosts(self, ehost_list, dirname):
+        """ Write each ehost in ehost_list to a seperate file in dir.
+
+        >>> api.write_ehosts(ehost_list, '/tmp/ehosts_test')
+        """
+        self.execution_host_manager.write_objects(ehost_list, dirname)
+
+    @api_call
+    def add_ehosts_from_dir(self, dirname):
+        """ Adds all UGE execution hosts from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_ehosts_from_dir('/tmp/ehosts_test')
+        """
+        return self.execution_host_manager.add_objects_from_dir(dirname)
+
+    @api_call
+    def modify_ehosts_from_dir(self, dirname):
+        """ Modifies all UGE execution hosts from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_ehosts_from_dir('/tmp/ehosts_test')
+        """
+        return self.execution_host_manager.modify_objects_from_dir(dirname)
+
+
+
 
     #
     # HostGroup methods
@@ -1364,6 +1465,17 @@ class QconfApi(object):
             metadata=metadata, json_string=json_string)
 
     @api_call
+    def add_prjs(self, prj_list):
+        """ Adds all projects in prj_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_prjs(prj_list)
+        """
+        return self.project_manager.add_objects(prj_list)
+
+    @api_call
     def modify_prj(self, pycl_object=None, name=None, data=None,
                    metadata=None, json_string=None):
         """ Modify UGE project object.
@@ -1401,6 +1513,17 @@ class QconfApi(object):
             metadata=metadata, json_string=json_string)
 
     @api_call
+    def modify_prjs(self, prj_list):
+        """ Modifies all projects in prj_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_prjs(prj_list)
+        """
+        return self.project_manager.modify_objects(prj_list)
+
+    @api_call
     def get_prj(self, name):
         """ Retrieve UGE project configuration.
 
@@ -1420,6 +1543,19 @@ class QconfApi(object):
         return self.project_manager.get_object(name)
 
     @api_call
+    def get_prjs(self):
+        """ Retrieve all UGE projects.
+
+        :returns: array of project dict objects.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> prjs_list = api.get_prjs()
+        """
+        return self.project_manager.get_objects()
+
+    @api_call
     def delete_prj(self, name):
         """ Delete UGE project.
 
@@ -1436,6 +1572,22 @@ class QconfApi(object):
         return self.project_manager.delete_object(name)
 
     @api_call
+    def delete_prjs(self, prjname_list):
+        """ Delete UGE projects in prj_list.
+
+        :param name: Project name list.
+        :type name: string list
+
+        :raises ObjectNotFound: in case project object with a given name does not exist.
+        :raises InvalidRequest: if project is still referenced in other objects.
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.delete_prjs(['testproject1', 'testproject2'])
+        """
+        return self.project_manager.delete_objects(prjname_list)
+
+    @api_call
     def list_prjs(self):
         """ List UGE project names.
 
@@ -1449,6 +1601,52 @@ class QconfApi(object):
         ['project1']
         """
         return self.project_manager.list_objects()
+
+    @api_call
+    def mk_prjs_dir(self, dirname):
+        """ Make a temporary directory to write project data.
+
+        >>> api.mk_prjs_dir('/tmp/prjs_test')
+        """
+        self.project_manager.mk_object_dir(dirname)
+
+    @api_call
+    def rm_prjs_dir(self, dirname):
+        """ Remove temporary projects directory.
+
+        >>> api.rm_prjs_dir('/tmp/prjs_test')
+        """
+        self.project_manager.rm_object_dir(dirname)
+
+    @api_call
+    def write_prjs(self, prjs, dirname):
+        """ Write each project in prjs to a seperate file in dir.
+
+        >>> api.write_prjs(prjs, '/tmp/prjs_test')
+        """
+        self.project_manager.write_objects(prjs, dirname)
+
+    @api_call
+    def add_prjs_from_dir(self, dirname):
+        """ Adds all projects from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_prjs('/tmp/prjs_test')
+        """
+        return self.project_manager.add_objects_from_dir(dirname)
+
+    @api_call
+    def modify_prjs_from_dir(self, dirname):
+        """ Modify all projects from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_prjs_from_dir('/tmp/prjs_test')
+        """
+        return self.project_manager.modify_objects_from_dir(dirname)
 
     #
     # Calendar methods
@@ -3054,4 +3252,21 @@ if __name__ == '__main__':
     print 'QUEUE LIST: ', queue_list
     print 'QUEUE LIST JSON: ', queue_list.to_json()
 
+    #ehosts = api.get_ehosts()
+    #api.mk_ehosts_dir('/tmp/uge/ehosts')
+    #api.write_ehosts(ehosts, '/tmp/uge/ehosts')
 
+    #prjs = api.get_prjs()
+    #api.mk_prjs_dir('/tmp/uge/proj')
+    #api.write_prjs(prjs, '/tmp/uge/proj')
+
+    #api.add_ehosts_from_dir('/tmp/uge/ehosts')
+    #api.modify_ehosts_from_dir('/tmp/uge/ehosts')
+    #api.delete_ehosts(['passat', 'elmsfeuer', 'kugelblitz'])
+
+    #api.add_prjs_from_dir('/tmp/uge/proj')
+    #api.modify_prjs_from_dir('/tmp/uge/proj')
+    #api.delete_prjs(['test1', 'test2', 'test3', 'test4'])
+
+    #api.rm_ehosts_dir('/tmp/uge/ehosts')
+    #api.rm_prjs_dir('/tmp/uge/prjs')
