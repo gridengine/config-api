@@ -66,7 +66,7 @@ class QrdelExecutor(object):
             lines = p.get_stdout().split('\n')
             if not len(lines):
                 raise AdvanceReservationException('Cannot determine UGE version from output: %s' % p.get_stdout())
-            self.uge_version = lines[0].split()[-1]
+            self.uge_version = lines[0].split()[-1].split("_")[0]
         return self.uge_version
 
     def execute_qrdel(self, cmd, error_regex_list=[], error_details=None, combine_error_lines=False, success_regex_list=[], failure_regex_list=[]):

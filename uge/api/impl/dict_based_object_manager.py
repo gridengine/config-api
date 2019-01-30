@@ -17,7 +17,8 @@
 # limitations under the License. 
 ########################################################################### 
 #___INFO__MARK_END__ 
-# 
+#
+import errno
 import re
 import copy
 import os
@@ -201,7 +202,7 @@ class DictBasedObjectManager(object):
         except ObjectNotFound, ex:
             object_list = QconfNameList(metadata={'description' : 'List of %s object names' % (self.OBJECT_CLASS_NAME)}, data=[])
         return object_list
-        
+
     def get_objects(self):
         bulk_output = self.qconf_executor.execute_qconf('-s%s%s' % (self.OBJECT_CLASS_UGE_NAME, self.OBJECT_CLASS_UGE_LIST_DETAILS_NAME), self.QCONF_ERROR_REGEX_LIST, failure_regex_list=self.QCONF_FAILURE_REGEX_LIST).get_stdout()
         bulk_object = self.parse_bulk_output(bulk_output)
@@ -272,4 +273,3 @@ class DictBasedObjectManager(object):
 # Testing.
 if __name__ == '__main__':
     pass
-

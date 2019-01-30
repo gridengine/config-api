@@ -1,6 +1,17 @@
 
 include ./util/include.mk
 
+# The command line arguments of pandoc were renamed between version 1.x and 2.x,
+# so find out which pandoc version we are using and set options accordingly.
+PANDOC_VERSION_MAJOR = $(shell pandoc -v | grep "^pandoc" | cut -d" " -f 2 | cut -d"." -f 1)
+PANDOC_VERSION_GE_2 = $(shell [ $(PANDOC_VERSION_MAJOR) -ge 2 ] && echo true)
+
+ifeq ($(PANDOC_VERSION_GE_2),true)
+	PANDOC_OPTS = --pdf-engine=xelatex
+else
+	PANDOC_OPTS = -R --latex-engine=xelatex
+endif
+
 all: build doc
 
 # Stubs for default targets
@@ -19,7 +30,7 @@ doc:
 	PYTHONPATH=$(PWD) make -C doc html
 
 pdf:
-	(cd doc/UserDocumentation; pandoc -R -N --template=template.tex --listings -H listings.tex \
+	(cd doc/UserDocumentation; pandoc $(PANDOC_OPTS) --template=template.tex --listings -H listings.tex \
 		--variable mainfont=Georgia --variable sansfont=Arial \
 		--variable fontsize=10pt --variable version="$(REVISION)" \
 		--variable title="Grid Engine Configuration API User Guide" \
@@ -27,7 +38,7 @@ pdf:
 		--variable UGELongVersion="$(REVISION)" --variable UGEShortVersion="$(REVISION)" \
 		--variable UGEFullName="Univa Grid Engine" --variable UGEShortName="Grid Engine" \
 		--variable doc-family="Univa Grid Engine Documentation" \
-		--latex-engine=xelatex --toc -s UGEConfigLibraryDoc.md -o UGEConfigLibraryDoc.pdf)
+		--toc -s UGEConfigLibraryDoc.md -o UGEConfigLibraryDoc.pdf)
 
 dist: egg doc
 	cp doc/UserDocumentation/UGEConfigLibraryDoc.pdf doc/build
