@@ -156,6 +156,6 @@ def needs_uge(func):
 if __name__ == '__main__':
     #print 'Last line: ', read_last_line('/tmp/uge.log')
     create_config_file()
-    d = load_test_values('test_values.json')
+    d = load_values('test_values.json')
     print d
 

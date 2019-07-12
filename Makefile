@@ -40,14 +40,20 @@ pdf:
 		--variable doc-family="Univa Grid Engine Documentation" \
 		--toc -s UGEConfigLibraryDoc.md -o UGEConfigLibraryDoc.pdf)
 
-dist: egg doc
+dist: sdist wheel doc
 	cp doc/UserDocumentation/UGEConfigLibraryDoc.pdf doc/build
 	rsync -arvlP doc/build/* dist/doc/
 	cp doc/UGEConfigLibraryHLD.pdf dist/doc
 	(cd dist; zip -r config-api.zip `ls -d *`)
 
-egg: uge/__init__.py
-	python setup.py bdist_egg
+#egg: uge/__init__.py
+#	python setup.py bdist_egg
+
+sdist: uge/__init__.py
+	python setup.py sdist
+
+wheel: uge/__init__.py
+	python setup.py bdist_wheel
 
 test: uge/__init__.py
 	mkdir -p build
