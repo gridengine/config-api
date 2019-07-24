@@ -3,6 +3,9 @@ include ./util/include.mk
 
 # The command line arguments of pandoc were renamed between version 1.x and 2.x,
 # so find out which pandoc version we are using and set options accordingly.
+PANDOC_EXISTS := $(shell pandoc -v 2>/dev/null)
+
+ifdef PANDOC_EXISTS
 PANDOC_VERSION_MAJOR = $(shell pandoc -v | grep "^pandoc" | cut -d" " -f 2 | cut -d"." -f 1)
 PANDOC_VERSION_GE_2 = $(shell [ $(PANDOC_VERSION_MAJOR) -ge 2 ] && echo true)
 
@@ -10,6 +13,8 @@ ifeq ($(PANDOC_VERSION_GE_2),true)
 	PANDOC_OPTS = --pdf-engine=xelatex
 else
 	PANDOC_OPTS = -R --latex-engine=xelatex
+endif
+
 endif
 
 all: build doc
@@ -43,11 +48,10 @@ pdf:
 dist: sdist wheel doc
 	cp doc/UserDocumentation/UGEConfigLibraryDoc.pdf doc/build
 	rsync -arvlP doc/build/* dist/doc/
-	cp doc/UGEConfigLibraryHLD.pdf dist/doc
 	(cd dist; zip -r config-api.zip `ls -d *`)
 
-#egg: uge/__init__.py
-#	python setup.py bdist_egg
+egg: uge/__init__.py
+	python setup.py bdist_egg
 
 sdist: uge/__init__.py
 	python setup.py sdist
@@ -62,7 +66,6 @@ test: uge/__init__.py
 clean:
 	make -C doc clean
 	rm -f doc/UserDocumentation/UGEConfigLibraryDoc.pdf
-	rm -rf build *.egg-info `find . -name '*.pyc'`
-	rm -rf dist
+	rm -rf  dist test/.coverage *.egg-info `find . -name '*.pyc' -o -name '__pycache__' -o -name 'build'` 
 
 tidy: clean
