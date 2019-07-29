@@ -20,7 +20,7 @@ endif
 all: build doc
 
 # Stubs for default targets
-.PHONY:deps install clean dist egg distclean test doc
+.PHONY:deps install clean dist egg wheel distclean test doc
 deps install test:
 
 uge/__init__.py : ./util/params.mk
@@ -66,6 +66,8 @@ test: uge/__init__.py
 clean:
 	make -C doc clean
 	rm -f doc/UserDocumentation/UGEConfigLibraryDoc.pdf
-	rm -rf  dist test/.coverage *.egg-info `find . -name '*.pyc' -o -name '__pycache__' -o -name 'build'` 
+	rm -rf  test/.coverage *.egg-info `find . -name '*.pyc' -o -name '__pycache__' -o -name 'build' -o -name '.coverage' `
 
 tidy: clean
+	rm -rf dist
+

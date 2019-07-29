@@ -125,7 +125,7 @@ class QrstatExecutor(object):
 # Testing.
 if __name__ == '__main__':
     from uge.exceptions.command_failed import CommandFailed
-    executor = QrstatExecutor(sge_root='/Users/aalefeld/univa/trash/UGE86', sge_cell='default',sge_qmaster_port=5560, sge_execd_port=5561)
+    executor = QrstatExecutor(sge_root='/Users/aalefeld/univa/clusters/UGE86', sge_cell='default',sge_qmaster_port=5560, sge_execd_port=5561)
     try:
         print 'Version: ', executor.get_uge_version()
 

@@ -350,7 +350,7 @@ keys for UGE projects.
 
 Most keys that have default values do not have to be provided by the
 library user. For certain keys the values will have to be set by the library user before the UGE object is added or modified via the relevant PyCL API calls (e.g., “qname” attribute of UGE cluster queue). Note that default values for certain keys may be installation specific, and will have to be generated at runtime (for example, those keys that rely on
-```\$SGE\_ROOT```)
+``\$SGE\_ROOT``)
 
 Some objects (e.g., cluster configuration) have a set of keys that are
 optional (i.e., they can be removed from object’s configuration). In order to accommodate such cases, PyCL wrapper class utilizes dictionaries of optional data keys and their respective default values. For example:

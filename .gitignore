@@ -99,3 +99,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Dokumentation PDF
+doc/UserDocumentation/UGEConfigLibraryDoc.pdf

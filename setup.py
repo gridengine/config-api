@@ -23,14 +23,14 @@ if sys.version_info <= (2, 5):
     print(error, file=sys.stderr)
     sys.exit(1)
 
-def readme():
-    with open("README.md") as f:
-        return f.read()
+with open("README.md") as f:
+      long_description = f.read()
 
 setup(name = 'uge-pycl',
       version = __version__,
       description = 'UGE Python Configuration Library',
-      long_description = readme(),
+      long_description = long_description,
+      long_description_content_type = 'text/markdown',
       author = 'Univa',
       author_email = 'info@univa.com',
       test_suite = 'test',
@@ -63,6 +63,8 @@ setup(name = 'uge-pycl',
                      'Programming Language :: Python :: 2',
                      'Programming Language :: Python :: 2.6',
                      'Programming Language :: Python :: 2.7',
+                     'Programming Language :: Python :: 3',
                      ],
+      options={'bdist_wheel':{'universal':True}},
       **extra
       )
