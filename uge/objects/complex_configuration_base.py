@@ -74,11 +74,11 @@ class ComplexConfigurationBase(QconfObject):
         :returns: Object's UGE-formatted string.
         """
         lines = ''
-        lines += '#name               shortcut   type        relop requestable consumable default  urgency aapre\n'  
-        lines += '#-----------------------------------------------------------------------------------------------\n'
+        lines += '#name               shortcut   type        relop requestable consumable default  urgency aapre affinity\n'
+        lines += '#------------------------------------------------------------------------------------------------------\n'
         for (key, value_dict) in self.data.items():
             lines += '%s' % (key)
-            for key2 in ['shortcut', 'type', 'relop', 'requestable', 'consumable', 'default', 'urgency', 'aapre']:
+            for key2 in ['shortcut', 'type', 'relop', 'requestable', 'consumable', 'default', 'urgency', 'aapre', 'affinity']:
                 lines += ' %s' % (self.py_to_uge(key2, value_dict[key2], value_dict.get('default_is_bool', False)))
             lines += '\n' 
         return lines
@@ -136,6 +136,7 @@ class ComplexConfigurationBase(QconfObject):
             default_is_bool = self.is_uge_value_bool(key_value[6])
             urgency = self.uge_to_py(key, key_value[7], 'INT')
             aapre = self.uge_to_py(key, key_value[8])
+            affinity = self.uge_to_py(key, key_value[9])
             object_data[key] = { 
                 'shortcut' : shortcut, 
                 'type' : uge_type, 
@@ -145,6 +146,7 @@ class ComplexConfigurationBase(QconfObject):
                 'default' : default, 
                 'urgency' : urgency, 
                 'aapre' : aapre,
+                'affinity' : affinity,
                 'default_is_bool' : default_is_bool
             }
         return object_data
@@ -154,7 +156,7 @@ class ComplexConfigurationBase(QconfObject):
             raise InvalidArgument('Invalid complex attribute name.')
         if type(data) != types.DictType:
             raise InvalidArgument('Complex attribute data must be a dictionary.')
-        for key in ['shortcut', 'type', 'relop', 'requestable', 'consumable', 'default', 'urgency', 'aapre'] :
+        for key in ['shortcut', 'type', 'relop', 'requestable', 'consumable', 'default', 'urgency', 'aapre', 'affinity'] :
             if not data.has_key(key):
                 raise InvalidArgument('Complex attribute data is missing the "%s" key.' % key)
 

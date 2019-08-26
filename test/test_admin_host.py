@@ -28,6 +28,7 @@ from uge.config.config_manager import ConfigManager
 from uge.log.log_manager import LogManager
 from uge.exceptions.object_not_found import ObjectNotFound
 from uge.exceptions.object_already_exists import ObjectAlreadyExists
+from uge.exceptions.authorization_error import AuthorizationError
 
 create_config_file()
 API = QconfApi()
@@ -64,8 +65,11 @@ def test_delete_and_add_ahosts():
                 break
         if not host_name:
             raise SkipTest('Could not find UGE admin host that could be removed.')
-        hl2 = API.delete_ahosts([host_name])
-        assert(hl2.data.count(host_name) == 0)
+        try:
+            hl2 = API.delete_ahosts([host_name])
+            assert(hl2.data.count(host_name) == 0)
+        except AuthorizationError, ex:
+            raise SkipTest('Skip master host warning %s.' % str(ex))
         hl3 = API.add_ahosts(host_name)
         assert(hl3.data.count(host_name) == 1)
     except ObjectNotFound, ex:
