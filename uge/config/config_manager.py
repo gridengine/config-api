@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,15 +16,21 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
 
 import os
 import pwd
 import socket
 
-import UserDict
-import ConfigParser
+try:
+    import UserDict
+except ImportError:
+    import collections as UserDict
+try:
+    import ConfigParser
+except ImportError:
+    import configparser as ConfigParser
 
 # Defaults.
 DEFAULT_UGE_ROOT = '/opt/uge'
@@ -105,7 +111,6 @@ class ConfigManager(UserDict.UserDict, object):
         # System info.
         self['host'] = socket.getfqdn()
         self['user'] = pwd.getpwuid(os.getuid())[0]
-
 
     # This function will ignore errors if environment variable is not set.
     def __set_from_env_variable(self, key, env_var):
@@ -268,8 +273,8 @@ class ConfigManager(UserDict.UserDict, object):
         config_parser = self.get_config_parser()
         if self.has_config_section(config_section):
             try:
-                return config_parser.get(config_section, key, True)
-            except ConfigParser.NoOptionError, ex:
+                return config_parser.get(config_section, key, raw=True)
+            except ConfigParser.NoOptionError as ex:
                 # ok, return default
                 pass
         return default_value
@@ -302,15 +307,16 @@ class ConfigManager(UserDict.UserDict, object):
         from uge import __version__
         return __version__
 
+
 #############################################################################
 # Testing
 if __name__ == '__main__':
     cm1 = ConfigManager.get_instance()
-    print 'CONFIG_FILE: ', cm1.get_config_file()
+    print('CONFIG_FILE: ', cm1.get_config_file())
     cm1.set_config_file('/tmp/xyz')
-    print 'CONFIG_FILE: ', cm1.get_config_file()
+    print('CONFIG_FILE: ', cm1.get_config_file())
     cm2 = ConfigManager()
-    print 'cm1 = cm2:', cm1 == cm2
-    print 'ROOT: ', cm1.get_root()
-    print 'CONFIG_FILE: ', cm1.get_config_file()
-    print 'CONFIG FILE SECTIONS: ', cm1.get_config_sections()
+    print('cm1 = cm2:', cm1 == cm2)
+    print('ROOT: ', cm1.get_root())
+    print('CONFIG_FILE: ', cm1.get_config_file())
+    print('CONFIG FILE SECTIONS: ', cm1.get_config_sections())

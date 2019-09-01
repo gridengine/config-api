@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
 import os
 import subprocess
@@ -24,14 +24,18 @@ import subprocess
 from uge.log.log_manager import LogManager
 from uge.exceptions.command_failed import CommandFailed
 
+
 class UgeSubprocess(subprocess.Popen):
 
-    def __init__(self, args, bufsize=0, executable=None, stdin=None, stdout=subprocess.PIPE, stderr=subprocess.PIPE, preexec_fn=None, close_fds=False, shell=True, cwd=None, env=None, universal_newlines=False, startupinfo=None, creationflags=0, use_exceptions=True):
+    def __init__(self, args, bufsize=0, executable=None, stdin=None, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                 preexec_fn=None, close_fds=False, shell=True, cwd=None, env=None, universal_newlines=False,
+                 startupinfo=None, creationflags=0, use_exceptions=True):
         """
         Overrides Popen constructor with defaults more appropriate for
         Uge usage.
         """
-        subprocess.Popen.__init__(self, args, bufsize, executable, stdin, stdout, stderr, preexec_fn, close_fds, shell, cwd, env, universal_newlines, startupinfo, creationflags)
+        subprocess.Popen.__init__(self, args, bufsize, executable, stdin, stdout, stderr, preexec_fn, close_fds, shell,
+                                  cwd, env, universal_newlines, startupinfo, creationflags)
         self.logger = LogManager.get_instance().get_logger(self.__class__.__name__)
         self.stdout_ = None
         self.stderr_ = None
@@ -42,7 +46,7 @@ class UgeSubprocess(subprocess.Popen):
         # Not very useful to show the name of this file.
         # Walk up the stack to find the caller.
         import traceback
-        stack =  traceback.extract_stack()
+        stack = traceback.extract_stack()
         for i in range(2, len(stack)):
             if stack[-i][0] != stack[-1][0]:
                 fileName, lineNumber, functionName, text = stack[-i]
@@ -51,17 +55,17 @@ class UgeSubprocess(subprocess.Popen):
             fileName = lineNumber = functionName = text = '?'
 
         self.logger.debug('from [%s:%s] Invoking: [%s]' %
-            (os.path.basename(fileName), lineNumber, self.args_))
+                          (os.path.basename(fileName), lineNumber, self.args_))
 
     def run(self, input=None):
         self.__command_log()
         (self.stdout_, self.stderr_) = subprocess.Popen.communicate(self, input)
         self.logger.debug('Exit status: %s' % self.returncode)
         if self.returncode != 0 and self.use_exceptions:
-            self.logger.debug('StdOut: %s' % self.stdout_)
-            self.logger.debug('StdErr: %s' % self.stderr_)
-            raise CommandFailed(str(self.stderr_), self.stdout_, self.stderr_, self.returncode)
-        return (self.stdout_, self.stderr_) 
+            self.logger.debug('StdOut: %s' % self.stdout_.decode())
+            self.logger.debug('StdErr: %s' % self.stderr_.decode())
+            raise CommandFailed(self.stderr_.decode(), self.stdout_.decode(), self.stderr_.decode(), self.returncode)
+        return self.stdout_.decode(), self.stderr_.decode()
 
     def get_logger(self):
         return self.logger
@@ -70,10 +74,10 @@ class UgeSubprocess(subprocess.Popen):
         return self.args_
 
     def get_stdout(self):
-        return self.stdout_
+        return self.stdout_.decode()
 
     def get_stderr(self):
-        return self.stderr_
+        return self.stderr_.decode()
 
     def get_exit_status(self):
         return self.returncode
@@ -93,7 +97,7 @@ class UgeSubprocess(subprocess.Popen):
         p = UgeSubprocess(command)
         try:
             p.run()
-        except CommandFailed, ex:
+        except CommandFailed as ex:
             p.get_logger().debug('Command failed, stdout: %s, stderr: %s' % (p.get_stdout(), p.get_stderr()))
         return p
 
@@ -108,7 +112,8 @@ class UgeSubprocess(subprocess.Popen):
             outp = p.stdout.readline()
             if not outp:
                 break
-            print outp,
+            # print(outp, end=' ')
+            print(outp)
         retval = p.wait()
 
         p.logger.debug('Exit status: %s' % retval)
@@ -124,11 +129,13 @@ class UgeSubprocess(subprocess.Popen):
 
         return p
 
+
 #############################################################################
 # Testing.
 if __name__ == '__main__':
     p = UgeSubprocess('ls -l', use_exceptions=False)
-    print p.run()
-    print p.get_stdout()
-    print p.get_stderr()
-    print p.get_exit_status()
+    # print(p.run())
+    p.run()
+    print(p.get_stdout())
+    print(p.get_stderr())
+    print(p.get_exit_status())

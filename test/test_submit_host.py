@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,12 +16,12 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
 from nose import SkipTest
 
-from utils import needs_uge
-from utils import create_config_file
+from .utils import needs_uge
+from .utils import create_config_file
 
 from uge.api.qconf_api import QconfApi
 from uge.config.config_manager import ConfigManager
@@ -34,13 +34,15 @@ API = QconfApi()
 CONFIG_MANAGER = ConfigManager.get_instance()
 LOG_MANAGER = LogManager.get_instance()
 
+
 @needs_uge
 def test_list_shosts():
     try:
         hl = API.list_shosts()
-        assert(hl is not None)
-    except ObjectNotFound, ex:
+        assert (hl is not None)
+    except ObjectNotFound as ex:
         raise SkipTest('There are no configured UGE submit hosts.')
+
 
 def test_object_already_exists():
     try:
@@ -48,14 +50,15 @@ def test_object_already_exists():
             hl = API.list_shosts()
             if len(hl):
                 API.add_shosts([hl[0]])
-                assert(False)
+                assert (False)
             else:
                 raise SkipTest('There are no configured UGE submit hosts.')
-        except ObjectNotFound, ex:
+        except ObjectNotFound as ex:
             raise SkipTest('There are no configured UGE submit hosts.')
-    except ObjectAlreadyExists, ex:
+    except ObjectAlreadyExists as ex:
         # ok
         pass
+
 
 def test_delete_and_add_shosts():
     try:
@@ -64,9 +67,8 @@ def test_delete_and_add_shosts():
             raise SkipTest('There are no configured UGE submit hosts.')
         host_name = hl[0]
         hl2 = API.delete_shosts([host_name])
-        assert(hl2.data.count(host_name) == 0)
+        assert (hl2.data.count(host_name) == 0)
         hl3 = API.add_shosts(host_name)
-        assert(hl3.data.count(host_name) == 1)
-    except ObjectNotFound, ex:
+        assert (hl3.data.count(host_name) == 1)
+    except ObjectNotFound as ex:
         raise SkipTest('There are no configured UGE submit hosts.')
-

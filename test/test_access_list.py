@@ -18,10 +18,10 @@
 ########################################################################### 
 #___INFO__MARK_END__ 
 # 
-from utils import needs_uge
-from utils import generate_random_string
-from utils import generate_random_string_list
-from utils import create_config_file
+from .utils import needs_uge
+from .utils import generate_random_string
+from .utils import generate_random_string_list
+from .utils import create_config_file
 
 from uge.api.qconf_api import QconfApi
 from uge.config.config_manager import ConfigManager
@@ -42,18 +42,20 @@ def test_object_not_found():
     try:
         acl = API.get_acl('__non_existent_acl__')
         assert(False)
-    except ObjectNotFound, ex:
+    except ObjectNotFound as ex:
         # ok
         pass
+
 
 def test_generate_acl():
     acl = API.generate_acl(ACL_NAME)
     assert(acl.data['name'] == ACL_NAME)
 
+
 def test_add_acl():
     try:
         acl_list = API.list_acls()
-    except ObjectNotFound, ex:
+    except ObjectNotFound as ex:
         # no acls defined
         acl_list = []
     acl = API.add_acl(name=ACL_NAME)
@@ -62,21 +64,25 @@ def test_add_acl():
     assert(len(acl_list2) == len(acl_list) + 1)
     assert(acl_list2.count(ACL_NAME) == 1)
 
+
 def test_list_acls():
     acl_list = API.list_acls()
     assert(acl_list is not None)
+
 
 def test_object_already_exists():
     try:
         acl = API.add_acl(name=ACL_NAME)
         assert(False)
-    except ObjectAlreadyExists, ex:
+    except ObjectAlreadyExists as ex:
         # ok
         pass
+
 
 def test_get_acl():
     acl = API.get_acl(ACL_NAME)
     assert(acl.data['name'] == ACL_NAME)
+
 
 def test_generate_acl_from_json():
     acl = API.get_acl(ACL_NAME)
@@ -84,16 +90,18 @@ def test_generate_acl_from_json():
     json = acl.to_json()
     acl2 = API.generate_object(json)
     assert(acl2.__class__.__name__ == acl.__class__.__name__)
-    for key in acl.data.keys():
+    for key in list(acl.data.keys()):
         v = acl.data[key]
         v2 = acl2.data[key]
         assert(str(v) == str(v2))
+
 
 def test_modify_acl():
     acl = API.get_acl(ACL_NAME)
     acl = API.modify_acl(name=ACL_NAME, data={'entries' : [USER1_NAME, USER2_NAME]})
     entries = acl.data['entries'] 
     assert(len(entries) == 2)
+
 
 def test_add_users_to_acl_and_delete_users_from_acl():
     acl_list = API.list_acls()
@@ -115,14 +123,14 @@ def test_add_users_to_acl_and_delete_users_from_acl():
     acl_list3 = API.list_acls()
     assert(len(acl_list3) == len(acl_list))
 
+
 def test_delete_acl():
     acl_list = API.list_acls()
     API.delete_acl(ACL_NAME)
     try:
         acl_list2 = API.list_acls()
-    except ObjectNotFound, ex:
+    except ObjectNotFound as ex:
         # no acls defined
         acl_list2 = []
     assert(len(acl_list2) == len(acl_list) - 1)
     assert(acl_list2.count(ACL_NAME) == 0)
-

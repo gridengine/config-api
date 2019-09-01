@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,8 +16,10 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
-# 
+# ___INFO__MARK_END__
+#
+from uge.objects.ar_object_factory import AdvanceReservationObjectFactory
+
 __docformat__ = 'reStructuredText'
 
 import os
@@ -30,6 +32,8 @@ from uge.api.impl.qrstat_executor import QrstatExecutor
 from uge.api.impl.qrsub_executor import QrsubExecutor
 from uge.api.impl.qrdel_executor import QrdelExecutor
 from uge.api.impl.ar_manager import AdvanceReservationManager
+import collections
+
 
 class AdvanceReservationApi(object):
     """ High-level advance reservation API class. """
@@ -40,7 +44,7 @@ class AdvanceReservationApi(object):
 
     logger = None
 
-    def __init__(self, sge_root=None, sge_cell=None, 
+    def __init__(self, sge_root=None, sge_cell=None,
                  sge_qmaster_port=None, sge_execd_port=None):
         """ 
         Class constructor. 
@@ -62,10 +66,10 @@ class AdvanceReservationApi(object):
         :raises AdvanceReservationException: for any other errors.
 
         >>> api = AdvanceReservationApi(sge_root='/opt/uge')
-        """ 
+        """
         self.__configure(sge_root, sge_cell, sge_qmaster_port, sge_execd_port)
 
-    def __configure(self, sge_root, sge_cell, sge_qmaster_port, 
+    def __configure(self, sge_root, sge_cell, sge_qmaster_port,
                     sge_execd_port):
         self.get_logger()
         if not sge_root:
@@ -79,18 +83,19 @@ class AdvanceReservationApi(object):
         if not sge_execd_port:
             sge_execd_port = os.environ.get('SGE_EXECD_PORT', self.DEFAULT_SGE_EXECD_PORT)
 
-        self.logger.debug('Configuration: SGE_ROOT=%s, SGE_CELL=%s, SGE_QMASTER_PORT=%s, SGE_EXECD_PORT=%s' % (sge_root, sge_cell, sge_qmaster_port, sge_execd_port))
+        self.logger.debug('Configuration: SGE_ROOT=%s, SGE_CELL=%s, SGE_QMASTER_PORT=%s, SGE_EXECD_PORT=%s' % (
+        sge_root, sge_cell, sge_qmaster_port, sge_execd_port))
         self.qrstat_executor = QrstatExecutor(
-            sge_root=sge_root, sge_cell=sge_cell, 
-            sge_qmaster_port=sge_qmaster_port, 
+            sge_root=sge_root, sge_cell=sge_cell,
+            sge_qmaster_port=sge_qmaster_port,
             sge_execd_port=sge_qmaster_port)
         self.qrsub_executor = QrsubExecutor(
-            sge_root=sge_root, sge_cell=sge_cell, 
-            sge_qmaster_port=sge_qmaster_port, 
+            sge_root=sge_root, sge_cell=sge_cell,
+            sge_qmaster_port=sge_qmaster_port,
             sge_execd_port=sge_qmaster_port)
         self.qrdel_executor = QrdelExecutor(
-            sge_root=sge_root, sge_cell=sge_cell, 
-            sge_qmaster_port=sge_qmaster_port, 
+            sge_root=sge_root, sge_cell=sge_cell,
+            sge_qmaster_port=sge_qmaster_port,
             sge_execd_port=sge_qmaster_port)
         self.ar_manager = AdvanceReservationManager(self.qrstat_executor, self.qrsub_executor, self.qrdel_executor)
 
@@ -106,10 +111,11 @@ class AdvanceReservationApi(object):
             try:
                 result = func(*args, **kwargs)
                 return result
-            except AdvanceReservationException, ex:
+            except AdvanceReservationException as ex:
                 raise
-            except Exception, ex:
+            except Exception as ex:
                 raise AdvanceReservationException(exception=ex)
+
         return decorator(wrapped_call, func)
 
     # Make sure only ar specific exceptions are raised
@@ -121,12 +127,14 @@ class AdvanceReservationApi(object):
                 try:
                     result = func(*args, **kwargs)
                     return result
-                except AdvanceReservationException, ex:
+                except AdvanceReservationException as ex:
                     raise
-                except Exception, ex:
+                except Exception as ex:
                     raise AdvanceReservationException(exception=ex)
+
             return decorator(wrapped_call, func)
-        if len(dargs) == 1 and callable(dargs[0]):
+
+        if len(dargs) == 1 and isinstance(dargs[0], collections.Callable):
             return internal_call(dargs[0])
         else:
             return internal_call
@@ -259,23 +267,22 @@ class AdvanceReservationApi(object):
         """
         return self.qrdel_executor.delete_ar(name)
 
+
 #############################################################################
 # Testing.
 if __name__ == '__main__':
     lm = LogManager.get_instance()
     lm.set_console_log_level('trace')
     api = AdvanceReservationApi()
-    print api.get_uge_version()
+    print(api.get_uge_version())
     ar_id1 = api.request_ar('-d 3600 -fr y')
     ar1 = api.get_ar(ar_id1)
-    print 'AR 1: ', ar1
+    print('AR 1: ', ar1)
     ar_id2 = api.request_ar('-cal_week mon-fri=8-16=on')
     ar2 = api.get_ar(ar_id2)
-    print 'AR 2: ', ar2
+    print('AR 2: ', ar2)
     ar_summary = api.get_ar_summary()
-    print 'AR SUMMARY: ', ar_summary
-    print 'AR LIST: ', api.get_ar_list()
-    print api.delete_ar(ar_id1)
-    print api.delete_ar(ar_id2)
-
-
+    print('AR SUMMARY: ', ar_summary)
+    print('AR LIST: ', api.get_ar_list())
+    print(api.delete_ar(ar_id1))
+    print(api.delete_ar(ar_id2))

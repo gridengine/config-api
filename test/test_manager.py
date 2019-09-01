@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,11 +16,11 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
-from utils import needs_uge
-from utils import create_config_file
-from utils import generate_random_string
+from .utils import needs_uge
+from .utils import create_config_file
+from .utils import generate_random_string
 
 from uge.api.qconf_api import QconfApi
 from uge.config.config_manager import ConfigManager
@@ -34,37 +34,41 @@ MANAGER_NAME = '%s' % generate_random_string(6)
 CONFIG_MANAGER = ConfigManager.get_instance()
 LOG_MANAGER = LogManager.get_instance()
 
+
 @needs_uge
 def test_list_managers():
     ol = API.list_managers()
-    assert(ol is not None)
+    assert (ol is not None)
+
 
 def test_add_manager():
     ol = API.list_managers()
     ol2 = API.add_managers([MANAGER_NAME])
-    assert(len(ol2) == len(ol)+1)
-    assert(ol2.count(MANAGER_NAME) == 1)
+    assert (len(ol2) == len(ol) + 1)
+    assert (ol2.count(MANAGER_NAME) == 1)
+
 
 def test_delete_manager():
     ol = API.list_managers()
     ol2 = API.delete_managers([MANAGER_NAME])
-    assert(len(ol2) == len(ol)-1)
-    assert(ol2.count(MANAGER_NAME) == 0)
+    assert (len(ol2) == len(ol) - 1)
+    assert (ol2.count(MANAGER_NAME) == 0)
+
 
 def test_object_already_exists():
     API.add_managers([MANAGER_NAME])
     try:
         API.add_managers([MANAGER_NAME])
-        assert(False)
-    except ObjectAlreadyExists, ex:
+        assert (False)
+    except ObjectAlreadyExists as ex:
         # ok
         pass
     API.delete_managers([MANAGER_NAME])
 
+
 def test_object_not_found():
     try:
         API.delete_managers([MANAGER_NAME])
-    except ObjectNotFound, ex:
+    except ObjectNotFound as ex:
         # ok
         pass
-

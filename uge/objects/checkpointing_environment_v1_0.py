@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,9 +16,10 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
-from qconf_object import QconfObject
+from .qconf_object import QconfObject
+
 
 class CheckpointingEnvironment(QconfObject):
     """ This class encapsulates UGE checkpointing environment object. """
@@ -34,14 +35,14 @@ class CheckpointingEnvironment(QconfObject):
 
     #: Default values for required data keys.
     REQUIRED_DATA_DEFAULTS = {
-        'interface'           : 'userdefined',
-        'ckpt_command'        : None,
-        'migr_command'        : None,
-        'restart_command'     : None,
-        'clean_command'       : None,
-        'ckpt_dir'            : '/tmp',
-        'signal'              : None,
-        'when'                : 'sx'
+        'interface': 'userdefined',
+        'ckpt_command': None,
+        'migr_command': None,
+        'restart_command': None,
+        'clean_command': None,
+        'ckpt_dir': '/tmp',
+        'signal': None,
+        'when': 'sx'
     }
 
     INT_KEY_MAP = QconfObject.get_int_key_map(REQUIRED_DATA_DEFAULTS)
@@ -69,4 +70,3 @@ class CheckpointingEnvironment(QconfObject):
         :raises: **InvalidArgument** - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a PE object.
         """
         QconfObject.__init__(self, name=name, data=data, metadata=metadata, json_string=json_string)
-

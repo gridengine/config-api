@@ -35,8 +35,8 @@ doc:
 	PYTHONPATH=$(PWD) make -C doc html
 
 pdf:
-	(cd doc/UserDocumentation; pandoc $(PANDOC_OPTS) --template=template.tex --listings -H listings.tex \
-		--variable mainfont=Georgia --variable sansfont=Arial \
+	(cd doc/UserDocumentation; pandoc $(PANDOC_OPTS) --template=$(PWD)/../../doc/template.tex \
+		--listings -H $(PWD)/../../doc/listings.tex \
 		--variable fontsize=10pt --variable version="$(REVISION)" \
 		--variable title="Grid Engine Configuration API User Guide" \
 		--variable author="Univa Engineering" --variable company="Univa Corporation" \

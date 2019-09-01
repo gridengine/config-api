@@ -24,7 +24,7 @@ from uge.exceptions.object_not_found import ObjectNotFound
 from uge.exceptions.invalid_request import InvalidRequest
 from uge.exceptions.invalid_argument import InvalidArgument
 from uge.objects.qconf_object_factory import QconfObjectFactory
-from dict_list_based_object_manager import DictListBasedObjectManager
+from .dict_list_based_object_manager import DictListBasedObjectManager
 
 class ShareTreeManager(DictListBasedObjectManager):
 
@@ -50,7 +50,7 @@ class ShareTreeManager(DictListBasedObjectManager):
     def add_stnode(self, path, shares):
         try:
             share_value = int(shares)
-        except ValueError, ex:
+        except ValueError as ex:
             raise InvalidArgument(exception=ex)
         self.qconf_executor.execute_qconf('-astnode %s=%s' % (path, shares), self.QCONF_ERROR_REGEX_LIST)
         return self.get_object()
@@ -62,7 +62,7 @@ class ShareTreeManager(DictListBasedObjectManager):
     def object_exists(self):
         try:
             self.qconf_executor.execute_qconf('-sstree', self.QCONF_ERROR_SSTREE_REGEX_LIST)
-        except ObjectNotFound, ex:
+        except ObjectNotFound as ex:
             return False
         return True
 
@@ -84,7 +84,7 @@ class ShareTreeManager(DictListBasedObjectManager):
     def modify_or_add_object(self, pycl_object=None, data=None,
                       metadata=None, json_string=None):
         # If empty list is provided, delete share tree
-        if type(data) == types.ListType and not len(data):
+        if type(data) == list and not len(data):
             self.delete_object_if_exists()
             return self.generate_object(data=[], add_required_data=False)
         else:     

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,9 +16,10 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
-from qconf_object import QconfObject
+from .qconf_object import QconfObject
+
 
 class ExecutionHost(QconfObject):
     """ This class encapsulates UGE execution host object. """
@@ -34,27 +35,27 @@ class ExecutionHost(QconfObject):
 
     #: Default values for required data keys.
     REQUIRED_DATA_DEFAULTS = {
-        'load_scaling'             : None,
-        'complex_values'           : None,
-        'user_lists'               : None,
-        'xuser_lists'              : None,
-        'projects'                 : None,
-        'xprojects'                : None,
-        'usage_scaling'            : None,
-        'report_variables'         : None,
-        'license_constraints'      : None,
-        'license_oversubscription' : None,
+        'load_scaling': None,
+        'complex_values': None,
+        'user_lists': None,
+        'xuser_lists': None,
+        'projects': None,
+        'xprojects': None,
+        'usage_scaling': None,
+        'report_variables': None,
+        'license_constraints': None,
+        'license_oversubscription': None,
     }
     INT_KEY_MAP = QconfObject.get_int_key_map(REQUIRED_DATA_DEFAULTS)
     FLOAT_KEY_MAP = QconfObject.get_float_key_map(REQUIRED_DATA_DEFAULTS)
     DEFAULT_LIST_DELIMITER = ','
     LIST_KEY_MAP = {
-        'complex_values'           : ',',
-        'user_lists'               : ',',
-        'xuser_lists'              : ',',
-        'projects'                 : ',',
-        'xprojects'                : ',',
-        'report_variables'         : ',',
+        'complex_values': ',',
+        'user_lists': ',',
+        'xuser_lists': ',',
+        'projects': ',',
+        'xprojects': ',',
+        'report_variables': ',',
     }
 
     def __init__(self, name=None, data=None, metadata=None, json_string=None):
@@ -76,5 +77,3 @@ class ExecutionHost(QconfObject):
         :raises: **InvalidArgument** - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing an ExecutionHost object.
         """
         QconfObject.__init__(self, name=name, data=data, metadata=metadata, json_string=json_string)
-        
-

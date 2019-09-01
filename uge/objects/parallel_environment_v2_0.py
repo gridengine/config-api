@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,9 +16,10 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
-from qconf_object import QconfObject
+from .qconf_object import QconfObject
+
 
 class ParallelEnvironment(QconfObject):
     """ This class encapsulates UGE parallel environment object. """
@@ -34,28 +35,28 @@ class ParallelEnvironment(QconfObject):
 
     #: Default values for required data keys.
     REQUIRED_DATA_DEFAULTS = {
-        'slots'               : 0,
-        'user_lists'          : None,
-        'xuser_lists'         : None,
-        'start_proc_args'     : None,
-        'stop_proc_args'      : None,
-        'per_pe_task_prolog'  : None,
-        'per_pe_task_epilog'  : None,
-        'allocation_rule'     : '$pe_slots',
-        'control_slaves'      : False,
-        'job_is_first_task'   : True,
-        'urgency_slots'       : 'min',
-        'accounting_summary'  : False,
-        'daemon_forks_slaves' : False,
-        'master_forks_slaves' : False,
+        'slots': 0,
+        'user_lists': None,
+        'xuser_lists': None,
+        'start_proc_args': None,
+        'stop_proc_args': None,
+        'per_pe_task_prolog': None,
+        'per_pe_task_epilog': None,
+        'allocation_rule': '$pe_slots',
+        'control_slaves': False,
+        'job_is_first_task': True,
+        'urgency_slots': 'min',
+        'accounting_summary': False,
+        'daemon_forks_slaves': False,
+        'master_forks_slaves': False,
     }
 
     INT_KEY_MAP = QconfObject.get_int_key_map(REQUIRED_DATA_DEFAULTS)
     FLOAT_KEY_MAP = QconfObject.get_float_key_map(REQUIRED_DATA_DEFAULTS)
     DEFAULT_LIST_DELIMITER = ' '
     LIST_KEY_MAP = {
-        'user_lists'           : ' ',
-        'xuser_lists'          : ' ',
+        'user_lists': ' ',
+        'xuser_lists': ' ',
     }
 
     def __init__(self, name=None, data=None, metadata=None, json_string=None):
@@ -77,4 +78,3 @@ class ParallelEnvironment(QconfObject):
         :raises: **InvalidArgument** - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a PE object.
         """
         QconfObject.__init__(self, name=name, data=data, metadata=metadata, json_string=json_string)
-

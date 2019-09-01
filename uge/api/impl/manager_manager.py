@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,20 +16,20 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
 import re
 from uge.exceptions.object_not_found import ObjectNotFound
 from uge.exceptions.invalid_request import InvalidRequest
 from uge.exceptions.object_already_exists import ObjectAlreadyExists
-from list_based_object_manager import ListBasedObjectManager
+from .list_based_object_manager import ListBasedObjectManager
+
 
 class ManagerManager(ListBasedObjectManager):
-
     QCONF_ERROR_REGEX_LIST = [
-        (re.compile('.*already exists.*'),ObjectAlreadyExists),
-        (re.compile('.*does not exist.*'),ObjectNotFound),
-        (re.compile('.*may not remove.*'),InvalidRequest),
+        (re.compile('.*already exists.*'), ObjectAlreadyExists),
+        (re.compile('.*does not exist.*'), ObjectNotFound),
+        (re.compile('.*may not remove.*'), InvalidRequest),
     ]
 
     OBJECT_NAME = 'manager'
@@ -38,8 +38,8 @@ class ManagerManager(ListBasedObjectManager):
     def __init__(self, qconf_executor):
         ListBasedObjectManager.__init__(self, qconf_executor)
 
+
 #############################################################################
 # Testing.
 if __name__ == '__main__':
     pass
-

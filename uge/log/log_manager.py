@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,20 +16,20 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
 
-import sys
-import re
-
 import logging
+import re
+import sys
 
-from uge.exceptions.configuration_error import ConfigurationError
 from uge.config.config_manager import ConfigManager
-from trace_logger import TraceLogger
-from logger_factory import LoggerFactory
+from uge.exceptions.configuration_error import ConfigurationError
+from uge.log.logger_factory import LoggerFactory
+from uge.log.trace_logger import TraceLogger
 
-class LogManager(object): 
+
+class LogManager(object):
     """
     Singleton class for logging management.
 
@@ -51,7 +51,7 @@ class LogManager(object):
         # handler only.
         try:
             myObject.someMethod()
-        except Exception, ex:
+        except Exception as ex:
             logger.exception('A bad thing happened.')
 
         # These methods are used to set user/system logging levels.
@@ -131,7 +131,8 @@ class LogManager(object):
 
     def __get_log_level(self, level_str):
         # Get Log Level based on a string representation
-        level = logging.getLevelName(level_str)
+        # level = logging.getLevelName(level_str)
+        level = logging._checkLevel(level_str)
         # Level should be an integer
         try:
             return int(level)
@@ -214,7 +215,8 @@ class LogManager(object):
         root_log_level = cm.get_config_option('LoggerLevels', 'root', 'error')
         root_level_int = logging.getLevelName(root_log_level.upper())
         root_logger = logging.getLogger('')
-        root_logger.root.setLevel(root_level_int)
+        # root_logger.root.setLevel(root_level_int)
+        root_logger.root.setLevel(40)
         root_logger.debug('Set root logger to %s' % root_level_int)
         expressions = cm.get_config_option('LoggerLevels', 'expressions')
         return LoggerFactory(expressions)
@@ -224,8 +226,8 @@ class LogManager(object):
         """ Configure specified handler with a given defaults. """
         cm = ConfigManager.get_instance()
         cm.set_config_defaults(defaults)
-        handler_option = cm.get_config_option(config_section, 
-                'handler', handler)
+        handler_option = cm.get_config_option(config_section,
+                                              'handler', handler)
 
         # If handler_option is empty, handler cannot be instantiated.
         _handler = None
@@ -236,9 +238,9 @@ class LogManager(object):
             handler_name = re.sub(r'\(.*', '', handler_option)
             module_name = handler_name.split('.')[0]
             try:
-                exec 'from uge.log import %s' % (module_name)
-                exec '_handler = %s' % (handler_option)
-            except IOError, ex:
+                exec('from uge.log import %s' % (module_name))
+                exec('_handler = %s' % (handler_option))
+            except IOError as ex:
                 _errno = ex.errno
                 import errno
 
@@ -249,7 +251,7 @@ class LogManager(object):
                 if _errno != errno.EACCES:
                     raise
                 _handler = None
-            except Exception, ex:
+            except Exception as ex:
                 raise ConfigurationError(exception=ex)
 
         # Only request setting from the config file if it was
@@ -275,7 +277,7 @@ class LogManager(object):
                         config_section, 'datefmt', defaults['datefmt'])
 
                 _handler.setFormatter(logging.Formatter(_format, _datefmt))
-            except Exception, ex:
+            except Exception as ex:
                 raise ConfigurationError(exception=ex)
 
             # Look to see if there is a filter to apply to the handler
@@ -283,7 +285,7 @@ class LogManager(object):
 
             try:
                 filter_ = cm.get_config_option(config_section, 'filter')
-            except Exception, ex:
+            except Exception as ex:
                 pass
 
             if filter_:
@@ -303,7 +305,7 @@ class LogManager(object):
             for handler in self.user_handler_list:
                 handler.setLevel(intLevel)
             self.logger_factory.force_level(intLevel)
-        except Exception, ex:
+        except Exception as ex:
             raise ConfigurationError(exception=ex)
 
     def set_file_log_level(self, level):
@@ -314,8 +316,9 @@ class LogManager(object):
             for handler in self.system_handler_list:
                 handler.setLevel(intLevel)
             self.logger_factory.force_level(intLevel)
-        except Exception, ex:
+        except Exception as ex:
             raise ConfigurationError(exception=ex)
+
 
 #############################################################################
 # Testing.

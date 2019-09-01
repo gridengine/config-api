@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
 import re
 import os
@@ -30,27 +30,27 @@ from uge.exceptions.authorization_error import AuthorizationError
 from uge.exceptions.object_not_found import ObjectNotFound
 from uge.exceptions.object_already_exists import ObjectAlreadyExists
 
-class QrdelExecutor(object):
 
+class QrdelExecutor(object):
     QRDEL_ERROR_REGEX_LIST = [
-        (re.compile('.*unable to send message to qmaster.*'),QmasterUnreachable),
-        (re.compile('.*must be manager.*'),AuthorizationError),
-        (re.compile('denied.*'),AuthorizationError),
-        (re.compile('.*does not exist.*'),ObjectNotFound),
-        (re.compile('.*no.*defined.*'),ObjectNotFound),
-        (re.compile('.*'),AdvanceReservationException)
+        (re.compile('.*unable to send message to qmaster.*'), QmasterUnreachable),
+        (re.compile('.*must be manager.*'), AuthorizationError),
+        (re.compile('denied.*'), AuthorizationError),
+        (re.compile('.*does not exist.*'), ObjectNotFound),
+        (re.compile('.*no.*defined.*'), ObjectNotFound),
+        (re.compile('.*'), AdvanceReservationException)
     ]
-    QRDEL_SUCCESS_REGEX_LIST = [] # for successful outcome incorrectly classified as failure
-    QRDEL_FAILURE_REGEX_LIST = [] # for failure incorrectly classified as successful outcome
+    QRDEL_SUCCESS_REGEX_LIST = []  # for successful outcome incorrectly classified as failure
+    QRDEL_FAILURE_REGEX_LIST = []  # for failure incorrectly classified as successful outcome
 
     def __init__(self, sge_root, sge_cell, sge_qmaster_port, sge_execd_port):
         self.logger = LogManager.get_instance().get_logger(self.__class__.__name__)
         self.env_dict = {
-            'SGE_ROOT' : sge_root,
-            'SGE_CELL' : sge_cell,
-            'SGE_QMASTER_PORT' : str(sge_qmaster_port),
-            'SGE_EXECD_PORT' : str(sge_execd_port),
-            'SGE_SINGLE_LINE' : '1',
+            'SGE_ROOT': sge_root,
+            'SGE_CELL': sge_cell,
+            'SGE_QMASTER_PORT': str(sge_qmaster_port),
+            'SGE_EXECD_PORT': str(sge_execd_port),
+            'SGE_SINGLE_LINE': '1',
         }
         self.uge_version = None
         self.__configure()
@@ -59,7 +59,7 @@ class QrdelExecutor(object):
         self.logger.trace('Retrieving UGE version')
         uge_version = self.get_uge_version()
         self.logger.debug('UGE version: %s' % uge_version)
- 
+
     def get_uge_version(self):
         if not self.uge_version:
             p = self.execute_qrdel('-help')
@@ -69,49 +69,54 @@ class QrdelExecutor(object):
             self.uge_version = lines[0].split()[-1].split("_")[0]
         return self.uge_version
 
-    def execute_qrdel(self, cmd, error_regex_list=[], error_details=None, combine_error_lines=False, success_regex_list=[], failure_regex_list=[]):
+    def execute_qrdel(self, cmd, error_regex_list=[], error_details=None, combine_error_lines=False,
+                      success_regex_list=[], failure_regex_list=[]):
         try:
-            command = '. %s/%s/common/settings.sh; qrdel %s' % (self.env_dict['SGE_ROOT'], self.env_dict['SGE_CELL'], cmd)
+            command = '. %s/%s/common/settings.sh; qrdel %s' % (
+            self.env_dict['SGE_ROOT'], self.env_dict['SGE_CELL'], cmd)
             p = UgeSubprocess(command, env=self.env_dict)
             p.run()
 
             # In some cases successful outcome is actually a failure
             error = p.get_stderr()
             if error:
-                for (pattern,qrdelExClass) in failure_regex_list+QrdelExecutor.QRDEL_FAILURE_REGEX_LIST:
+                for (pattern, qrdelExClass) in failure_regex_list + QrdelExecutor.QRDEL_FAILURE_REGEX_LIST:
                     if pattern.match(error):
                         raise qrdelExClass(error, error_details=error_details)
             return p
-        except CommandFailed, ex:
+        except CommandFailed as ex:
             error = str(ex)
             if combine_error_lines:
                 error = error.replace('\n', '; ')
-            for (pattern,result) in success_regex_list+QrdelExecutor.QRDEL_SUCCESS_REGEX_LIST:
+            for (pattern, result) in success_regex_list + QrdelExecutor.QRDEL_SUCCESS_REGEX_LIST:
                 if pattern.match(error):
-                    self.logger.debug('Ignoring command failed for success pattern, replacing stdout with result: "%s"' % result)
+                    self.logger.debug(
+                        'Ignoring command failed for success pattern, replacing stdout with result: "%s"' % result)
                     p.stdout_ = result
                     return p
-            for (pattern,qrdelExClass) in error_regex_list+QrdelExecutor.QRDEL_ERROR_REGEX_LIST:
+            for (pattern, qrdelExClass) in error_regex_list + QrdelExecutor.QRDEL_ERROR_REGEX_LIST:
                 if pattern.match(error):
                     raise qrdelExClass(error, error_details=error_details)
-            raise 
+            raise
 
     def delete_ar(self, name):
         p = self.execute_qrdel(name)
         lines = p.get_stdout()
         return lines
 
+
 #############################################################################
 # Testing.
 if __name__ == '__main__':
     from uge.exceptions.command_failed import CommandFailed
+
     executor = QrdelExecutor(sge_root='/opt/uge-8.1.7p5')
     try:
-        print 'Version: ', executor.get_uge_version()
+        print('Version: ', executor.get_uge_version())
 
         p = executor.execute_qrdel('-help')
-        print p.get_stdout()
-        print p.get_exit_status()
-    except CommandFailed, ex:
-        print 'Exit Status: ', ex.get_command_exit_status()
-        print 'Std Error  : ', ex.get_command_stderr()
+        print(p.get_stdout())
+        print(p.get_exit_status())
+    except CommandFailed as ex:
+        print('Exit Status: ', ex.get_command_exit_status())
+        print('Std Error  : ', ex.get_command_stderr())

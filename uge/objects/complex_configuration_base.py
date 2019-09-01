@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,11 +16,12 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
 import types
-from qconf_object import QconfObject
+from .qconf_object import QconfObject
 from uge.exceptions.invalid_argument import InvalidArgument
+
 
 class ComplexConfigurationBase(QconfObject):
     """ This class serves as a base for UGE complex configuration objects. """
@@ -30,21 +31,21 @@ class ComplexConfigurationBase(QconfObject):
     }
 
     UGE_PYTHON_OBJECT_MAP = {
-        'NONE'     : None,
-        'YES'      : True,
-        'NO'       : False,
+        'NONE': None,
+        'YES': True,
+        'NO': False,
     }
 
     UGE_PYTHON_BOOL_VALUE_MAP = {
-        'TRUE'     : True,
-        'FALSE'    : False,
+        'TRUE': True,
+        'FALSE': False,
     }
 
     UGE_PYTHON_TYPE_MAP = {
-        'BOOL'     : int,
-        'INT'      : int,
-        'FLOAT'    : float,
-        'DOUBLE'   : float,
+        'BOOL': int,
+        'INT': int,
+        'FLOAT': float,
+        'DOUBLE': float,
     }
 
     OPTIONAL_KEYS_ALLOWED = True
@@ -76,22 +77,23 @@ class ComplexConfigurationBase(QconfObject):
         lines = ''
         lines += '#name               shortcut   type        relop requestable consumable default  urgency aapre affinity\n'
         lines += '#------------------------------------------------------------------------------------------------------\n'
-        for (key, value_dict) in self.data.items():
+        for (key, value_dict) in list(self.data.items()):
             lines += '%s' % (key)
-            for key2 in ['shortcut', 'type', 'relop', 'requestable', 'consumable', 'default', 'urgency', 'aapre', 'affinity']:
+            for key2 in ['shortcut', 'type', 'relop', 'requestable', 'consumable', 'default', 'urgency', 'aapre',
+                         'affinity']:
                 lines += ' %s' % (self.py_to_uge(key2, value_dict[key2], value_dict.get('default_is_bool', False)))
-            lines += '\n' 
+            lines += '\n'
         return lines
 
     def convert_data_to_uge_keywords(self, data):
-        for (data_key, value_dict) in data.items():
-            for (key, value) in value_dict.items():
+        for (data_key, value_dict) in list(data.items()):
+            for (key, value) in list(value_dict.items()):
                 value_dict[key] = self.py_to_uge(key, value, value_dict.get('default_is_bool', False))
 
     def py_to_uge(self, key, value, default_is_bool=False):
-        items = self.UGE_PYTHON_OBJECT_MAP.items()
+        items = list(self.UGE_PYTHON_OBJECT_MAP.items())
         if key == 'default' and default_is_bool:
-            items = self.UGE_PYTHON_BOOL_VALUE_MAP.items()
+            items = list(self.UGE_PYTHON_BOOL_VALUE_MAP.items())
         for (uge_value, py_value) in items:
             if value == py_value and type(value) == type(py_value):
                 return uge_value
@@ -99,20 +101,20 @@ class ComplexConfigurationBase(QconfObject):
 
     def uge_to_py(self, key, value, uge_type=None):
         uppercase_value = value.upper()
-        for (uge_value, py_value) in self.UGE_PYTHON_OBJECT_MAP.items():
+        for (uge_value, py_value) in list(self.UGE_PYTHON_OBJECT_MAP.items()):
             if uge_value == uppercase_value:
                 return py_value
-        for (uge_value, py_value) in self.UGE_PYTHON_BOOL_VALUE_MAP.items():
+        for (uge_value, py_value) in list(self.UGE_PYTHON_BOOL_VALUE_MAP.items()):
             if uge_value == uppercase_value:
                 return py_value
-        if uge_type and self.UGE_PYTHON_TYPE_MAP.has_key(uge_type):
+        if uge_type and uge_type in self.UGE_PYTHON_TYPE_MAP:
             py_value = self.UGE_PYTHON_TYPE_MAP[uge_type](value)
             return py_value
         return value
 
     def is_uge_value_bool(self, value):
         uppercase_value = value.upper()
-        for (uge_value, py_value) in self.UGE_PYTHON_BOOL_VALUE_MAP.items():
+        for (uge_value, py_value) in list(self.UGE_PYTHON_BOOL_VALUE_MAP.items()):
             if uge_value == uppercase_value:
                 return True
         return False
@@ -137,26 +139,26 @@ class ComplexConfigurationBase(QconfObject):
             urgency = self.uge_to_py(key, key_value[7], 'INT')
             aapre = self.uge_to_py(key, key_value[8])
             affinity = self.uge_to_py(key, key_value[9])
-            object_data[key] = { 
-                'shortcut' : shortcut, 
-                'type' : uge_type, 
-                'relop' : relop, 
-                'requestable' : requestable, 
-                'consumable' : consumable, 
-                'default' : default, 
-                'urgency' : urgency, 
-                'aapre' : aapre,
-                'affinity' : affinity,
-                'default_is_bool' : default_is_bool
+            object_data[key] = {
+                'shortcut': shortcut,
+                'type': uge_type,
+                'relop': relop,
+                'requestable': requestable,
+                'consumable': consumable,
+                'default': default,
+                'urgency': urgency,
+                'aapre': aapre,
+                'affinity': affinity,
+                'default_is_bool': default_is_bool
             }
         return object_data
 
     def check_attribute_data(self, name, data):
         if not name:
             raise InvalidArgument('Invalid complex attribute name.')
-        if type(data) != types.DictType:
+        if type(data) != dict:
             raise InvalidArgument('Complex attribute data must be a dictionary.')
-        for key in ['shortcut', 'type', 'relop', 'requestable', 'consumable', 'default', 'urgency', 'aapre', 'affinity'] :
-            if not data.has_key(key):
+        for key in ['shortcut', 'type', 'relop', 'requestable', 'consumable', 'default', 'urgency', 'aapre',
+                    'affinity']:
+            if key not in data:
                 raise InvalidArgument('Complex attribute data is missing the "%s" key.' % key)
-

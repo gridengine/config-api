@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,12 +16,16 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
-import exceptions
+try:
+    import exceptions
+except ImportError:
+    import builtins as exceptions
 import json
 
 from uge.constants import uge_status
+
 
 class AdvanceReservationException(exceptions.Exception):
     """
@@ -92,14 +96,13 @@ class AdvanceReservationException(exceptions.Exception):
         """ 
         :returns: Exception data dictionary.
         """
-        return { 'error_message' : '%s' % self.args, 
-                 'error_code' : self.error_code, 
-                 'error_details' : self.error_details, 
-                 'class_name' : self.__class__.__name__ }
+        return {'error_message': '%s' % self.args,
+                'error_code': self.error_code,
+                'error_details': self.error_details,
+                'class_name': self.__class__.__name__}
 
     def to_json(self):
         """ 
         :returns: JSON string with exception data.
         """
         return json.dumps(self.to_dict())
-

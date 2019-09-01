@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,9 +16,10 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
-from qconf_object import QconfObject
+from .qconf_object import QconfObject
+
 
 class HostGroup(QconfObject):
     """ This class encapsulates UGE host group object. """
@@ -34,13 +35,13 @@ class HostGroup(QconfObject):
 
     #: Default values for required data keys.
     REQUIRED_DATA_DEFAULTS = {
-        'hostlist'           : None,
+        'hostlist': None,
     }
     INT_KEY_MAP = QconfObject.get_int_key_map(REQUIRED_DATA_DEFAULTS)
     FLOAT_KEY_MAP = QconfObject.get_float_key_map(REQUIRED_DATA_DEFAULTS)
     DEFAULT_LIST_DELIMITER = ' '
     LIST_KEY_MAP = {
-        'hostlist'           : ' ',
+        'hostlist': ' ',
     }
 
     def __init__(self, name=None, data=None, metadata=None, json_string=None):
@@ -62,4 +63,3 @@ class HostGroup(QconfObject):
         :raises: **InvalidArgument** - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing a HostGroup object.
         """
         QconfObject.__init__(self, name=name, data=data, metadata=metadata, json_string=json_string)
-

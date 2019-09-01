@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,13 +16,14 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
 
 import re
 import logging
 
-from trace_logger import TraceLogger
+from uge.log.trace_logger import TraceLogger
+
 
 class LoggerFactory(object):
     def __init__(self, logger_expressions=None):
@@ -62,7 +63,7 @@ class LoggerFactory(object):
         """ Force all loggers to at least a specific level """
         self.forced_level = level
         self.logger.setLevel(level)
-        #self.logger.\
+        # self.logger.\
         #    log(TraceLogger.TRACE, 'Forced all loggers to %s' % level)
 
     def parse_expressions(self, expressions):
@@ -75,7 +76,8 @@ class LoggerFactory(object):
                 # Use the right split so we can have '='s in the regex
                 regex, level = line.rsplit('=', 1)
                 pattern = re.compile(regex)
-                results = (pattern, logging.getLevelName(level.upper()))
+                # results = (pattern, logging.getLevelName(level.upper()))
+                results = (pattern, logging._checkLevel(level.upper()))
 
                 self.logger.log(
                     TraceLogger.TRACE,
@@ -83,8 +85,6 @@ class LoggerFactory(object):
                         results[0], results[1]))
 
                 self.expressions.append(results)
-            except Exception, ex:
-                self.logger.\
-                    error('Parser error in log configuration file: %s' % (
-                        line))
+            except Exception as ex:
+                self.logger.error('Parser error in log configuration file: %s' % line)
                 self.logger.exception(ex)

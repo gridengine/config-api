@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
 import string
 import random
@@ -49,6 +49,7 @@ format=%(asctime)s %(levelname)s %(process)d %(message)s
 datefmt=%Y-%m-%d %H:%M:%S
 """
 
+
 def create_config_file(use_temporary_file=False):
     config_file_name = CONFIG_FILE
     if use_temporary_file:
@@ -66,19 +67,24 @@ def create_config_file(use_temporary_file=False):
     create_config_manager()
     return config_file_name
 
+
 def remove_file(file_path):
     if os.path.exists(file_path):
         os.remove(file_path)
 
+
 def remove_test_log_file():
     remove_file(LOG_FILE)
+
 
 def remove_test_config_file():
     remove_file(CONFIG_FILE)
 
+
 def remove_test_files():
     remove_file(LOG_FILE)
     remove_file(CONFIG_FILE)
+
 
 def read_last_line(file_path):
     f = open(file_path, 'r')
@@ -91,8 +97,10 @@ def read_last_line(file_path):
     f.close()
     return last_line
 
+
 def read_last_log_line():
     return read_last_line(LOG_FILE)
+
 
 def create_config_manager():
     from uge.config.config_manager import ConfigManager
@@ -101,61 +109,72 @@ def create_config_manager():
     cm.set_log_file(LOG_FILE)
     cm.set_file_log_level('trace')
 
-def generate_random_string(size, chars=string.ascii_lowercase+string.ascii_uppercase + string.digits):
+
+def generate_random_string(size, chars=string.ascii_lowercase + string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
 
 def generate_random_string_list(n_strings, string_length, delimiter=',', string_prefix=''):
     string_list = ''
     string_delimiter = ''
-    for i in range (0, n_strings):
-        string_list = '%s%s%s%s' % (string_list, string_delimiter, 
-            string_prefix,
-            generate_random_string(string_length))
+    for i in range(0, n_strings):
+        string_list = '%s%s%s%s' % (string_list, string_delimiter,
+                                    string_prefix,
+                                    generate_random_string(string_length))
         string_delimiter = delimiter
     return string_list
+
 
 def load_values(value_file):
     tpd = {}
     if os.path.exists(value_file):
         tpd = json.load(open(value_file))
     return tpd
-    
+
+
 # Common decorators
 def needs_setup(func):
     def inner(*args, **kwargs):
         create_config_file()
-        return func(*args,**kwargs)
+        return func(*args, **kwargs)
+
     return make_decorator(func)(inner)
+
 
 def needs_cleanup(func):
     def inner(*args, **kwargs):
         remove_test_files()
-        return func(*args,**kwargs)
+        return func(*args, **kwargs)
+
     return make_decorator(func)(inner)
+
 
 def needs_config(func):
-    def inner(*args,**kwargs):
+    def inner(*args, **kwargs):
         try:
             create_config_manager()
-        except Exception, ex:
-            print ex
+        except Exception as ex:
+            print(ex)
             raise SkipTest("Config manager instance could not be created.")
-        return func(*args,**kwargs)
+        return func(*args, **kwargs)
+
     return make_decorator(func)(inner)
 
+
 def needs_uge(func):
-    def inner(*args,**kwargs):
+    def inner(*args, **kwargs):
         from uge.exceptions.configuration_error import ConfigurationError
-        if not os.environ.has_key('SGE_ROOT'):
+        if 'SGE_ROOT' not in os.environ:
             raise ConfigurationError('SGE_ROOT is not defined.')
-        return func(*args,**kwargs)
+        return func(*args, **kwargs)
+
     return make_decorator(func)(inner)
+
 
 #############################################################################
 # Testing
 if __name__ == '__main__':
-    #print 'Last line: ', read_last_line('/tmp/uge.log')
+    # print 'Last line: ', read_last_line('/tmp/uge.log')
     create_config_file()
     d = load_values('test_values.json')
-    print d
-
+    print(d)

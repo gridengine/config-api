@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,12 +16,13 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
 
 import logging
 import os
 import inspect
+
 
 class TraceLogRecord(logging.LogRecord):
     """
@@ -48,4 +49,3 @@ class TraceLogRecord(logging.LogRecord):
         frameinfo = inspect.getframeinfo(caller)
 
         return frameinfo.filename, frameinfo.lineno, frameinfo.function
-

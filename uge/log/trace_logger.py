@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,12 +16,13 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
 
 import logging
 
-from trace_log_record import TraceLogRecord
+from .trace_log_record import TraceLogRecord
+
 
 class TraceLogger(logging.getLoggerClass()):
     # Use a level of 5...in logging module 0 = NOTSET and 10 = DEBUG
@@ -57,7 +58,7 @@ class TraceLogger(logging.getLoggerClass()):
             self.log(TraceLogger.TRACE, msg, *args, **kwargs)
 
     def makeRecord(self, name, level, fn, lno, msg, args, exc_info,
-                   func=None, extra=None):
+                   func=None, extra=None, stack_info=False):
         """
         Custom makeRecord so call stack variables can be updated with
         proper values
@@ -69,4 +70,3 @@ class TraceLogger(logging.getLoggerClass()):
 
         return logging.Logger.makeRecord(
             self, name, level, fn, lno, msg, args, exc_info, func)
-

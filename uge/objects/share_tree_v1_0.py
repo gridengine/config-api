@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,13 +16,11 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
-import types
-import UserList
-from uge.exceptions.invalid_argument import InvalidArgument
-from qconf_dict_list import QconfDictList
-from qconf_object import QconfObject
+from .qconf_dict_list import QconfDictList
+from .qconf_object import QconfObject
+
 
 class ShareTree(QconfDictList):
     """ This class encapsulates UGE share tree object. """
@@ -32,20 +30,20 @@ class ShareTree(QconfDictList):
 
     #: Key that designates start of an object in a list
     FIRST_KEY = 'id'
- 
+
     #: Object name key.
     NAME_KEY = None
- 
+
     #: Object keys that must be provided by user.
     USER_PROVIDED_KEYS = ['name']
 
     #: Default values for required dictionary data keys.
     REQUIRED_DATA_DEFAULTS = {
-        'id'         : 0,
-        'name'       : None,
-        'type'       : 1,
-        'shares'     : 0,
-        'childnodes' : None,
+        'id': 0,
+        'name': None,
+        'type': 1,
+        'shares': 0,
+        'childnodes': None,
 
     }
 
@@ -53,7 +51,7 @@ class ShareTree(QconfDictList):
     INT_KEY_MAP = QconfObject.get_int_key_map(REQUIRED_DATA_DEFAULTS)
     FLOAT_KEY_MAP = QconfObject.get_float_key_map(REQUIRED_DATA_DEFAULTS)
     DEFAULT_LIST_DELIMITER = ','
-  
+
     def __init__(self, data=None, metadata=None, json_string=None):
         """ 
         Class constructor. 
@@ -79,14 +77,13 @@ class ShareTree(QconfDictList):
         """
         lines = ''
         for d in self.data:
-            for key in [ 'id', 'name', 'type', 'shares', 'childnodes']:
+            for key in ['id', 'name', 'type', 'shares', 'childnodes']:
                 value = d.get(key)
                 lines += '%s%s%s\n' % (key, self.KEY_VALUE_DELIMITER, self.py_to_uge(key, value))
         return lines
-    
+
+
 #############################################################################
 # Testing.
 if __name__ == '__main__':
     pass
-    
-

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,17 +16,18 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
-import os
-import tempfile
-import types
-import json
 import copy
 import datetime
+import json
+import os
+import tempfile
+
+from uge.config.config_manager import ConfigManager
 from uge.exceptions.invalid_argument import InvalidArgument
 from uge.exceptions.invalid_request import InvalidRequest
-from uge.config.config_manager import ConfigManager
+
 
 class QconfObject(object):
     """ This class encapsulates data and functionality common to all Qconf API objects. """
@@ -34,10 +35,10 @@ class QconfObject(object):
     VERSION = '1.0'
     NAME_KEY = None
     UGE_PYTHON_OBJECT_MAP = {
-        'NONE'     : None,
-        'INFINITY' : float('inf'),
-        'TRUE'     : True,
-        'FALSE'    : False,
+        'NONE': None,
+        'INFINITY': float('inf'),
+        'TRUE': True,
+        'FALSE': False,
     }
     UGE_CASE_SENSITIVE_KEYS = {}
     USER_PROVIDED_KEYS = []
@@ -78,7 +79,7 @@ class QconfObject(object):
         # Unpack and check json
         json_dict = self.unpack_input_json(json_string)
         if json_dict:
-            if json_dict.has_key('data'):
+            if 'data' in json_dict:
                 self.data = json_dict.get('data')
                 del json_dict['data']
             self.metadata = json_dict
@@ -91,7 +92,7 @@ class QconfObject(object):
         # Merge json entries with provided data
         if data:
             self.check_input_data(data)
-            if type(data) == types.DictType:
+            if type(data) == dict:
                 self.data.update(data)
             else:
                 self.data = data
@@ -106,15 +107,15 @@ class QconfObject(object):
         # Add standard metadata
         self.metadata['object_version'] = self.VERSION
         self.metadata['object_class'] = self.__class__.__name__
- 
+
     def unpack_input_json(self, json_string):
         if not json_string:
             return None
         try:
             json_dict = json.loads(json_string)
-        except Exception, ex:
+        except Exception as ex:
             raise InvalidArgument('Input is not a valid json string: %s (error: %s).' % (str(json_string), ex))
-        if type(json_dict) != types.DictType:
+        if type(json_dict) != dict:
             raise InvalidArgument('Input json string does not contain dictionary: %s.' % str(json_string))
         return json_dict
 
@@ -124,7 +125,7 @@ class QconfObject(object):
 
         :raises: **InvalidRequest** - in case object's data is not a dictionary, or if any of the required keys are missing.
         """
-        if type(self.data) != types.DictType:
+        if type(self.data) != dict:
             raise InvalidRequest('Data object is not a dictionary: %s.' % str(self.data))
 
         for key in self.USER_PROVIDED_KEYS:
@@ -136,7 +137,7 @@ class QconfObject(object):
 
     def check_input_metadata(self, metadata):
         if metadata:
-            if type(metadata) != types.DictType:
+            if type(metadata) != dict:
                 raise InvalidArgument('Provided metadata is not a dictionary: %s.' % str(metadata))
 
     def remove_optional_keys(self):
@@ -148,12 +149,12 @@ class QconfObject(object):
         if self.OPTIONAL_KEYS_ALLOWED:
             return
 
-        if type(self.data) != types.DictType:
+        if type(self.data) != dict:
             raise InvalidRequest('Data object is not a dictionary: %s.' % str(self.data))
 
         removed_keys = []
-        for (key,value) in self.data.items():
-            if not self.get_required_data_defaults().has_key(key):
+        for (key, value) in list(self.data.items()):
+            if key not in self.get_required_data_defaults():
                 if key not in self.USER_PROVIDED_KEYS and not key.startswith('#'):
                     removed_keys.append(key)
         for key in removed_keys:
@@ -165,11 +166,11 @@ class QconfObject(object):
 
         :raises: **InvalidArgument** - in case object's data is not a dictionary.
         """
-        if type(self.data) != types.DictType:
+        if type(self.data) != dict:
             raise InvalidRequest('Data object is not a dictionary: %s.' % str(self.data))
-        for (key,value) in self.get_required_data_defaults().items():
-            if not self.data.has_key(key):
-                if type(value) == types.StringType:
+        for (key, value) in list(self.get_required_data_defaults().items()):
+            if key not in self.data:
+                if type(value) == bytes:
                     for env_var in ['SGE_ROOT', 'SGE_CELL']:
                         value = value.replace(env_var, os.environ[env_var])
                 self.data[key] = value
@@ -184,14 +185,15 @@ class QconfObject(object):
         return self.REQUIRED_DATA_DEFAULTS
 
     def convert_list_keys(self):
-        for key in self.LIST_KEY_MAP.keys():
+        for key in list(self.LIST_KEY_MAP.keys()):
             value = self.data.get(key)
             if value is not None:
-                if type(value) == types.StringType:
+                if type(value) == bytes or type(value) == str:
                     delimiter = self.LIST_KEY_MAP.get(key, self.DEFAULT_LIST_DELIMITER)
                     self.data[key] = value.split(delimiter)
-                elif type(value) != types.ListType:
-                    raise InvalidArgument('Value for key %s must be provided either as a string, or as a python list of strings.' % key)
+                elif type(value) != list:
+                    raise InvalidArgument(
+                        'Value for key %s must be provided either as a string, or as a python list of strings.' % key)
 
     def parse_value_as_dict(self, key, value):
         delimiter = self.DICT_KEY_MAP.get(key, self.DEFAULT_LIST_DELIMITER)
@@ -199,7 +201,8 @@ class QconfObject(object):
         value_dict = {}
         for item in items:
             if item.find(self.DICT_VALUE_DELIMITER) < 0:
-                raise InvalidArgument('Cannot parse dictionary value: Unexpected format of item %s for key %s.' % (item,key))
+                raise InvalidArgument(
+                    'Cannot parse dictionary value: Unexpected format of item %s for key %s.' % (item, key))
             item_tokens = item.split(self.DICT_VALUE_DELIMITER)
             item_key = item_tokens[0]
             item_value = self.DICT_VALUE_DELIMITER.join(item_tokens[1:])
@@ -207,13 +210,14 @@ class QconfObject(object):
         return value_dict
 
     def convert_dict_keys(self):
-        for key in self.DICT_KEY_MAP.keys():
+        for key in list(self.DICT_KEY_MAP.keys()):
             value = self.data.get(key)
             if value is not None:
-                if type(value) == types.StringType:
+                if type(value) == bytes:
                     self.data[key] = self.parse_value_as_dict(key, value)
-                elif type(value) != types.DictType:
-                    raise InvalidArgument('Value for key %s must be provided either as a string, or as a python dictionary.' % key)
+                elif type(value) != dict:
+                    raise InvalidArgument(
+                        'Value for key %s must be provided either as a string, or as a python dictionary.' % key)
 
     def set_data_dict_from_qconf_output(self, qconf_output):
         data = self.to_dict(qconf_output)
@@ -230,49 +234,49 @@ class QconfObject(object):
     @classmethod
     def get_bool_key_map(cls, key_map):
         bool_key_map = {}
-        for (key,value) in key_map.items():
-            if type(value) == types.BooleanType:
+        for (key, value) in list(key_map.items()):
+            if type(value) == bool:
                 bool_key_map[key] = value
-            elif type(value) == types.DictType:
-                for (key2,value2) in value.items():
-                    if type(value2) == types.BooleanType:
+            elif type(value) == dict:
+                for (key2, value2) in list(value.items()):
+                    if type(value2) == bool:
                         bool_key_map[key2] = value2
         return bool_key_map
 
     @classmethod
     def get_int_key_map(cls, key_map):
         int_key_map = {}
-        for (key,value) in key_map.items():
-            if type(value) == types.IntType:
+        for (key, value) in list(key_map.items()):
+            if type(value) == int:
                 int_key_map[key] = value
-            elif type(value) == types.DictType:
-                for (key2,value2) in value.items():
-                    if type(value2) == types.IntType:
+            elif type(value) == dict:
+                for (key2, value2) in list(value.items()):
+                    if type(value2) == int:
                         int_key_map[key2] = value2
         return int_key_map
 
     @classmethod
     def get_float_key_map(cls, key_map):
         float_key_map = {}
-        for (key,value) in key_map.items():
-            if type(value) == types.FloatType:
+        for (key, value) in list(key_map.items()):
+            if type(value) == float:
                 float_key_map[key] = value
         return float_key_map
 
     @classmethod
     def get_list_key_map(cls, key_map):
         list_key_map = {}
-        for (key,value) in key_map.items():
-            if type(value) == types.ListType:
+        for (key, value) in list(key_map.items()):
+            if type(value) == list:
                 list_key_map[key] = value
         return list_key_map
 
     def uge_to_py(self, key, value):
         uppercase_value = value.upper()
-        for (uge_value, py_value) in self.UGE_PYTHON_OBJECT_MAP.items():
+        for (uge_value, py_value) in list(self.UGE_PYTHON_OBJECT_MAP.items()):
             if uge_value == uppercase_value:
                 return py_value
-        if self.LIST_KEY_MAP.has_key(key):
+        if key in self.LIST_KEY_MAP:
             # Key is designated as list key.
             # Try to split by corresponding delimiter.
             delimiter = self.LIST_KEY_MAP.get(key)
@@ -280,17 +284,17 @@ class QconfObject(object):
                 return value.split(delimiter)
             else:
                 return [value]
-        elif self.DICT_KEY_MAP.has_key(key):
+        elif key in self.DICT_KEY_MAP:
             # Key is designated as dict key.
             # Try to split by corresponding delimiter.
             return self.parse_value_as_dict(key, value)
-        elif self.INT_KEY_MAP.has_key(key):
+        elif key in self.INT_KEY_MAP:
             try:
                 return int(value)
             except:
                 # We cannot convert this string to int
                 pass
-        elif self.FLOAT_KEY_MAP.has_key(key):
+        elif key in self.FLOAT_KEY_MAP:
             try:
                 return float(value)
             except:
@@ -301,18 +305,18 @@ class QconfObject(object):
         return value
 
     def py_to_uge(self, key, value):
-        for (uge_value, py_value) in self.UGE_PYTHON_OBJECT_MAP.items():
+        for (uge_value, py_value) in list(self.UGE_PYTHON_OBJECT_MAP.items()):
             if value == py_value and type(value) == type(py_value):
-                if self.UGE_CASE_SENSITIVE_KEYS.has_key(key):
+                if key in self.UGE_CASE_SENSITIVE_KEYS:
                     return self.UGE_CASE_SENSITIVE_KEYS[key](uge_value)
                 return uge_value
-        if type(value) == types.ListType:
+        if type(value) == list:
             delimiter = self.LIST_KEY_MAP.get(key, self.DEFAULT_LIST_DELIMITER)
             return delimiter.join(value)
-        elif type(value) == types.DictType:
+        elif type(value) == dict:
             delimiter = self.DICT_KEY_MAP.get(key, self.DEFAULT_DICT_DELIMITER)
             dict_tokens = []
-            for (item_key,item_value) in value.items():
+            for (item_key, item_value) in list(value.items()):
                 dict_tokens.append('%s%s%s' % (item_key, self.DICT_VALUE_DELIMITER, item_value))
             return delimiter.join(dict_tokens)
         return value
@@ -323,20 +327,20 @@ class QconfObject(object):
 
         :returns: Object's UGE-formatted string.
         """
-        lines = '' 
-        for (key, value) in self.data.items():
+        lines = ''
+        for (key, value) in list(self.data.items()):
             lines += '%s %s\n' % (key, self.py_to_uge(key, value))
         return lines
- 
+
     def convert_data_to_uge_keywords(self, data):
-        for (key, value) in data.items():
+        for (key, value) in list(data.items()):
             data[key] = self.py_to_uge(key, value)
- 
+
     def to_json(self, use_uge_keywords=False):
         """ 
         Converts object to JSON string.
 
-        :param use_uge_keywords: if True, UGE keywords (e.g. 'NONE') are restored before conversion to JSON; otherwise, no changes are made to object's data. Default is False. 
+        :param use_uge_keywords: if True, UGE keywords (e.g. 'NONE') are restored before conversion to JSON; otherwise, no changes are made to object's data. Default is False.
         :type mode: bool
 
         :returns: Object's JSON representation.
@@ -347,7 +351,7 @@ class QconfObject(object):
             self.convert_data_to_uge_keywords(data)
         json_dict['data'] = data
         return json.dumps(json_dict)
- 
+
     def to_dict(self, input_string):
         lines = input_string.split('\n')
         object_data = {}
@@ -386,4 +390,3 @@ class QconfObject(object):
         created_by = '%s@%s' % (cm['user'], cm['host'])
         self.metadata['created_by'] = created_by
         self.metadata['created_on'] = datetime.datetime.now().isoformat()
-

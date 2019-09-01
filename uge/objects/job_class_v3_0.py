@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,9 +16,10 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
-from qconf_object import QconfObject
+from .qconf_object import QconfObject
+
 
 class JobClass(QconfObject):
     """ This class encapsulates UGE job class object. """
@@ -28,76 +29,75 @@ class JobClass(QconfObject):
 
     #: Object name key.
     NAME_KEY = 'jcname'
- 
+
     #: Object keys that must be provided by user.
     USER_PROVIDED_KEYS = ['jcname']
 
     #: Default values for required data keys.
     REQUIRED_DATA_DEFAULTS = {
-        'variant_list'     : None,
-        'owner'            : None,
-        'user_lists'       : None,
-        'xuser_lists'      : None,
-        'A'                : '{+}UNSPECIFIED',
-        'a'                : '{+}UNSPECIFIED',
-        'ar'               : '{+}UNSPECIFIED',
-        'b'                : '{+}UNSPECIFIED',
-        'binding'          : '{+}UNSPECIFIED',
-        'c_interval'       : '{+}UNSPECIFIED',
-        'c_occasion'       : '{+}UNSPECIFIED',
-        'CMDNAME'          : '{+}UNSPECIFIED',
-        'CMDARG'           : '{+}UNSPECIFIED',
-        'ckpt'             : '{+}UNSPECIFIED',
-        'ac'               : '{+}UNSPECIFIED',
-        'cwd'              : '{+}UNSPECIFIED',
-        'dl'               : '{+}UNSPECIFIED',
-        'e'                : '{+}UNSPECIFIED',
-        'h'                : '{+}UNSPECIFIED',
-        'hold_jid'         : '{+}UNSPECIFIED',
-        'hold_jid_ad'      : '{+}UNSPECIFIED',
-        'i'                : '{+}UNSPECIFIED',
-        'j'                : '{+}UNSPECIFIED',
-        'js'               : '{+}UNSPECIFIED',
-        'l_hard'           : '{+}UNSPECIFIED',
-        'l_soft'           : '{+}UNSPECIFIED',
-        'masterl'          : '{+}UNSPECIFIED',
-        'm'                : '{+}UNSPECIFIED',
-        'mbind'            : '{+}UNSPECIFIED',
-        'M'                : '{+}UNSPECIFIED',
-        'masterq'          : '{+}UNSPECIFIED',
-        'N'                : '{+}UNSPECIFIED',
-        'notify'           : '{+}UNSPECIFIED',
-        'now'              : '{+}UNSPECIFIED',
-        'o'                : '{+}UNSPECIFIED',
-        'P'                : '{+}UNSPECIFIED',
-        'p'                : '{+}UNSPECIFIED',
-        'pe_name'          : '{+}UNSPECIFIED',
-        'pe_range'         : '{+}UNSPECIFIED',
-        'par'              : '{+}UNSPECIFIED',
-        'q_hard'           : '{+}UNSPECIFIED',
-        'q_soft'           : '{+}UNSPECIFIED',
-        'R'                : '{+}UNSPECIFIED',
-        'r'                : '{+}UNSPECIFIED',
-        'rou'              : '{+}UNSPECIFIED',
-        'S'                : '{+}UNSPECIFIED',
-        'shell'            : '{+}UNSPECIFIED',
-        't'                : '{+}UNSPECIFIED',
-        'tc'               : '{+}UNSPECIFIED',
-        'V'                : '{+}UNSPECIFIED',
-        'v'                : '{+}UNSPECIFIED',
-        'xd'               : '{+}UNSPECIFIED',
-        'rdi'              : '{+}UNSPECIFIED',
+        'variant_list': None,
+        'owner': None,
+        'user_lists': None,
+        'xuser_lists': None,
+        'A': '{+}UNSPECIFIED',
+        'a': '{+}UNSPECIFIED',
+        'ar': '{+}UNSPECIFIED',
+        'b': '{+}UNSPECIFIED',
+        'binding': '{+}UNSPECIFIED',
+        'c_interval': '{+}UNSPECIFIED',
+        'c_occasion': '{+}UNSPECIFIED',
+        'CMDNAME': '{+}UNSPECIFIED',
+        'CMDARG': '{+}UNSPECIFIED',
+        'ckpt': '{+}UNSPECIFIED',
+        'ac': '{+}UNSPECIFIED',
+        'cwd': '{+}UNSPECIFIED',
+        'dl': '{+}UNSPECIFIED',
+        'e': '{+}UNSPECIFIED',
+        'h': '{+}UNSPECIFIED',
+        'hold_jid': '{+}UNSPECIFIED',
+        'hold_jid_ad': '{+}UNSPECIFIED',
+        'i': '{+}UNSPECIFIED',
+        'j': '{+}UNSPECIFIED',
+        'js': '{+}UNSPECIFIED',
+        'l_hard': '{+}UNSPECIFIED',
+        'l_soft': '{+}UNSPECIFIED',
+        'masterl': '{+}UNSPECIFIED',
+        'm': '{+}UNSPECIFIED',
+        'mbind': '{+}UNSPECIFIED',
+        'M': '{+}UNSPECIFIED',
+        'masterq': '{+}UNSPECIFIED',
+        'N': '{+}UNSPECIFIED',
+        'notify': '{+}UNSPECIFIED',
+        'now': '{+}UNSPECIFIED',
+        'o': '{+}UNSPECIFIED',
+        'P': '{+}UNSPECIFIED',
+        'p': '{+}UNSPECIFIED',
+        'pe_name': '{+}UNSPECIFIED',
+        'pe_range': '{+}UNSPECIFIED',
+        'par': '{+}UNSPECIFIED',
+        'q_hard': '{+}UNSPECIFIED',
+        'q_soft': '{+}UNSPECIFIED',
+        'R': '{+}UNSPECIFIED',
+        'r': '{+}UNSPECIFIED',
+        'rou': '{+}UNSPECIFIED',
+        'S': '{+}UNSPECIFIED',
+        'shell': '{+}UNSPECIFIED',
+        't': '{+}UNSPECIFIED',
+        'tc': '{+}UNSPECIFIED',
+        'V': '{+}UNSPECIFIED',
+        'v': '{+}UNSPECIFIED',
+        'xd': '{+}UNSPECIFIED',
+        'rdi': '{+}UNSPECIFIED',
     }
 
     INT_KEY_MAP = QconfObject.get_int_key_map(REQUIRED_DATA_DEFAULTS)
     FLOAT_KEY_MAP = QconfObject.get_float_key_map(REQUIRED_DATA_DEFAULTS)
     DEFAULT_LIST_DELIMITER = ','
     LIST_KEY_MAP = {
-        'variant_list'       : ',',
-        'user_lists'         : ',',
-        'xuser_lists'        : ',',
+        'variant_list': ',',
+        'user_lists': ',',
+        'xuser_lists': ',',
     }
-
 
     def __init__(self, name=None, data=None, metadata=None, json_string=None):
         """ 
@@ -119,4 +119,3 @@ class JobClass(QconfObject):
         """
 
         QconfObject.__init__(self, name=name, data=data, metadata=metadata, json_string=json_string)
-

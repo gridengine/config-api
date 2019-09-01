@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,11 +16,12 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
 
 from uge.exceptions.qconf_exception import QconfException
 from uge.constants import uge_status
+
 
 class InvalidArgument(QconfException):
     """ 
@@ -41,4 +42,3 @@ class InvalidArgument(QconfException):
         QconfException.__init__(
             self, error, uge_status.UGE_INVALID_ARGUMENT,
             **kwargs)
-

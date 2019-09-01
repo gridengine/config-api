@@ -20,9 +20,9 @@
 # 
 import types
 import random
-from utils import needs_uge
-from utils import generate_random_string
-from utils import create_config_file
+from .utils import needs_uge
+from .utils import generate_random_string
+from .utils import create_config_file
 from uge.exceptions.object_not_found import ObjectNotFound
 
 from uge.api.qconf_api import QconfApi
@@ -87,12 +87,12 @@ def test_generate_stree_from_json():
     for i in range(0,len(stree.data)):
         v = stree.data[i]
         v2 = stree2.data[i]
-        assert(type(v) == types.DictType)
-        assert(type(v2) == types.DictType)
-        for key in v.keys():
+        assert(type(v) == dict)
+        assert(type(v2) == dict)
+        for key in list(v.keys()):
             x = v[key]
             x2 = v2[key]
-            if type(x) == types.ListType:
+            if type(x) == list:
                 assert(len(x) == len(x2))
                 for y in x:
                     assert(x2.count(y) == 1)
@@ -129,7 +129,7 @@ def test_delete_stree():
     try:
         stree = API.get_stree()
         assert(False)
-    except ObjectNotFound, ex:
+    except ObjectNotFound as ex:
         pass
 
 def test_modify_or_add_stree():

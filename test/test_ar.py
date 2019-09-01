@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-#___INFO__MARK_BEGIN__
+# ___INFO__MARK_BEGIN__
 ##########################################################################
 # Copyright 2016,2017 Univa Corporation
 #
@@ -16,13 +16,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ###########################################################################
-#___INFO__MARK_END__
+# ___INFO__MARK_END__
 #
 from nose import SkipTest
 
-from utils import needs_uge
-from utils import generate_random_string
-from utils import create_config_file
+from .utils import needs_uge
+from .utils import generate_random_string
+from .utils import create_config_file
 
 from uge.api.ar_api import AdvanceReservationApi
 from uge.config.config_manager import ConfigManager
@@ -32,35 +32,40 @@ from uge.exceptions.object_already_exists import ObjectAlreadyExists
 
 create_config_file()
 AR_API = AdvanceReservationApi()
-#AR_NAME = '%s' % generate_random_string(6)
-#CONFIG_MANAGER = ConfigManager.get_instance()
+# AR_NAME = '%s' % generate_random_string(6)
+# CONFIG_MANAGER = ConfigManager.get_instance()
 LOG_MANAGER = LogManager.get_instance()
 logger = LOG_MANAGER.get_logger('test_ar')
+
 
 @needs_uge
 def test_request_ar():
     ar_id = AR_API.request_ar('-d 3600 -fr y')
     ar = AR_API.get_ar(ar_id)
     logger.info('AR: ', ar)
-    assert(ar_id is not None)
+    assert (ar_id is not None)
+
 
 def test_request_sr():
     ar_id = AR_API.request_ar('-cal_week mon-fri=8-16=on')
     ar = AR_API.get_ar(ar_id)
     logger.info('SR: ', ar)
-    assert(ar_id is not None)
+    assert (ar_id is not None)
+
 
 def test_get_ar_summary():
     ar_summary = AR_API.get_ar_summary()
     logger.info(ar_summary)
-    assert(ar_summary is not None)
+    assert (ar_summary is not None)
+
 
 def test_get_ar():
     for ar_id in AR_API.get_ar_list():
         ar = AR_API.get_ar(str(ar_id))
-        assert(ar is not None)
+        assert (ar is not None)
     else:
         raise SkipTest('There are no UGE advance reservations.')
+
 
 def test_delete_all_ar():
     for ar_id in AR_API.get_ar_list():

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-#___INFO__MARK_BEGIN__ 
+# ___INFO__MARK_BEGIN__
 ########################################################################## 
 # Copyright 2016,2017 Univa Corporation
 # 
@@ -16,9 +16,10 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License. 
 ########################################################################### 
-#___INFO__MARK_END__ 
+# ___INFO__MARK_END__
 # 
-from qconf_object import QconfObject
+from .qconf_object import QconfObject
+
 
 class Project(QconfObject):
     """ This class encapsulates UGE project object. """
@@ -34,17 +35,17 @@ class Project(QconfObject):
 
     #: Default values for required data keys.
     REQUIRED_DATA_DEFAULTS = {
-        'oticket'         : 0,
-        'fshare'          : 0,
-        'acl'             : None,
-        'xacl'            : None,
+        'oticket': 0,
+        'fshare': 0,
+        'acl': None,
+        'xacl': None,
     }
     INT_KEY_MAP = QconfObject.get_int_key_map(REQUIRED_DATA_DEFAULTS)
     FLOAT_KEY_MAP = QconfObject.get_float_key_map(REQUIRED_DATA_DEFAULTS)
     DEFAULT_LIST_DELIMITER = ' '
     LIST_KEY_MAP = {
-        'acl'             : ' ',
-        'xacl'            : ' ',
+        'acl': ' ',
+        'xacl': ' ',
     }
 
     def __init__(self, name=None, data=None, metadata=None, json_string=None):
@@ -66,4 +67,3 @@ class Project(QconfObject):
         :raises: **InvalidArgument** - in case metadata is not a dictionary, JSON string is not valid, or it does not contain dictionary representing an Project object.
         """
         QconfObject.__init__(self, name=name, data=data, metadata=metadata, json_string=json_string)
-
