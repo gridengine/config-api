@@ -23,8 +23,8 @@ all: build doc
 .PHONY:deps install clean dist egg wheel distclean test doc
 deps install test:
 
-uge/__init__.py : ./util/params.mk
-	echo "__version__ = '$(VERSION)'" > $@
+#uge/__init__.py : ./util/params.mk
+#	echo "__version__ = '$(VERSION)'" > $@
 
 distclean: tidy
 
