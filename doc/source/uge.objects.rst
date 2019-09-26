@@ -289,18 +289,6 @@ SchedulerConfiguration v2.0
     .. autoattribute:: uge.objects.scheduler_configuration_v2_0.SchedulerConfiguration.USER_PROVIDED_KEYS
     .. autoattribute:: uge.objects.scheduler_configuration_v2_0.SchedulerConfiguration.REQUIRED_DATA_DEFAULTS
 
-SchedulerConfiguration v3.0
----------------------------
-
-.. autoclass:: uge.objects.scheduler_configuration_v3_0.SchedulerConfiguration()
-    :members: __init__
-    :show-inheritance:
-
-    .. autoattribute:: uge.objects.scheduler_configuration_v3_0.SchedulerConfiguration.VERSION 
-    .. autoattribute:: uge.objects.scheduler_configuration_v3_0.SchedulerConfiguration.NAME_KEY
-    .. autoattribute:: uge.objects.scheduler_configuration_v3_0.SchedulerConfiguration.USER_PROVIDED_KEYS
-    .. autoattribute:: uge.objects.scheduler_configuration_v3_0.SchedulerConfiguration.REQUIRED_DATA_DEFAULTS
-
 ShareTree v1.0
 --------------
 

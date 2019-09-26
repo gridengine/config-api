@@ -47,7 +47,7 @@ UGE_RELEASE_OBJECT_MAP['8.3.1p12'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.3.1p9']
 # 8.4.0
 UGE_RELEASE_OBJECT_MAP['8.4.0'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.3.1p9'])
 UGE_RELEASE_OBJECT_MAP['8.4.0']['ComplexConfiguration'] = '2.0'
-    
+
 # 8.4.3
 UGE_RELEASE_OBJECT_MAP['8.4.3'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.4.0'])
 
@@ -137,7 +137,3 @@ UGE_RELEASE_OBJECT_MAP['8.6.7'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.6'])
 # 8.6.8
 UGE_RELEASE_OBJECT_MAP['8.6.8prealpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.7'])
 UGE_RELEASE_OBJECT_MAP['8.6.8'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.7'])
-
-# 8.7.0
-UGE_RELEASE_OBJECT_MAP['8.7.0alpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.0'])
-UGE_RELEASE_OBJECT_MAP['8.7.0alpha']['SchedulerConfiguration'] = '3.0'
