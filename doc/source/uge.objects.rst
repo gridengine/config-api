@@ -102,6 +102,18 @@ ClusterQueue v1.0
     .. autoattribute:: uge.objects.cluster_queue_v1_0.ClusterQueue.USER_PROVIDED_KEYS
     .. autoattribute:: uge.objects.cluster_queue_v1_0.ClusterQueue.REQUIRED_DATA_DEFAULTS
 
+ClusterQueue v2.0
+-----------------
+
+.. autoclass:: uge.objects.cluster_queue_v2_0.ClusterQueue()
+    :members: __init__
+    :show-inheritance:
+
+    .. autoattribute:: uge.objects.cluster_queue_v2_0.ClusterQueue.VERSION 
+    .. autoattribute:: uge.objects.cluster_queue_v2_0.ClusterQueue.NAME_KEY
+    .. autoattribute:: uge.objects.cluster_queue_v2_0.ClusterQueue.USER_PROVIDED_KEYS
+    .. autoattribute:: uge.objects.cluster_queue_v2_0.ClusterQueue.REQUIRED_DATA_DEFAULTS
+
 ComplexConfigurationBase
 ------------------------
 
@@ -132,6 +144,18 @@ ComplexConfiguration v2.0
     .. autoattribute:: uge.objects.complex_configuration_v2_0.ComplexConfiguration.NAME_KEY
     .. autoattribute:: uge.objects.complex_configuration_v2_0.ComplexConfiguration.USER_PROVIDED_KEYS
     .. autoattribute:: uge.objects.complex_configuration_v2_0.ComplexConfiguration.REQUIRED_DATA_DEFAULTS
+
+ComplexConfiguration v3.0
+-------------------------
+
+.. autoclass:: uge.objects.complex_configuration_v3_0.ComplexConfiguration()
+    :members: __init__
+    :show-inheritance:
+
+    .. autoattribute:: uge.objects.complex_configuration_v3_0.ComplexConfiguration.VERSION 
+    .. autoattribute:: uge.objects.complex_configuration_v3_0.ComplexConfiguration.NAME_KEY
+    .. autoattribute:: uge.objects.complex_configuration_v3_0.ComplexConfiguration.USER_PROVIDED_KEYS
+    .. autoattribute:: uge.objects.complex_configuration_v3_0.ComplexConfiguration.REQUIRED_DATA_DEFAULTS
 
 ExecutionHost v1.0
 ------------------
@@ -264,6 +288,18 @@ SchedulerConfiguration v2.0
     .. autoattribute:: uge.objects.scheduler_configuration_v2_0.SchedulerConfiguration.NAME_KEY
     .. autoattribute:: uge.objects.scheduler_configuration_v2_0.SchedulerConfiguration.USER_PROVIDED_KEYS
     .. autoattribute:: uge.objects.scheduler_configuration_v2_0.SchedulerConfiguration.REQUIRED_DATA_DEFAULTS
+
+SchedulerConfiguration v3.0
+---------------------------
+
+.. autoclass:: uge.objects.scheduler_configuration_v3_0.SchedulerConfiguration()
+    :members: __init__
+    :show-inheritance:
+
+    .. autoattribute:: uge.objects.scheduler_configuration_v3_0.SchedulerConfiguration.VERSION 
+    .. autoattribute:: uge.objects.scheduler_configuration_v3_0.SchedulerConfiguration.NAME_KEY
+    .. autoattribute:: uge.objects.scheduler_configuration_v3_0.SchedulerConfiguration.USER_PROVIDED_KEYS
+    .. autoattribute:: uge.objects.scheduler_configuration_v3_0.SchedulerConfiguration.REQUIRED_DATA_DEFAULTS
 
 ShareTree v1.0
 --------------
