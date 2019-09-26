@@ -18,6 +18,7 @@
 ########################################################################### 
 # ___INFO__MARK_END__
 # 
+from __future__ import print_function
 import abc
 import logging
 import os
@@ -29,9 +30,10 @@ from uge.config.config_manager import ConfigManager
 from uge.exceptions.invalid_argument import InvalidArgument
 from uge.exceptions.qconf_exception import QconfException
 from uge.log.log_manager import LogManager
+# compatible with Python 2 *and* 3:
+ABC = abc.ABCMeta('ABC', (object,), {'__slots__': ()})
 
-
-class QconfCli(object, metaclass=abc.ABCMeta):
+class QconfCli(ABC):
     """ Base qconf command line interface class. """
 
     def __init__(self, valid_arg_count=0):
