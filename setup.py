@@ -23,7 +23,7 @@ if sys.version_info <= (2, 5):
     print(error, file=sys.stderr)
     sys.exit(1)
 
-with open("README.md") as f:
+with open("README.rst") as f:
     long_description=f.read()
 
 setup(name='uge-pycl',
