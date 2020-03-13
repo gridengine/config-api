@@ -75,12 +75,12 @@ class ComplexConfigurationBase(QconfObject):
         :returns: Object's UGE-formatted string.
         """
         lines = ''
-        lines += '#name               shortcut   type        relop requestable consumable default  urgency aapre affinity\n'
+        lines += '#name               shortcut   type        relop requestable consumable default  urgency aapre affinity do_report is_static\n'
         lines += '#------------------------------------------------------------------------------------------------------\n'
         for (key, value_dict) in list(self.data.items()):
             lines += '%s' % (key)
             for key2 in ['shortcut', 'type', 'relop', 'requestable', 'consumable', 'default', 'urgency', 'aapre',
-                         'affinity']:
+                         'affinity', 'do_report', 'is_static']:
                 lines += ' %s' % (self.py_to_uge(key2, value_dict[key2], value_dict.get('default_is_bool', False)))
             lines += '\n'
         return lines
@@ -139,6 +139,8 @@ class ComplexConfigurationBase(QconfObject):
             urgency = self.uge_to_py(key, key_value[7], 'INT')
             aapre = self.uge_to_py(key, key_value[8])
             affinity = self.uge_to_py(key, key_value[9])
+            do_report = self.uge_to_py(key, key_value[10])
+            is_static = self.uge_to_py(key, key_value[11])
             object_data[key] = {
                 'shortcut': shortcut,
                 'type': uge_type,
@@ -149,6 +151,8 @@ class ComplexConfigurationBase(QconfObject):
                 'urgency': urgency,
                 'aapre': aapre,
                 'affinity': affinity,
+                'do_report': do_report,
+                'is_static': is_static,
                 'default_is_bool': default_is_bool
             }
         return object_data
@@ -159,6 +163,6 @@ class ComplexConfigurationBase(QconfObject):
         if type(data) != dict:
             raise InvalidArgument('Complex attribute data must be a dictionary.')
         for key in ['shortcut', 'type', 'relop', 'requestable', 'consumable', 'default', 'urgency', 'aapre',
-                    'affinity']:
+                    'affinity', 'do_report', 'is_static']:
             if key not in data:
                 raise InvalidArgument('Complex attribute data is missing the "%s" key.' % key)

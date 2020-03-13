@@ -79,7 +79,8 @@ def test_modify_cconf():
 
 def test_add_cattr():
     cattr_data = {'shortcut': CATTR_NAME[0:3], 'type': 'INT', 'relop': '<=', 'requestable': True, 'consumable': True,
-                  'default': 10, 'urgency': CATTR_URGENCY, 'aapre': False, 'affinity': 0.1}
+                  'default': 10, 'urgency': CATTR_URGENCY, 'aapre': False, 'affinity': 0.1,
+                  'do_report': True, 'is_static': False}
     cconf = API.add_cattr(CATTR_NAME, cattr_data)
     assert (cconf.data[CATTR_NAME]['urgency'] == CATTR_URGENCY)
 

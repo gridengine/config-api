@@ -166,7 +166,7 @@ class ComplexConfiguration(ComplexConfigurationBase):
         'seq_no': {'shortcut': 'seq', 'type': 'INT', 'relop': '==', 'requestable': False, 'consumable': False,
                    'default': 0, 'urgency': 0, 'aapre': False, 'affinity': 0.0},
         'slots': {'shortcut': 's', 'type': 'INT', 'relop': '<=', 'requestable': True, 'consumable': True, 'default': 1,
-                  'urgency': 1000, 'aapre': True},
+                  'urgency': 1000, 'aapre': True, 'affinity': 0.0},
         'swap_free': {'shortcut': 'sf', 'type': 'MEMORY', 'relop': '<=', 'requestable': True, 'consumable': False,
                       'default': '0', 'urgency': 0, 'aapre': False, 'affinity': 0.0},
         'swap_rate': {'shortcut': 'sr', 'type': 'MEMORY', 'relop': '>=', 'requestable': True, 'consumable': False,

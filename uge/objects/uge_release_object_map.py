@@ -148,3 +148,4 @@ UGE_RELEASE_OBJECT_MAP['8.6.10prealpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6
 # 8.7.0
 UGE_RELEASE_OBJECT_MAP['8.7.0alpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.0'])
 UGE_RELEASE_OBJECT_MAP['8.7.0alpha']['SchedulerConfiguration'] = '3.0'
+UGE_RELEASE_OBJECT_MAP['8.7.0alpha']['ComplexConfiguration'] = '4.0'
