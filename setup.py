@@ -52,9 +52,10 @@ setup(name='uge-pycl',
                 'uge/objects', 
                 'uge/utility'
       ],
-      install_requires=['decorator'],
+      install_requires=['decorator','xmltodict'],
       package_data={
       },
+      data_files=[('', ['test_values.json'])],
       license='Apache 2.0',
       platforms='Posix; MacOS X',
       classifiers=[
