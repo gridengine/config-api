@@ -52,7 +52,7 @@ setup(name='uge-pycl',
                 'uge/objects', 
                 'uge/utility'
       ],
-      install_requires=['decorator'],
+      install_requires=['decorator','xmltodict'],
       package_data={
       },
       license='Apache 2.0',
