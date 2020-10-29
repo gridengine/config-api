@@ -39,7 +39,7 @@ pdf:
 		--listings -H listings.tex \
 		--variable fontsize=10pt --variable version="$(VERSION)" \
 		--variable title="Grid Engine Configuration API User Guide" \
-		--variable author="Univa Engineering" --variable company="Univa Corporation" \
+		--variable author="Altair Engineering" --variable company="Univa, An Altair Company" \
 		--variable UGELongVersion="$(VERSION)" --variable UGEShortVersion="$(VERSION)" \
 		--variable UGEFullName="Univa Grid Engine" --variable UGEShortName="Grid Engine" \
 		--variable doc-family="Univa Grid Engine Documentation" \
