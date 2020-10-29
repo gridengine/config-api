@@ -7,7 +7,6 @@
 
 % additional definitions ...
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$]{$documentclass$}
-\usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -17,6 +16,7 @@
 \usepackage[a4paper]{geometry}
 \usepackage[raggedright]{titlesec}
 \usepackage{booktabs}
+\usepackage{tcolorbox}
 % use microtype if available
 \IfFileExists{microtype.sty}{\usepackage{microtype}}{}
 % use upquote if available, for straight quotes in verbatim environments
@@ -32,6 +32,9 @@
 \newcommand{\UGEShortName}{$UGEShortName$}
 % End Macro section
 
+\usepackage[default]{opensans}
+\usepackage[T1]{fontenc}
+
 $if(euro)$
   \usepackage{eurosym}
 $endif$
@@ -42,18 +45,7 @@ $endif$
   \fi
   \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
   \newcommand{\euro}{€}
-$if(mainfont)$
-    \setmainfont{$mainfont$}
-$endif$
-$if(sansfont)$
-    \setsansfont{$sansfont$}
-$endif$
-$if(monofont)$
-    \setmonofont{$monofont$}
-$endif$
-$if(mathfont)$
-    \setmathfont{$mathfont$}
-$endif$
+\setmainfont{Open Sans}
 \fi
 
 \usepackage{fancyhdr}
@@ -165,18 +157,21 @@ $endfor$
 %\title{$title$}
 %$endif$
 
-
 \author{$for(author)$$author$$sep$ \and $endfor$}
 \date{$date$}
 
 \begin{document}
+
+$if(no-title-page)$
+{ \huge \bfseries $title$}\\[0.4cm]
+$else$
 % CBRUN Our special title
 \begin{titlepage}
 \begin{center}
 
 % Upper part of the page. The '~' is needed because \\
 % only works if a paragraph has started.
-\includegraphics[width=0.15\textwidth]{./univa-400x200.png}~\\[1cm]
+\includegraphics[width=0.15\textwidth]{./altair-360x360.png}~\\[1cm]
 
 \textsc{\LARGE $company$}\\[1.5cm]
 
@@ -210,23 +205,21 @@ $version$
 
 % Bottom of the page
 {\large \today}
-
+% 
 \end{center}
-\clearpage\null\vfill
-\pagestyle{empty}
-\begin{minipage}[b]{0.9\textwidth}
-\footnotesize\raggedright
-\setlength{\parskip}{0.5\baselineskip}
+\vfill
 \begin{center}
-Copyright \copyright 2012--\the\year\ $company$.
-All rights reserved.
+\copyright\thinspace\the\year\thinspace ALTAIR ENGINEERING, INC. ALL RIGHTS RESERVED.
 \end{center}
-\end{minipage}
+\begin{center}
+WE ARE CURRENTLY LISTED ON NASDAQ AS ALTR. UNIVA IS AN ALTAIR COMPANY
+\end{center}
+
 \vspace*{2\baselineskip}
 \cleardoublepage
 \rfoot{\thepage}
 \end{titlepage}
-
+$endif$
 
 %$if(title)$
 %\maketitle
