@@ -204,6 +204,20 @@ class DictBasedObjectManager(object):
         self.verify_object_before_delete(deleted_object)
         self.qconf_executor.execute_qconf('-d%s %s' % (self.OBJECT_CLASS_UGE_NAME, name), self.QCONF_ERROR_REGEX_LIST)
 
+    def delete_object_list(self, object_list, dirname=None):
+        if not dirname:
+            dirname = tempfile.mktemp()
+        self.mk_object_dir(dirname)
+        self.write_objects(object_list, dirname)
+        self.delete_objects_from_dir(dirname)
+        self.rm_object_dir(dirname)
+        return
+
+    def delete_objects_from_dir(self, dir):
+        self.qconf_executor.execute_qconf_with_dir('-D%s' % self.OBJECT_CLASS_UGE_NAME, dir,
+                                                   self.QCONF_ERROR_REGEX_LIST)
+        return
+
     def list_objects(self):
         try:
             qconf_output = self.qconf_executor.execute_qconf('-s%sl' % (self.OBJECT_CLASS_UGE_NAME),

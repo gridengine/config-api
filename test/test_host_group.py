@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
 # Copyright 2016-2021 Univa Corporation (acquired and owned by Altair Engineering Inc.)
@@ -18,13 +18,16 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
+
+import tempfile
 import types
 from nose import SkipTest
 
 from .utils import needs_uge
 from .utils import generate_random_string
 from .utils import create_config_file
+from .utils import load_values
 
 from uge.api.qconf_api import QconfApi
 from uge.config.config_manager import ConfigManager
@@ -38,6 +41,8 @@ HOST_GROUP_NAME = '@%s' % generate_random_string(6)
 CONFIG_MANAGER = ConfigManager.get_instance()
 HOST_NAME = CONFIG_MANAGER['host']
 LOG_MANAGER = LogManager.get_instance()
+VALUES_DICT = load_values('test_values.json')
+print(VALUES_DICT)
 
 
 @needs_uge
@@ -117,6 +122,82 @@ def test_modify_hgrp():
         assert (hgrp3.data['hostlist'] == original_host_list)
     else:
         raise SkipTest('There are no configured UGE host groups.')
+
+
+def test_get_hgrps():
+    hgrpl = API.list_hgrps()
+    hgrps = API.get_hgrps()
+    for hgrp in hgrps:
+        print("#############################################")
+        print(hgrp.to_uge())
+        assert (hgrp.data['group_name'] in hgrpl)
+
+
+def test_write_hgrps():
+    try:
+        tdir = tempfile.mkdtemp()
+        print("*************************** " + tdir)
+        hgrp_names = VALUES_DICT['hgrp_names']
+        hgrps = API.get_hgrps()
+        for hgrp in hgrps:
+            print("Before #############################################")
+            print(hgrp.to_uge())
+
+        new_hgrps = []
+        for name in hgrp_names:
+            nhgrp = API.generate_hgrp(name=name)
+            new_hgrps.append(nhgrp)
+        API.mk_hgrps_dir(tdir)
+        API.write_hgrps(new_hgrps, tdir)
+        API.add_hgrps_from_dir(tdir)
+        API.modify_hgrps_from_dir(tdir)
+        hgrps = API.get_hgrps()
+        for hgrp in hgrps:
+            print("After #############################################")
+            print(hgrp.to_uge())
+
+        hgrps = API.list_hgrps()
+        for name in hgrp_names:
+            assert (name in hgrps)
+            print("host group found: " + name)
+
+    finally:
+        API.delete_hgrps_from_dir(tdir)
+        API.rm_hgrps_dir(tdir)
+
+
+def test_add_hgrps():
+    try:
+        new_hgrps = []
+        hgrp_names = VALUES_DICT['hgrp_names']
+        for name in hgrp_names:
+            nhgrp = API.generate_hgrp(name=name)
+            new_hgrps.append(nhgrp)
+
+        # print all host groups currently in the cluster
+        hgrps = API.get_hgrps()
+        for hgrp in hgrps:
+            print("Before #############################################")
+            print(hgrp.to_uge())
+
+        # add host groups
+        API.add_hgrps(new_hgrps)
+        API.modify_hgrps(new_hgrps)
+
+        # print all host groups currently in the cluster
+        hgrps = API.get_hgrps()
+        for hgrp in hgrps:
+            print("After #############################################")
+            print(hgrp.to_uge())
+
+        # check that host groups have been added
+        hgrps = API.list_hgrps()
+        for name in hgrp_names:
+            assert (name in hgrps)
+            print("host group found: " + name)
+
+    finally:
+        API.delete_hgrps(new_hgrps)
 
 
 def test_delete_hgrp():

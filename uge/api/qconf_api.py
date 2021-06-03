@@ -246,7 +246,7 @@ class QconfApi(object):
         """ Add UGE cluster queue. Default values for any missing required data keys will be added to queue configuration.
 
         :param pycl_object: Cluster queue object to be added.
-        :type pycl_object: ClusterQueue 
+        :type pycl_object: ClusterQueue
 
         :param name: Cluster queue name; if provided, it will override queue name in the provided cluster queue object, data dictionary, or in the json string.
         :type name: str
@@ -281,12 +281,34 @@ class QconfApi(object):
             metadata=metadata, json_string=json_string)
 
     @api_call
+    def add_queues(self, queue_list):
+        """ Adds all UGE queues in queue_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_queues(queue_list)
+        """
+        return self.cluster_queue_manager.add_objects(queue_list)
+
+    @api_call
+    def add_queues_from_dir(self, dirname):
+        """ Adds all UGE queues from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_queues_from_dir('/tmp/queue_test')
+        """
+        return self.cluster_queue_manager.add_objects_from_dir(dirname)
+
+    @api_call
     def modify_queue(self, pycl_object=None, name=None, data=None,
                      metadata=None, json_string=None):
         """ Modify UGE cluster queue object.
 
         :param pycl_object: Cluster queue object to be modified.
-        :type pycl_object: ClusterQueue 
+        :type pycl_object: ClusterQueue
 
         :param name: Cluster queue name; if provided, it will override queue name in the provided cluster queue object, data dictionary, or in the json string.
         :type name: str
@@ -318,6 +340,28 @@ class QconfApi(object):
             metadata=metadata, json_string=json_string)
 
     @api_call
+    def modify_queues(self, queue_list):
+        """ Modifies all UGE queues in queue_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_queues(queue_list)
+        """
+        return self.cluster_queue_manager.modify_objects(queue_list)
+
+    @api_call
+    def modify_queues_from_dir(self, dirname):
+        """ Modifies all UGE queues from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_queues_from_dir('/tmp/queue_test')
+        """
+        return self.cluster_queue_manager.modify_objects_from_dir(dirname)
+
+    @api_call
     def get_queue(self, name):
         """ Retrieve UGE queue configuration.
 
@@ -337,6 +381,20 @@ class QconfApi(object):
         return self.cluster_queue_manager.get_object(name)
 
     @api_call
+    def get_queues(self):
+        """ Retrieve all UGE queues details.
+
+        :returns: array of queue dict objects.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> cal_queue_list = api.get_queues()
+
+        """
+        return self.cluster_queue_manager.get_objects()
+
+    @api_call
     def delete_queue(self, name):
         """ Delete UGE queue configuration.
 
@@ -350,6 +408,31 @@ class QconfApi(object):
         >>> api.delete_queue('new.q')
         """
         return self.cluster_queue_manager.delete_object(name)
+
+    @api_call
+    def delete_queues(self, queue_list):
+        """ Deletes all UGE queue in queue_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.delete_queues(queue_list)
+        """
+        return self.cluster_queue_manager.delete_object_list(queue_list)
+
+    @api_call
+    def delete_queues_from_dir(self, dirname):
+        """ Delete UGE queues from files in dir.
+
+        :param dirname: Directory containing UGE queue object files.
+        :type dirname: string
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.delete_queues_from_dir('/tmp/queue_test')
+        """
+        return self.cluster_queue_manager.delete_objects_from_dir(dirname)
 
     @api_call
     def list_queues(self):
@@ -367,6 +450,30 @@ class QconfApi(object):
         'QconfNameList'
         """
         return self.cluster_queue_manager.list_objects()
+
+    @api_call
+    def mk_queues_dir(self, dirname):
+        """ Make a temporary directory to write queue data.
+
+        >>> api.mk_queues_dir('/tmp/queues_test')
+        """
+        self.cluster_queue_manager.mk_object_dir(dirname)
+
+    @api_call
+    def rm_queues_dir(self, dirname):
+        """ Remove temporary queue directory.
+
+        >>> api.rm_queues_dir('/tmp/queues_test')
+        """
+        self.cluster_queue_manager.rm_object_dir(dirname)
+
+    @api_call
+    def write_queues(self, queue_list, dirname):
+        """ Write each queue in queue_list to a seperate file in dir.
+
+        >>> api.write_queues(queue_list, '/tmp/queues_test')
+        """
+        self.cluster_queue_manager.write_objects(queue_list, dirname)
 
     #
     # ParallelEnvironment methods
@@ -421,7 +528,7 @@ class QconfApi(object):
         """ Add UGE parallel environment. Default values for any missing required data keys will be added to PE configuration.
 
         :param pycl_object: Parallel environment object to be added.
-        :type pycl_object: ParallelEnvironment 
+        :type pycl_object: ParallelEnvironment
 
         :param name: Parallel environment name; if provided, it will override PE name in the provided parallel environment object, data dictionary, or in the json string.
         :type name: str
@@ -454,12 +561,34 @@ class QconfApi(object):
             metadata=metadata, json_string=json_string)
 
     @api_call
+    def add_pes(self, pe_list):
+        """ Adds all UGE parallel environment objects in pe_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_pes(pe_list)
+        """
+        return self.parallel_environment_manager.add_objects(pe_list)
+
+    @api_call
+    def add_pes_from_dir(self, dirname):
+        """ Adds all UGE parallel environment objects from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_pes_from_dir('/tmp/pe_test')
+        """
+        return self.parallel_environment_manager.add_objects_from_dir(dirname)
+
+    @api_call
     def modify_pe(self, pycl_object=None, name=None, data=None,
                   metadata=None, json_string=None):
         """ Modify UGE parallel environment object.
 
         :param pycl_object: Parallel environment object to be modified.
-        :type pycl_object: ParallelEnvironment 
+        :type pycl_object: ParallelEnvironment
 
         :param name: Parallel environment name; if provided, it will override PE name in the provided parallel environment object, data dictionary, or in the json string.
         :type name: str
@@ -495,6 +624,28 @@ class QconfApi(object):
             metadata=metadata, json_string=json_string)
 
     @api_call
+    def modify_pes(self, pe_list):
+        """ Modify all UGE parallel environment objects in pe_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_pes(pe_list)
+        """
+        return self.parallel_environment_manager.modify_objects(pe_list)
+
+    @api_call
+    def modify_pes_from_dir(self, dirname):
+        """ Modify all UGE parallel environment objects from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_pes_from_dir('/tmp/pe_test')
+        """
+        return self.parallel_environment_manager.modify_objects_from_dir(dirname)
+
+    @api_call
     def get_pe(self, name):
         """ Retrieve UGE PE configuration.
 
@@ -514,6 +665,19 @@ class QconfApi(object):
         return self.parallel_environment_manager.get_object(name)
 
     @api_call
+    def get_pes(self):
+        """ Retrieve all UGE parallel environment objects details.
+
+        :returns: array of parallel environment dict objects.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> pe_dict_list = api.get_pes()
+        """
+        return self.parallel_environment_manager.get_objects()
+
+    @api_call
     def delete_pe(self, name):
         """ Delete UGE pe configuration.
 
@@ -529,6 +693,31 @@ class QconfApi(object):
         return self.parallel_environment_manager.delete_object(name)
 
     @api_call
+    def delete_pes(self, pe_list):
+        """ Deletes all UGE parallel environments in pe_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.delete_pes(pe_list)
+        """
+        return self.parallel_environment_manager.delete_object_list(pe_list)
+
+    @api_call
+    def delete_pes_from_dir(self, dirname):
+        """ Delete all UGE parallel environments from files in dir.
+
+        :param dirname: Directory containing UGE parallel environment object files.
+        :type dirname: string
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.delete_pes_from_dir('/tmp/pe_test')
+        """
+        return self.parallel_environment_manager.delete_objects_from_dir(dirname)
+
+    @api_call
     def list_pes(self):
         """ List UGE PE names.
 
@@ -542,6 +731,30 @@ class QconfApi(object):
         ['pe1']
         """
         return self.parallel_environment_manager.list_objects()
+
+    @api_call
+    def mk_pes_dir(self, dirname):
+        """ Make a temporary directory to write UGE parallel environment data.
+
+        >>> api.mk_pes_dir('/tmp/pes_test')
+        """
+        self.parallel_environment_manager.mk_object_dir(dirname)
+
+    @api_call
+    def rm_pes_dir(self, dirname):
+        """ Remove temporary UGE parallel environments directory.
+
+        >>> api.rm_pes_dir('/tmp/pes_test')
+        """
+        self.parallel_environment_manager.rm_object_dir(dirname)
+
+    @api_call
+    def write_pes(self, pe_list, dirname):
+        """ Write each UGE parallel environment in pe_list to a seperate file in dir.
+
+        >>> api.write_pes(pe_list, '/tmp/pes_test')
+        """
+        self.parallel_environment_manager.write_objects(pe_list, dirname)
 
     #
     # ExecutionHost methods
@@ -722,7 +935,6 @@ class QconfApi(object):
         :raises QconfException: for any other errors.
 
         >>> ehost_dict_list = api.get_ehosts()
-
         """
         return self.execution_host_manager.get_objects()
 
@@ -787,7 +999,7 @@ class QconfApi(object):
     def rm_ehosts_dir(self, dirname):
         """ Remove temporary ehosts directory.
 
-        >>> api.rm_prjs_dir('/tmp/ehosts_test')
+        >>> api.rm_ehosts_dir('/tmp/ehosts_test')
         """
         self.execution_host_manager.rm_object_dir(dirname)
 
@@ -905,12 +1117,34 @@ class QconfApi(object):
             metadata=metadata, json_string=json_string)
 
     @api_call
+    def add_hgrps(self, hgrp_list):
+        """ Adds all UGE host groups in hgrp_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_hgrps(hgrp_list)
+        """
+        return self.host_group_manager.add_objects(hgrp_list)
+
+    @api_call
+    def add_hgrps_from_dir(self, dirname):
+        """ Adds all UGE host groups from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_hgrps_from_dir('/tmp/hgrp_test')
+        """
+        return self.host_group_manager.add_objects_from_dir(dirname)
+
+    @api_call
     def modify_hgrp(self, pycl_object=None, name=None, data=None,
                     metadata=None, json_string=None):
         """ Modify UGE host group object.
 
         :param pycl_object: Host group object to be modified.
-        :type pycl_object: HostGroup 
+        :type pycl_object: HostGroup
 
         :param name: Host group name; if provided, it will override host name in the provided host group object, data dictionary, or in the json string.
         :type name: str
@@ -942,6 +1176,28 @@ class QconfApi(object):
             metadata=metadata, json_string=json_string)
 
     @api_call
+    def modify_hgrps(self, hgrp_list):
+        """ Modifies all UGE host groups in hgrp_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_hgrps(hgrp_list)
+        """
+        return self.host_group_manager.modify_objects(hgrp_list)
+
+    @api_call
+    def modify_hgrps_from_dir(self, dirname):
+        """ Modifies all UGE host groups from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_hgrps_from_dir('/tmp/hgrp_test')
+        """
+        return self.host_group_manager.modify_objects_from_dir(dirname)
+
+    @api_call
     def get_hgrp(self, name):
         """ Retrieve UGE host group configuration.
 
@@ -961,6 +1217,20 @@ class QconfApi(object):
         return self.host_group_manager.get_object(name)
 
     @api_call
+    def get_hgrps(self):
+        """ Retrieve all UGE host groups details.
+
+        :returns: array of host group objects.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> hgrp_dict_list = api.get_hgrps()
+
+        """
+        return self.host_group_manager.get_objects()
+
+    @api_call
     def delete_hgrp(self, name):
         """ Delete UGE host group.
 
@@ -975,6 +1245,31 @@ class QconfApi(object):
         >>> api.delete_hgrp('@myhosts')
         """
         return self.host_group_manager.delete_object(name)
+
+    @api_call
+    def delete_hgrps(self, hgrp_list):
+        """ Deletes all UGE host groups in hgrp_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.delete_hgrps(hgrp_list)
+        """
+        return self.host_group_manager.delete_object_list(hgrp_list)
+
+    @api_call
+    def delete_hgrps_from_dir(self, dirname):
+        """ Delete UGE host groups from files in dir.
+
+        :param dirname: Directory containing UGE host group object files.
+        :type dirname: string
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.delete_hgrps_from_dir('/tmp/hgrp_test')
+        """
+        return self.host_group_manager.delete_objects_from_dir(dirname)
 
     @api_call
     def list_hgrps(self):
@@ -992,6 +1287,30 @@ class QconfApi(object):
         'QconfNameList'
         """
         return self.host_group_manager.list_objects()
+
+    @api_call
+    def mk_hgrps_dir(self, dirname):
+        """ Make a temporary directory to write host group data.
+
+        >>> api.mk_hgrps_dir('/tmp/hgrps_test')
+        """
+        self.host_group_manager.mk_object_dir(dirname)
+
+    @api_call
+    def rm_hgrps_dir(self, dirname):
+        """ Remove temporary host group directory.
+
+        >>> api.rm_hgrps_dir('/tmp/hgrps_test')
+        """
+        self.host_group_manager.rm_object_dir(dirname)
+
+    @api_call
+    def write_hgrps(self, hgrp_list, dirname):
+        """ Write each host group in hgrp_list to a seperate file in dir.
+
+        >>> api.write_hgrps(hgrp_list, '/tmp/hgrps_test')
+        """
+        self.host_group_manager.write_objects(hgrp_list, dirname)
 
     #
     # SubmitHost methods
@@ -1272,7 +1591,7 @@ class QconfApi(object):
         """ Add UGE user. Default values for any missing required data keys will be added to user configuration.
 
         :param pycl_object: User object to be added.
-        :type pycl_object: User 
+        :type pycl_object: User
 
         :param name: User name; if provided, it will override user name in the provided user object, data dictionary, or in the json string.
         :type name: str
@@ -1305,12 +1624,34 @@ class QconfApi(object):
             metadata=metadata, json_string=json_string)
 
     @api_call
+    def add_users(self, user_list):
+        """ Adds all UGE users in user_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_users(user_list)
+        """
+        return self.user_manager.add_objects(user_list)
+
+    @api_call
+    def add_users_from_dir(self, dirname):
+        """ Adds all UGE users from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_users_from_dir('/tmp/user_test')
+        """
+        return self.user_manager.add_objects_from_dir(dirname)
+
+    @api_call
     def modify_user(self, pycl_object=None, name=None, data=None,
                     metadata=None, json_string=None):
         """ Modify UGE user object.
 
         :param pycl_object: User object to be modified.
-        :type pycl_object: User 
+        :type pycl_object: User
 
         :param name: User name; if provided, it will override user name in the provided user object, data dictionary, or in the json string.
         :type name: str
@@ -1342,6 +1683,28 @@ class QconfApi(object):
             metadata=metadata, json_string=json_string)
 
     @api_call
+    def modify_users(self, user_list):
+        """ Modifies all UGE users in user_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_users(user_list)
+        """
+        return self.user_manager.modify_objects(user_list)
+
+    @api_call
+    def modify_users_from_dir(self, dirname):
+        """ Modifies all UGE users from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_users_from_dir('/tmp/user_test')
+        """
+        return self.user_manager.modify_objects_from_dir(dirname)
+
+    @api_call
     def get_user(self, name):
         """ Retrieve UGE user configuration.
 
@@ -1361,6 +1724,20 @@ class QconfApi(object):
         return self.user_manager.get_object(name)
 
     @api_call
+    def get_users(self):
+        """ Retrieve all UGE user details.
+
+        :returns: array of user dict objects.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> user_dict_list = api.get_users()
+
+        """
+        return self.user_manager.get_objects()
+
+    @api_call
     def delete_user(self, name):
         """ Delete UGE user.
 
@@ -1377,6 +1754,31 @@ class QconfApi(object):
         return self.user_manager.delete_object(name)
 
     @api_call
+    def delete_users(self, user_list):
+        """ Deletes all UGE users in user_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.delete_users(user_list)
+        """
+        return self.user_manager.delete_object_list(user_list)
+
+    @api_call
+    def delete_users_from_dir(self, dirname):
+        """ Delete UGE users from files in dir.
+
+        :param dirname: Directory containing UGE user object files.
+        :type dirname: string
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.delete_users_from_dir('/tmp/user_test')
+        """
+        return self.user_manager.delete_objects_from_dir(dirname)
+
+    @api_call
     def list_users(self):
         """ List UGE user names.
 
@@ -1390,6 +1792,30 @@ class QconfApi(object):
         ['bbryce']
         """
         return self.user_manager.list_objects()
+
+    @api_call
+    def mk_users_dir(self, dirname):
+        """ Make a temporary directory to write user data.
+
+        >>> api.mk_users_dir('/tmp/users_test')
+        """
+        self.user_manager.mk_object_dir(dirname)
+
+    @api_call
+    def rm_users_dir(self, dirname):
+        """ Remove temporary user directory.
+
+        >>> api.rm_users_dir('/tmp/users_test')
+        """
+        self.user_manager.rm_object_dir(dirname)
+
+    @api_call
+    def write_users(self, user_list, dirname):
+        """ Write each user in user_list to a seperate file in dir.
+
+        >>> api.write_users(user_list, '/tmp/users_test')
+        """
+        self.user_manager.write_objects(user_list, dirname)
 
     #
     # Project methods
@@ -1705,7 +2131,7 @@ class QconfApi(object):
         """ Add UGE calendar. Default values for any missing required data keys will be added to calendar configuration.
 
         :param pycl_object: Calendar object to be added.
-        :type pycl_object: Calendar 
+        :type pycl_object: Calendar
 
         :param name: Calendar name; if provided, it will override calendar name in the provided calendar object, data dictionary, or in the json string.
         :type name: str
@@ -1738,12 +2164,34 @@ class QconfApi(object):
             metadata=metadata, json_string=json_string)
 
     @api_call
+    def add_cals(self, cal_list):
+        """ Adds all UGE calendars in cal_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_cals(cal_list)
+        """
+        return self.calendar_manager.add_objects(cal_list)
+
+    @api_call
+    def add_cals_from_dir(self, dirname):
+        """ Adds all UGE calendars from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_cals_from_dir('/tmp/cal_test')
+        """
+        return self.calendar_manager.add_objects_from_dir(dirname)
+
+    @api_call
     def modify_cal(self, pycl_object=None, name=None, data=None,
                    metadata=None, json_string=None):
         """ Modify UGE calendar object.
 
         :param pycl_object: Calendar object to be modified.
-        :type pycl_object: Calendar 
+        :type pycl_object: Calendar
 
         :param name: Calendar name; if provided, it will override calendar name in the provided calendar object, data dictionary, or in the json string.
         :type name: str
@@ -1775,6 +2223,28 @@ class QconfApi(object):
             metadata=metadata, json_string=json_string)
 
     @api_call
+    def modify_cals(self, cal_list):
+        """ Modifies all UGE calendars in cal_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_cals(cal_list)
+        """
+        return self.calendar_manager.modify_objects(cal_list)
+
+    @api_call
+    def modify_cals_from_dir(self, dirname):
+        """ Modifies all UGE calendars from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_cals_from_dir('/tmp/cal_test')
+        """
+        return self.calendar_manager.modify_objects_from_dir(dirname)
+
+    @api_call
     def get_cal(self, name):
         """ Retrieve UGE calendar configuration.
 
@@ -1794,6 +2264,20 @@ class QconfApi(object):
         return self.calendar_manager.get_object(name)
 
     @api_call
+    def get_cals(self):
+        """ Retrieve all UGE calendars details.
+
+        :returns: array of calendar dict objects.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> cal_dict_list = api.get_cals()
+
+        """
+        return self.calendar_manager.get_objects()
+
+    @api_call
     def delete_cal(self, name):
         """ Delete UGE calendar.
 
@@ -1810,6 +2294,31 @@ class QconfApi(object):
         return self.calendar_manager.delete_object(name)
 
     @api_call
+    def delete_cals(self, cal_list):
+        """ Deletes all UGE calendars in cal_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.delete_cals(cal_list)
+        """
+        return self.calendar_manager.delete_object_list(cal_list)
+
+    @api_call
+    def delete_cals_from_dir(self, dirname):
+        """ Delete UGE calendars from files in dir.
+
+        :param dirname: Directory containing UGE calender object files.
+        :type dirname: string
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.delete_cals_from_dir('/tmp/cal_test')
+        """
+        return self.calendar_manager.delete_objects_from_dir(dirname)
+
+    @api_call
     def list_cals(self):
         """ List UGE calendar names.
 
@@ -1823,6 +2332,30 @@ class QconfApi(object):
         ['calendar1']
         """
         return self.calendar_manager.list_objects()
+
+    @api_call
+    def mk_cals_dir(self, dirname):
+        """ Make a temporary directory to write calendar data.
+
+        >>> api.mk_cals_dir('/tmp/cals_test')
+        """
+        self.calendar_manager.mk_object_dir(dirname)
+
+    @api_call
+    def rm_cals_dir(self, dirname):
+        """ Remove temporary calendar directory.
+
+        >>> api.rm_cals_dir('/tmp/cals_test')
+        """
+        self.calendar_manager.rm_object_dir(dirname)
+
+    @api_call
+    def write_cals(self, cal_list, dirname):
+        """ Write each calendar in cal_list to a seperate file in dir.
+
+        >>> api.write_cals(cal_list, '/tmp/cals_test')
+        """
+        self.calendar_manager.write_objects(cal_list, dirname)
 
     #
     # CheckpointingEnvironment methods
@@ -1875,7 +2408,7 @@ class QconfApi(object):
         """ Add UGE checkpointing environment. Default values for any missing required data keys will be added to the environment configuration.
 
         :param pycl_object: Checkpointing environment object to be added.
-        :type pycl_object: CheckpointingEnvironment 
+        :type pycl_object: CheckpointingEnvironment
 
         :param name: Checkpointing environment name; if provided, it will override environment name in the provided checkpointing environment object, data dictionary, or in the json string.
         :type name: str
@@ -1908,12 +2441,34 @@ class QconfApi(object):
             metadata=metadata, json_string=json_string)
 
     @api_call
+    def add_ckpts(self, ckpt_list):
+        """ Adds all UGE checkpointing environment objects in ckpt_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_ckpts(ckpt_list)
+        """
+        return self.checkpointing_environment_manager.add_objects(ckpt_list)
+
+    @api_call
+    def add_ckpts_from_dir(self, dirname):
+        """ Adds all UGE checkpointing environment objects from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_ckpts_from_dir('/tmp/ckpt_test')
+        """
+        return self.checkpointing_environment_manager.add_objects_from_dir(dirname)
+
+    @api_call
     def modify_ckpt(self, pycl_object=None, name=None, data=None,
                     metadata=None, json_string=None):
         """ Modify UGE checkpointing environment object.
 
         :param pycl_object: Checkpointing environment object to be modified.
-        :type pycl_object: CheckpointingEnvironment 
+        :type pycl_object: CheckpointingEnvironment
 
         :param name: Checkpointing environment name; if provided, it will override environment name in the provided checkpointing environment object, data dictionary, or in the json string.
         :type name: str
@@ -1949,6 +2504,28 @@ class QconfApi(object):
             metadata=metadata, json_string=json_string)
 
     @api_call
+    def modify_ckpts(self, ckpt_list):
+        """ Modify all UGE checkpointing environment objects in ckpt_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_ckpts(ckpt_list)
+        """
+        return self.checkpointing_environment_manager.modify_objects(ckpt_list)
+
+    @api_call
+    def modify_ckpts_from_dir(self, dirname):
+        """ Modify all UGE checkpointing environment objects from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_ckpts_from_dir('/tmp/ckpt_test')
+        """
+        return self.checkpointing_environment_manager.modify_objects_from_dir(dirname)
+
+    @api_call
     def get_ckpt(self, name):
         """ Retrieve UGE checkpointing environment configuration.
 
@@ -1968,6 +2545,19 @@ class QconfApi(object):
         return self.checkpointing_environment_manager.get_object(name)
 
     @api_call
+    def get_ckpts(self):
+        """ Retrieve all UGE checkpointing environment objects details.
+
+        :returns: array of checkpointing environment dict objects.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> ckpt_dict_list = api.get_ckpts()
+        """
+        return self.checkpointing_environment_manager.get_objects()
+
+    @api_call
     def delete_ckpt(self, name):
         """ Delete UGE checkpointing environment configuration.
 
@@ -1983,6 +2573,31 @@ class QconfApi(object):
         return self.checkpointing_environment_manager.delete_object(name)
 
     @api_call
+    def delete_ckpts(self, ckpt_list):
+        """ Deletes all UGE checkpointing environment objects in ckpt_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.delete_ckpts(ckpt_list)
+        """
+        return self.checkpointing_environment_manager.delete_object_list(ckpt_list)
+
+    @api_call
+    def delete_ckpts_from_dir(self, dirname):
+        """ Delete all UGE checkpointing environments from files in dir.
+
+        :param dirname: Directory containing UGE checkpointing environment object files.
+        :type dirname: string
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.delete_ckpts_from_dir('/tmp/ckpt_test')
+        """
+        return self.checkpointing_environment_manager.delete_objects_from_dir(dirname)
+
+    @api_call
     def list_ckpts(self):
         """ List UGE checkpointing environment names.
 
@@ -1996,6 +2611,30 @@ class QconfApi(object):
         ['ckpt1']
         """
         return self.checkpointing_environment_manager.list_objects()
+
+    @api_call
+    def mk_ckpts_dir(self, dirname):
+        """ Make a temporary directory to write UGE checkpointing environment data.
+
+        >>> api.mk_ckpts_dir('/tmp/ckpts_test')
+        """
+        self.checkpointing_environment_manager.mk_object_dir(dirname)
+
+    @api_call
+    def rm_ckpts_dir(self, dirname):
+        """ Remove temporary UGE checkpointing environments directory.
+
+        >>> api.rm_ckpts_dir('/tmp/ckpts_test')
+        """
+        self.checkpointing_environment_manager.rm_object_dir(dirname)
+
+    @api_call
+    def write_ckpts(self, ckpt_list, dirname):
+        """ Write each UGE checkpointing environment in ckpt_list to a seperate file in dir.
+
+        >>> api.write_ckpts(ckpt_list, '/tmp/ckpts_test')
+        """
+        self.checkpointing_environment_manager.write_objects(ckpt_list, dirname)
 
     #
     # AccessList methods
@@ -2048,7 +2687,7 @@ class QconfApi(object):
         """ Add UGE access list. Default values for any missing required data keys will be added to the ACL configuration.
 
         :param pycl_object: Access list object to be added.
-        :type pycl_object: AccessList 
+        :type pycl_object: AccessList
 
         :param name: Access list name; if provided, it will override ACL name in the provided access list object, data dictionary, or in the json string.
         :type name: str
@@ -2081,12 +2720,34 @@ class QconfApi(object):
             metadata=metadata, json_string=json_string)
 
     @api_call
+    def add_acls(self, acl_list):
+        """ Adds all UGE access list objects in acl_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_acls(acl_list)
+        """
+        return self.access_list_manager.add_objects(acl_list)
+
+    @api_call
+    def add_acls_from_dir(self, dirname):
+        """ Adds all UGE access list objects from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.add_acls_from_dir('/tmp/acl_test')
+        """
+        return self.access_list_manager.add_objects_from_dir(dirname)
+
+    @api_call
     def modify_acl(self, pycl_object=None, name=None, data=None,
                    metadata=None, json_string=None):
         """ Modify UGE access list object.
 
         :param pycl_object: Access list object to be modified.
-        :type pycl_object: AccessList 
+        :type pycl_object: AccessList
 
         :param name: Access list name; if provided, it will override ACL name in the provided access list object, data dictionary, or in the json string.
         :type name: str
@@ -2122,6 +2783,28 @@ class QconfApi(object):
             metadata=metadata, json_string=json_string)
 
     @api_call
+    def modify_acls(self, acl_list):
+        """ Modify all UGE access list objects in acl_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_acls(acl_list)
+        """
+        return self.access_list_manager.modify_objects(acl_list)
+
+    @api_call
+    def modify_acls_from_dir(self, dirname):
+        """ Modify all UGE access list objects from files in dir.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.modify_acls_from_dir('/tmp/acl_test')
+        """
+        return self.access_list_manager.modify_objects_from_dir(dirname)
+
+    @api_call
     def get_acl(self, name):
         """ Retrieve UGE access list configuration.
 
@@ -2141,10 +2824,23 @@ class QconfApi(object):
         return self.access_list_manager.get_object(name)
 
     @api_call
+    def get_acls(self):
+        """ Retrieve all UGE access list objects details.
+
+        :returns: array of access list dict objects.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> acl_dict_list = api.get_acls()
+        """
+        return self.access_list_manager.get_objects()
+
+    @api_call
     def delete_acl(self, name):
         """ Delete UGE access list configuration.
 
-        :param name: Access list name.
+        :param name: access list name.
         :type name: str
 
         :raises ObjectNotFound: in case access list object with a given name does not exist.
@@ -2154,6 +2850,31 @@ class QconfApi(object):
         >>> api.delete_acl('acl2')
         """
         return self.access_list_manager.delete_object(name)
+
+    @api_call
+    def delete_acls(self, acl_list):
+        """ Deletes all UGE access lists in acl_list.
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.delete_acls(acl_list)
+        """
+        return self.access_list_manager.delete_object_list(acl_list)
+
+    @api_call
+    def delete_acls_from_dir(self, dirname):
+        """ Delete all UGE access lists from files in dir.
+
+        :param dirname: Directory containing UGE access list object files.
+        :type dirname: string
+
+        :raises QmasterUnreachable: in case UGE Qmaster cannot be reached.
+        :raises QconfException: for any other errors.
+
+        >>> api.delete_acls_from_dir('/tmp/acl_test')
+        """
+        return self.access_list_manager.delete_objects_from_dir(dirname)
 
     @api_call
     def list_acls(self):
@@ -2169,6 +2890,30 @@ class QconfApi(object):
         ['acl1', 'arusers', 'deadlineusers', 'defaultdepartment']
         """
         return self.access_list_manager.list_objects()
+
+    @api_call
+    def mk_acls_dir(self, dirname):
+        """ Make a temporary directory to write UGE access list data.
+
+        >>> api.mk_acls_dir('/tmp/acls_test')
+        """
+        self.access_list_manager.mk_object_dir(dirname)
+
+    @api_call
+    def rm_acls_dir(self, dirname):
+        """ Remove temporary UGE access lists directory.
+
+        >>> api.rm_acls_dir('/tmp/acls_test')
+        """
+        self.access_list_manager.rm_object_dir(dirname)
+
+    @api_call
+    def write_acls(self, acl_list, dirname):
+        """ Write each UGE access list in acl_list to a seperate file in dir.
+
+        >>> api.write_acls(acl_list, '/tmp/acls_test')
+        """
+        self.access_list_manager.write_objects(acl_list, dirname)
 
     def add_users_to_acls(self, user_names, access_list_names):
         """ Add users to UGE access lists.
@@ -2898,7 +3643,7 @@ class QconfApi(object):
         """ Modify UGE resource quota set object.
 
         :param pycl_object: Resource quota set object to be modified.
-        :type pycl_object: ResourceQuotaSet 
+        :type pycl_object: ResourceQuotaSet
 
         :param name: Resource quota set name; if provided, it will override resource quota set name in the provided resource quota set object, data dictionary, or in the json string.
         :type name: str
@@ -2922,7 +3667,7 @@ class QconfApi(object):
         :raises QconfException: for any other errors.
 
         >>> rqs = api.get_rqs('rqs1')
-        >>> print rqs.data['enabled'] 
+        >>> print rqs.data['enabled']
         False
         >>> rqs.data['enabled'] = True
         >>> rqs = api.modify_rqs(pycl_object=rqs)

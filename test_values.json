@@ -1,4 +1,11 @@
 {
+    "acl_names": ["testacl1", "testacl2", "testacl3"],
+    "cal_names": ["testcal1", "testcal2", "testcal3"],
+    "ckpt_names": ["testckpt1", "testckpt2", "testckpt3"],
+    "hgrp_names": ["@testhgrp1", "@testhgrp2", "@testhgrp3"],
+    "host_names": ["stanford.edu", "cern.ch"],
+    "pe_names": ["testpe1", "testpe2", "testpe3"],
     "prj_names": ["a", "b", "c"],
-    "host_names": ["stanford.edu", "cern.ch"]
+    "queue_names": ["testq1", "testq2", "testq3"],
+    "user_names": ["testuser1", "testuser2", "testuser3"]
 }

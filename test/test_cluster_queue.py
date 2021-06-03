@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
 # Copyright 2016-2021 Univa Corporation (acquired and owned by Altair Engineering Inc.)
@@ -18,11 +18,15 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
+
+import tempfile
 import types
+
 from .utils import needs_uge
 from .utils import generate_random_string
 from .utils import create_config_file
+from .utils import load_values
 
 from uge.api.qconf_api import QconfApi
 from uge.config.config_manager import ConfigManager
@@ -35,6 +39,8 @@ API = QconfApi()
 QUEUE_NAME = '%s.q' % generate_random_string(6)
 CONFIG_MANAGER = ConfigManager.get_instance()
 LOG_MANAGER = LogManager.get_instance()
+VALUES_DICT = load_values('test_values.json')
+print(VALUES_DICT)
 
 
 @needs_uge
@@ -105,6 +111,82 @@ def test_modify_queue():
     q = API.modify_queue(name=QUEUE_NAME, data={'slots': [str(slots + 1)]})
     slots2 = int(q.data['slots'][0])
     assert (slots2 == slots + 1)
+
+
+def test_get_queue():
+    queuel = API.list_queues()
+    queues = API.get_queues()
+    for queue in queues:
+        print("#############################################")
+        print(queue.to_uge())
+        assert (queue.data['qname'] in queuel)
+
+
+def test_write_queues():
+    try:
+        tdir = tempfile.mkdtemp()
+        print("*************************** " + tdir)
+        queue_names = VALUES_DICT['queue_names']
+        queues = API.get_queues()
+        for queue in queues:
+            print("Before #############################################")
+            print(queue.to_uge())
+
+        new_queues = []
+        for name in queue_names:
+            nqueue = API.generate_queue(name=name)
+            new_queues.append(nqueue)
+        API.mk_queues_dir(tdir)
+        API.write_queues(new_queues, tdir)
+        API.add_queues_from_dir(tdir)
+        API.modify_queues_from_dir(tdir)
+        queues = API.get_queues()
+        for queue in queues:
+            print("After #############################################")
+            print(queue.to_uge())
+
+        queues = API.list_queues()
+        for name in queue_names:
+            assert (name in queues)
+            print("queue found: " + name)
+
+    finally:
+        API.delete_queues_from_dir(tdir)
+        API.rm_queues_dir(tdir)
+
+
+def test_add_queues():
+    try:
+        new_queues = []
+        queue_names = VALUES_DICT['queue_names']
+        for name in queue_names:
+            nqueue = API.generate_queue(name=name)
+            new_queues.append(nqueue)
+
+        # print all queues currently in the cluster
+        queues = API.get_queues()
+        for queue in queues:
+            print("Before #############################################")
+            print(queue.to_uge())
+
+        # add queues
+        API.add_queues(new_queues)
+        API.modify_queues(new_queues)
+
+        # print all queues currently in the cluster
+        queues = API.get_queues()
+        for queue in queues:
+            print("After #############################################")
+            print(queue.to_uge())
+
+        # check that queues have been added
+        queues = API.list_queues()
+        for name in queue_names:
+            assert (name in queues)
+            print("queue found: " + name)
+
+    finally:
+        API.delete_queues(new_queues)
 
 
 def test_delete_queue():

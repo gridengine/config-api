@@ -42,9 +42,13 @@ class JobClassManager(DictBasedObjectManager):
     OBJECT_NAME_KEY = 'jcname'
     OBJECT_CLASS_NAME = 'JobClass'
     OBJECT_CLASS_UGE_NAME = 'jc'
+    OBJECT_CLASS_UGE_LIST_DETAILS_NAME = 'ld'
 
     def __init__(self, qconf_executor):
         DictBasedObjectManager.__init__(self, qconf_executor)
+
+    def get_bulk_dump_filename(self, object):
+        return 'conf_api_dump_' + object.data['jcname']
 
 
 #############################################################################

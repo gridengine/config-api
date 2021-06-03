@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
 # Copyright 2016-2021 Univa Corporation (acquired and owned by Altair Engineering Inc.)
@@ -18,10 +18,14 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
+
+import tempfile
+
 from .utils import needs_uge
 from .utils import generate_random_string
 from .utils import create_config_file
+from .utils import load_values
 
 from uge.api.qconf_api import QconfApi
 from uge.config.config_manager import ConfigManager
@@ -34,6 +38,8 @@ API = QconfApi()
 CALENDAR_NAME = '%s' % generate_random_string(6)
 CONFIG_MANAGER = ConfigManager.get_instance()
 LOG_MANAGER = LogManager.get_instance()
+VALUES_DICT = load_values('test_values.json')
+print(VALUES_DICT)
 
 
 @needs_uge
@@ -102,6 +108,81 @@ def test_modify_cal():
     week2 = calendar.data['week']
     assert (week2 == '1-2')
 
+
+def test_get_cals():
+    call = API.list_cals()
+    cals = API.get_cals()
+    for cal in cals:
+        print("#############################################")
+        print(cal.to_uge())
+        assert (cal.data['calendar_name'] in call)
+
+
+def test_write_cals():
+    try:
+        tdir = tempfile.mkdtemp()
+        print("*************************** " + tdir)
+        cal_names = VALUES_DICT['cal_names']
+        cals = API.get_cals()
+        for cal in cals:
+            print("Before #############################################")
+            print(cal.to_uge())
+
+        new_cals = []
+        for name in cal_names:
+            ncal = API.generate_cal(name=name)
+            new_cals.append(ncal)
+        API.mk_cals_dir(tdir)
+        API.write_cals(new_cals, tdir)
+        API.add_cals_from_dir(tdir)
+        API.modify_cals_from_dir(tdir)
+        cals = API.get_cals()
+        for cal in cals:
+            print("After #############################################")
+            print(cal.to_uge())
+
+        cals = API.list_cals()
+        for name in cal_names:
+            assert (name in cals)
+            print("calender found: " + name)
+
+    finally:
+        API.delete_cals_from_dir(tdir)
+        API.rm_cals_dir(tdir)
+
+
+def test_add_cals():
+    try:
+        new_cals = []
+        cal_names = VALUES_DICT['cal_names']
+        for name in cal_names:
+            ncal = API.generate_cal(name=name)
+            new_cals.append(ncal)
+
+        # print all calendars currently in the cluster
+        cals = API.get_cals()
+        for cal in cals:
+            print("Before #############################################")
+            print(cal.to_uge())
+
+        # add calendars
+        API.add_cals(new_cals)
+        API.modify_cals(new_cals)
+
+        # print all calendars currently in the cluster
+        cals = API.get_cals()
+        for cal in cals:
+            print("After #############################################")
+            print(cal.to_uge())
+
+        # check that calendars have been added
+        cals = API.list_cals()
+        for name in cal_names:
+            assert (name in cals)
+            print("calender found: " + name)
+
+    finally:
+        API.delete_cals(new_cals)
 
 def test_delete_cal():
     calendar_list = API.list_cals()

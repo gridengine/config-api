@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
 # Copyright 2016-2021 Univa Corporation (acquired and owned by Altair Engineering Inc.)
@@ -18,10 +18,14 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
+
+import tempfile
+
 from .utils import needs_uge
 from .utils import generate_random_string
 from .utils import create_config_file
+from .utils import load_values
 
 from uge.api.qconf_api import QconfApi
 from uge.config.config_manager import ConfigManager
@@ -34,6 +38,8 @@ API = QconfApi()
 CKPT_NAME = '%s.q' % generate_random_string(6)
 CONFIG_MANAGER = ConfigManager.get_instance()
 LOG_MANAGER = LogManager.get_instance()
+VALUES_DICT = load_values('test_values.json')
+print(VALUES_DICT)
 
 
 @needs_uge
@@ -101,6 +107,82 @@ def test_modify_ckpt():
     ckpt = API.modify_ckpt(name=CKPT_NAME, data={'ckpt_dir': '/storage'})
     ckpt_dir2 = ckpt.data['ckpt_dir']
     assert (ckpt_dir2 == '/storage')
+
+
+def test_get_ckpts():
+    ckptl = API.list_ckpts()
+    ckpts = API.get_ckpts()
+    for ckpt in ckpts:
+        print("#############################################")
+        print(ckpt.to_uge())
+        assert (ckpt.data['ckpt_name'] in ckptl)
+
+
+def test_write_ckpts():
+    try:
+        tdir = tempfile.mkdtemp()
+        print("*************************** " + tdir)
+        ckpt_names = VALUES_DICT['ckpt_names']
+        ckpts = API.get_ckpts()
+        for ckpt in ckpts:
+            print("Before #############################################")
+            print(ckpt.to_uge())
+
+        new_ckpts = []
+        for name in ckpt_names:
+            nckpt = API.generate_ckpt(name=name)
+            new_ckpts.append(nckpt)
+        API.mk_ckpts_dir(tdir)
+        API.write_ckpts(new_ckpts, tdir)
+        API.add_ckpts_from_dir(tdir)
+        API.modify_ckpts_from_dir(tdir)
+        ckpts = API.get_ckpts()
+        for ckpt in ckpts:
+            print("After #############################################")
+            print(ckpt.to_uge())
+
+        ckpts = API.list_ckpts()
+        for name in ckpt_names:
+            assert (name in ckpts)
+            print("ckpt found: " + name)
+
+    finally:
+        API.delete_ckpts_from_dir(tdir)
+        API.rm_ckpts_dir(tdir)
+
+
+def test_add_ckpts():
+    try:
+        new_ckpts = []
+        ckpt_names = VALUES_DICT['ckpt_names']
+        for name in ckpt_names:
+            nckpt = API.generate_ckpt(name=name)
+            new_ckpts.append(nckpt)
+
+        # print all checkpoints currently in the cluster
+        ckpts = API.get_ckpts()
+        for ckpt in ckpts:
+            print("Before #############################################")
+            print(ckpt.to_uge())
+
+        # add checkpoints
+        API.add_ckpts(new_ckpts)
+        API.modify_ckpts(new_ckpts)
+
+        # print all checkpoints currently in the cluster
+        ckpts = API.get_ckpts()
+        for ckpt in ckpts:
+            print("After #############################################")
+            print(ckpt.to_uge())
+
+        # check that checkpoints have been added
+        ckpts = API.list_ckpts()
+        for name in ckpt_names:
+            assert (name in ckpts)
+            print("ckpt found: " + name)
+
+    finally:
+        API.delete_ckpts(new_ckpts)
 
 
 def test_delete_ckpt():

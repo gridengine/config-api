@@ -42,10 +42,13 @@ class CalendarManager(DictBasedObjectManager):
     OBJECT_NAME_KEY = 'calendar_name'
     OBJECT_CLASS_NAME = 'Calendar'
     OBJECT_CLASS_UGE_NAME = 'cal'
+    OBJECT_CLASS_UGE_LIST_DETAILS_NAME = 'ld'
 
     def __init__(self, qconf_executor):
         DictBasedObjectManager.__init__(self, qconf_executor)
 
+    def get_bulk_dump_filename(self, object):
+        return 'conf_api_dump_' + object.data['calendar_name']
 
 #############################################################################
 # Testing.

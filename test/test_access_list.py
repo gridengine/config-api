@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-# 
-# ___INFO__MARK_BEGIN__ 
+#
+# ___INFO__MARK_BEGIN__
 #######################################################################################
 # Copyright 2016-2021 Univa Corporation (acquired and owned by Altair Engineering Inc.)
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -17,12 +17,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #######################################################################################
-# ___INFO__MARK_END__ 
-# 
+# ___INFO__MARK_END__
+#
+
+import tempfile
+
 from .utils import needs_uge
 from .utils import generate_random_string
 from .utils import generate_random_string_list
 from .utils import create_config_file
+from .utils import load_values
 
 from uge.api.qconf_api import QconfApi
 from uge.config.config_manager import ConfigManager
@@ -37,6 +41,9 @@ USER1_NAME = 'user.%s' % generate_random_string(6)
 USER2_NAME = 'user.%s' % generate_random_string(6)
 CONFIG_MANAGER = ConfigManager.get_instance()
 LOG_MANAGER = LogManager.get_instance()
+VALUES_DICT = load_values('test_values.json')
+print(VALUES_DICT)
+
 
 @needs_uge
 def test_object_not_found():
@@ -100,8 +107,84 @@ def test_generate_acl_from_json():
 def test_modify_acl():
     acl = API.get_acl(ACL_NAME)
     acl = API.modify_acl(name=ACL_NAME, data={'entries' : [USER1_NAME, USER2_NAME]})
-    entries = acl.data['entries'] 
+    entries = acl.data['entries']
     assert(len(entries) == 2)
+
+
+def test_get_acls():
+    acll = API.list_acls()
+    acls = API.get_acls()
+    for acl in acls:
+        print("#############################################")
+        print(acl.to_uge())
+        assert (acl.data['name'] in acll)
+
+
+def test_write_acls():
+    try:
+        tdir = tempfile.mkdtemp()
+        print("*************************** " + tdir)
+        acl_names = VALUES_DICT['acl_names']
+        acls = API.get_acls()
+        for acl in acls:
+            print("Before #############################################")
+            print(acl.to_uge())
+
+        new_acls = []
+        for name in acl_names:
+            nacl = API.generate_acl(name=name)
+            new_acls.append(nacl)
+        API.mk_acls_dir(tdir)
+        API.write_acls(new_acls, tdir)
+        API.add_acls_from_dir(tdir)
+        API.modify_acls_from_dir(tdir)
+        acls = API.get_acls()
+        for acl in acls:
+            print("After #############################################")
+            print(acl.to_uge())
+
+        acls = API.list_acls()
+        for name in acl_names:
+            assert (name in acls)
+            print("acl found: " + name)
+
+    finally:
+        API.delete_acls_from_dir(tdir)
+        API.rm_acls_dir(tdir)
+
+
+def test_add_acls():
+    try:
+        new_acls = []
+        acl_names = VALUES_DICT['acl_names']
+        for name in acl_names:
+            nacl = API.generate_acl(name=name)
+            new_acls.append(nacl)
+
+        # print all acls currently in the cluster
+        acls = API.get_acls()
+        for acl in acls:
+            print("Before #############################################")
+            print(acl.to_uge())
+
+        # add acls
+        API.add_acls(new_acls)
+        API.modify_acls(new_acls)
+
+        # print all acls currently in the cluster
+        acls = API.get_acls()
+        for acl in acls:
+            print("After #############################################")
+            print(acl.to_uge())
+
+        # check that cals have been added
+        acls = API.list_acls()
+        for name in acl_names:
+            assert (name in acls)
+            print("acl found: " + name)
+
+    finally:
+        API.delete_acls(new_acls)
 
 
 def test_add_users_to_acl_and_delete_users_from_acl():

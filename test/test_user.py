@@ -18,11 +18,15 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
+
+import tempfile
 import types
+
 from .utils import needs_uge
 from .utils import generate_random_string
 from .utils import create_config_file
+from .utils import load_values
 
 from uge.api.qconf_api import QconfApi
 from uge.config.config_manager import ConfigManager
@@ -35,6 +39,8 @@ API = QconfApi()
 USER_NAME = '%s' % generate_random_string(6)
 CONFIG_MANAGER = ConfigManager.get_instance()
 LOG_MANAGER = LogManager.get_instance()
+VALUES_DICT = load_values('test_values.json')
+print(VALUES_DICT)
 
 
 @needs_uge
@@ -109,6 +115,82 @@ def test_modify_user():
     user = API.modify_user(name=USER_NAME, data={'oticket': oticket + 1})
     oticket2 = user.data['oticket']
     assert (oticket2 == oticket + 1)
+
+
+def test_get_users():
+    userl = API.list_users()
+    users = API.get_users()
+    for user in users:
+        print("#############################################")
+        print(user.to_uge())
+        assert (user.data['name'] in userl)
+
+
+def test_write_users():
+    try:
+        tdir = tempfile.mkdtemp()
+        print("*************************** " + tdir)
+        user_names = VALUES_DICT['user_names']
+        users = API.get_users()
+        for user in users:
+            print("Before #############################################")
+            print(user.to_uge())
+
+        new_users = []
+        for name in user_names:
+            nuser = API.generate_user(name=name)
+            new_users.append(nuser)
+        API.mk_users_dir(tdir)
+        API.write_users(new_users, tdir)
+        API.add_users_from_dir(tdir)
+        API.modify_users_from_dir(tdir)
+        users = API.get_users()
+        for user in users:
+            print("After #############################################")
+            print(user.to_uge())
+
+        users = API.list_users()
+        for name in user_names:
+            assert (name in users)
+            print("user found: " + name)
+
+    finally:
+        API.delete_users_from_dir(tdir)
+        API.rm_users_dir(tdir)
+
+
+def test_add_users():
+    try:
+        new_users = []
+        user_names = VALUES_DICT['user_names']
+        for name in user_names:
+            nuser = API.generate_user(name=name)
+            new_users.append(nuser)
+
+        # print all users currently in the cluster
+        users = API.get_users()
+        for user in users:
+            print("Before #############################################")
+            print(user.to_uge())
+
+        # add user
+        API.add_users(new_users)
+        API.modify_users(new_users)
+
+        # print all users currently in the cluster
+        users = API.get_users()
+        for user in users:
+            print("After #############################################")
+            print(user.to_uge())
+
+        # check that users have been added
+        users = API.list_users()
+        for name in user_names:
+            assert (name in users)
+            print("user found: " + name)
+
+    finally:
+        API.delete_users(new_users)
 
 
 def test_delete_user():

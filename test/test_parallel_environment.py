@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
 # Copyright 2016-2021 Univa Corporation (acquired and owned by Altair Engineering Inc.)
@@ -18,11 +18,15 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
+
+import tempfile
 import types
+
 from .utils import needs_uge
 from .utils import generate_random_string
 from .utils import create_config_file
+from .utils import load_values
 
 from uge.api.qconf_api import QconfApi
 from uge.config.config_manager import ConfigManager
@@ -35,6 +39,8 @@ API = QconfApi()
 PE_NAME = '%s.q' % generate_random_string(6)
 CONFIG_MANAGER = ConfigManager.get_instance()
 LOG_MANAGER = LogManager.get_instance()
+VALUES_DICT = load_values('test_values.json')
+print(VALUES_DICT)
 
 
 @needs_uge
@@ -109,6 +115,81 @@ def test_modify_pe():
     pe = API.modify_pe(name=PE_NAME, data={'slots': slots + 1})
     slots2 = pe.data['slots']
     assert (slots2 == slots + 1)
+
+
+def test_get_acls():
+    pel = API.list_pes()
+    pes = API.get_pes()
+    for pe in pes:
+        print("#############################################")
+        print(pe.to_uge())
+        assert (pe.data['pe_name'] in pel)
+
+def test_write_pes():
+    try:
+        tdir = tempfile.mkdtemp()
+        print("*************************** " + tdir)
+        pe_names = VALUES_DICT['pe_names']
+        pes = API.get_pes()
+        for pe in pes:
+            print("Before #############################################")
+            print(pe.to_uge())
+
+        new_pes = []
+        for name in pe_names:
+            npe = API.generate_pe(name=name)
+            new_pes.append(npe)
+        API.mk_pes_dir(tdir)
+        API.write_pes(new_pes, tdir)
+        API.add_pes_from_dir(tdir)
+        API.modify_pes_from_dir(tdir)
+        pes = API.get_pes()
+        for pe in pes:
+            print("After #############################################")
+            print(pe.to_uge())
+
+        pes = API.list_pes()
+        for name in pe_names:
+            assert (name in pes)
+            print("pe found: " + name)
+
+    finally:
+        API.delete_pes_from_dir(tdir)
+        API.rm_pes_dir(tdir)
+
+
+def test_add_pes():
+    try:
+        new_pes = []
+        pe_names = VALUES_DICT['pe_names']
+        for name in pe_names:
+            npe = API.generate_pe(name=name)
+            new_pes.append(npe)
+
+        # print all pes currently in the cluster
+        pes = API.get_pes()
+        for pe in pes:
+            print("Before #############################################")
+            print(pe.to_uge())
+
+        # add pes
+        API.add_pes(new_pes)
+        API.modify_pes(new_pes)
+
+        # print all pes currently in the cluster
+        pes = API.get_pes()
+        for pe in pes:
+            print("After #############################################")
+            print(pe.to_uge())
+
+        # check that cals have been added
+        pes = API.list_pes()
+        for name in pe_names:
+            assert (name in pes)
+            print("pe found: " + name)
+
+    finally:
+        API.delete_pes(new_pes)
 
 
 def test_delete_pe():

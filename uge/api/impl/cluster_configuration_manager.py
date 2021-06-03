@@ -40,6 +40,7 @@ class ClusterConfigurationManager(DictBasedObjectManager):
     OBJECT_NAME_KEY = None
     OBJECT_CLASS_NAME = 'ClusterConfiguration'
     OBJECT_CLASS_UGE_NAME = 'conf'
+    OBJECT_CLASS_UGE_LIST_DETAILS_NAME = 'ld'
 
     def __init__(self, qconf_executor):
         DictBasedObjectManager.__init__(self, qconf_executor)
@@ -66,6 +67,9 @@ class ClusterConfigurationManager(DictBasedObjectManager):
         else:
             pycl_object = DictBasedObjectManager.get_object(self, name)
         return pycl_object
+
+    def get_bulk_dump_filename(self, object):
+        return 'conf_api_dump_' + object.data['hostname']
 
 
 #############################################################################

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
 # Copyright 2016-2021 Univa Corporation (acquired and owned by Altair Engineering Inc.)
@@ -18,7 +18,7 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
 
 import tempfile
 
@@ -106,7 +106,6 @@ def test_get_ehosts():
 
 def test_write_ehosts():
     try:
-        # tdir = '/tmp/uge/ehosts'
         tdir = tempfile.mkdtemp()
         print("*************************** " + tdir)
         host_names = VALUES_DICT['host_names']
@@ -115,18 +114,24 @@ def test_write_ehosts():
             print("Before #############################################")
             print(eh.to_uge())
 
-        add_hosts = []
+        new_hosts = []
         for name in host_names:
             neh = API.generate_ehost(name=name)
-            add_hosts.append(neh)
+            new_hosts.append(neh)
         API.mk_ehosts_dir(tdir)
-        API.write_ehosts(add_hosts, tdir)
+        API.write_ehosts(new_hosts, tdir)
         API.add_ehosts_from_dir(tdir)
         API.modify_ehosts_from_dir(tdir)
         ehosts = API.get_ehosts()
         for eh in ehosts:
             print("After #############################################")
             print(eh.to_uge())
+
+        ehosts = API.list_ehosts()
+        for name in host_names:
+            assert (name in ehosts)
+            print("execution host found: " + name)
+
     finally:
         API.delete_ehosts(host_names)
         API.rm_ehosts_dir(tdir)
@@ -134,11 +139,11 @@ def test_write_ehosts():
 
 def test_add_ehosts():
     try:
-        add_hosts = []
+        new_hosts = []
         host_names = VALUES_DICT['host_names']
         for name in host_names:
             neh = API.generate_ehost(name=name)
-            add_hosts.append(neh)
+            new_hosts.append(neh)
 
         # print all execution hosts currently in the cluster
         ehosts = API.get_ehosts()
@@ -147,7 +152,7 @@ def test_add_ehosts():
             print(eh.to_uge())
 
         # add execution hosts
-        API.add_ehosts(add_hosts)
+        API.add_ehosts(new_hosts)
 
         # print all execution hosts currently in the cluster
         ehosts = API.get_ehosts()
@@ -157,9 +162,9 @@ def test_add_ehosts():
 
         # check that hosts have been added
         ehosts = API.list_ehosts()
-        for h in host_names:
-            assert (h in ehosts)
-            print("execution host found: " + h)
+        for name in host_names:
+            assert (name in ehosts)
+            print("execution host found: " + name)
 
     finally:
         API.delete_ehosts(host_names)

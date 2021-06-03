@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
 # Copyright 2016-2021 Univa Corporation (acquired and owned by Altair Engineering Inc.)
@@ -18,7 +18,7 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
 import types
 import tempfile
 from .utils import needs_uge
@@ -140,8 +140,6 @@ def test_get_prjs():
 
 def test_write_prjs():
     try:
-        tprj = 'prj_xyz'
-        # tdir = '/tmp/uge/prjs'
         tdir = tempfile.mkdtemp()
         print("*************************** " + tdir)
         prjs = API.get_prjs()
@@ -149,30 +147,37 @@ def test_write_prjs():
             print("Before #############################################")
             print(prj.to_uge())
 
-        add_projects = []
-        nprj = API.generate_prj(name='prj_xyz')
-        add_projects.append(nprj)
+        new_prjs = []
+        prj_names = VALUES_DICT['prj_names']
+        for name in prj_names:
+            nprj = API.generate_prj(name=name)
+            new_prjs.append(nprj)
         API.mk_prjs_dir(tdir)
-        API.write_prjs(add_projects, tdir)
+        API.write_prjs(new_prjs, tdir)
         API.add_prjs_from_dir(tdir)
         API.modify_prjs_from_dir(tdir)
         prjs = API.get_prjs()
         for prj in prjs:
             print("After #############################################")
             print(prj.to_uge())
+
+        prjs = API.list_prjs()
+        for name in prj_names:
+            assert (name in prjs)
+            print("project found: " + name)
+
     finally:
-        API.delete_prjs(['prj_xyz'])
+        API.delete_prjs(prj_names)
         API.rm_prjs_dir(tdir)
 
 
 def test_add_prjs():
     try:
-        add_projects = []
+        new_prjs = []
         prj_names = VALUES_DICT['prj_names']
-        # prj_names = ['tp1', 'tp2']
         for name in prj_names:
             nprj = API.generate_prj(name=name)
-            add_projects.append(nprj)
+            new_prjs.append(nprj)
 
         # print all projects currently in the cluster
         prjs = API.get_prjs()
@@ -181,7 +186,8 @@ def test_add_prjs():
             print(prj.to_uge())
 
         # add projects
-        API.add_prjs(add_projects)
+        API.add_prjs(new_prjs)
+        API.modify_prjs(new_prjs)
 
         # print all projects currently in the cluster
         prjs = API.get_prjs()
@@ -191,9 +197,9 @@ def test_add_prjs():
 
         # check that projects have been added
         prjs = API.list_prjs()
-        for p in prj_names:
-            assert (p in prjs)
-            print("project found: " + p)
+        for name in prj_names:
+            assert (name in prjs)
+            print("project found: " + name)
 
     finally:
         API.delete_prjs(prj_names)
