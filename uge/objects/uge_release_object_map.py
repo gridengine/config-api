@@ -154,3 +154,4 @@ UGE_RELEASE_OBJECT_MAP['8.7.0alpha']['JobClass'] = '4.0'
 
 UGE_RELEASE_OBJECT_MAP['8.7.0alpha2'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0alpha'])
 
+UGE_RELEASE_OBJECT_MAP['8.7.0beta'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0alpha2'])
