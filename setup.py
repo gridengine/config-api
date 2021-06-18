@@ -51,15 +51,15 @@ setup(name='uge-pycl',
       description='UGE Python Configuration Library',
       long_description=long_description,
       # long_description_content_type='text/markdown',
-      author='Univa',
-      author_email='info@univa.com',
+      author='Univa Corporation (acquired and owned by Altair Engineering Inc.)',
+      author_email='support@altair.com',
       test_suite='test',
       entry_points={
         'console_scripts': [
             'qconf-convert=uge.cli.qconf_convert:run',
         ],
       },
-      url='https://www.univa.com',
+      url='https://www.altair.com',
       packages=[
                 'uge', 
                 'uge/api', 
