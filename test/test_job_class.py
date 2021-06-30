@@ -105,6 +105,24 @@ def test_modify_jc():
     shell = jc.data['CMDNAME']
     assert (shell == '/bin/ls')
 
+def test_modify_petask_1():
+    jc = API.get_jc(JC_NAME)
+    jc = API.modify_jc(name=JC_NAME, data={'q_hard': '{+}UNSPECIFIED;0|{+~}{~}master.q'})
+    q_hard = jc.data['q_hard']
+    assert (q_hard == '{+}UNSPECIFIED;0|{+~}{~}master.q')
+
+def test_modify_petask_2():
+    jc = API.get_jc(JC_NAME)
+    jc = API.modify_jc(name=JC_NAME, data={'l_hard': '{+~}{~}Z=true,[{+~}large={~}Y=true];0|{+~}{~}A=true;1,2|{+~}{~}B=true;3,4|{+}UNSPECIFIED,[{+~}large={~}B=true]'})
+    l_hard = jc.data['l_hard']
+    assert (l_hard == '{+~}{~}Z=true,[{+~}large={~}Y=true];0|{+~}{~}A=true;1,2|{+~}{~}B=true;3,4|{+}UNSPECIFIED,[{+~}large={~}B=true]')
+
+def test_modify_petask_3():
+    jc = API.get_jc(JC_NAME)
+    jc = API.modify_jc(name=JC_NAME, data={'l_hard': '{+~}{~}Z=true,[{+~}large={~}Y=true];0|{+~}{~}A=true;1,2|{+~}{~}B=true;3,4|{+}UNSPECIFIED,[{+~}large={~}B=true]'})
+    l_hard = jc.data['l_hard']
+    assert (l_hard == '{+~}{~}Z=true,[{+~}large={~}Y=true];0|{+~}{~}A=true;1,2|{+~}{~}B=true;3,4|{+}UNSPECIFIED,[{+~}large={~}B=true]')
+
 
 def test_delete_jc():
     jc_list = API.list_jcs()
