@@ -40,9 +40,9 @@ pdf:
 		--variable fontsize=10pt --variable version="$(VERSION)" \
 		--variable title="Grid Engine Configuration API User Guide" \
 		--variable author="Altair Engineering" --variable company="Univa, An Altair Company" \
-		--variable UGELongVersion="$(VERSION)" --variable UGEShortVersion="$(VERSION)" \
-		--variable UGEFullName="Univa Grid Engine" --variable UGEShortName="Grid Engine" \
-		--variable doc-family="Univa Grid Engine Documentation" \
+		--variable GELongVersion="$(VERSION)" --variable GEShortVersion="$(VERSION)" \
+		--variable GEFullName="Altair Grid Engine" --variable GEShortName="Grid Engine" \
+		--variable doc-family="Altair Grid Engine Documentation" \
 		--toc -s UGEConfigLibraryDoc.md -o UGEConfigLibraryDoc.pdf)
 
 dist: sdist wheel doc
