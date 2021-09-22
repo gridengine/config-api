@@ -151,7 +151,9 @@ UGE_RELEASE_OBJECT_MAP['8.7.0alpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.6.0']
 UGE_RELEASE_OBJECT_MAP['8.7.0alpha']['SchedulerConfiguration'] = '3.0'
 UGE_RELEASE_OBJECT_MAP['8.7.0alpha']['ComplexConfiguration'] = '4.0'
 UGE_RELEASE_OBJECT_MAP['8.7.0alpha']['JobClass'] = '4.0'
+
 UGE_RELEASE_OBJECT_MAP['8.7.0alpha2'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0alpha'])
+
 UGE_RELEASE_OBJECT_MAP['8.7.0beta'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0alpha2'])
 UGE_RELEASE_OBJECT_MAP['8.7.0beta2'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0beta'])
 UGE_RELEASE_OBJECT_MAP['8.7.0beta3'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0beta2'])
@@ -162,7 +164,3 @@ UGE_RELEASE_OBJECT_MAP['8.7.0beta7'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0be
 UGE_RELEASE_OBJECT_MAP['8.7.0beta8'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0beta7'])
 UGE_RELEASE_OBJECT_MAP['8.7.0beta9'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0beta8'])
 UGE_RELEASE_OBJECT_MAP['8.7.0'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0beta8'])
-
-# 8.7.1
-UGE_RELEASE_OBJECT_MAP['8.7.1prealpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0'])
-

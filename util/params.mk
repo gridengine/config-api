@@ -39,6 +39,6 @@ export PYCL_REL_STR       = Development
 ifneq ($(strip $(GIT_REV)),)
 export PYCL_REL_STR       = Development version ($(GIT_REV))
 endif
-export VERSION            = 8.7.1a0
+export VERSION            = 8.7.0
 export PYCL_PACKAGE_NAME  = uge-pycl
 
