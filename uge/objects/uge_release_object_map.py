@@ -166,3 +166,6 @@ UGE_RELEASE_OBJECT_MAP['8.7.0'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0beta8']
 # 8.7.1
 UGE_RELEASE_OBJECT_MAP['8.7.1prealpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0'])
 
+# 8.7.2
+UGE_RELEASE_OBJECT_MAP['8.7.2prealpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0'])
+
