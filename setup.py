@@ -1,7 +1,7 @@
 # 
 # ___INFO__MARK_BEGIN__ 
 #######################################################################################
-# Copyright 2016-2021 Univa Corporation (acquired and owned by Altair Engineering Inc.)
+# Copyright 2016-2022 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -51,7 +51,7 @@ setup(name='uge-pycl',
       description='UGE Python Configuration Library',
       long_description=long_description,
       # long_description_content_type='text/markdown',
-      author='Univa Corporation (acquired and owned by Altair Engineering Inc.)',
+      author='Altair Engineering Inc.',
       author_email='support@altair.com',
       test_suite='test',
       entry_points={
