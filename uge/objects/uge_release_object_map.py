@@ -168,5 +168,7 @@ UGE_RELEASE_OBJECT_MAP['8.7.1prealpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.
 UGE_RELEASE_OBJECT_MAP['8.7.1'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.1prealpha'])
 
 # 8.7.2
-UGE_RELEASE_OBJECT_MAP['8.7.2prealpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0'])
+UGE_RELEASE_OBJECT_MAP['8.7.2prealpha3'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0'])
+# if new version string shall be used (see uge/api/impl/*executor.py#get_uge_version)
+# UGE_RELEASE_OBJECT_MAP['2022.1.0pre3'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0'])
 
