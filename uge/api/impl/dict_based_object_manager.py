@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -80,7 +80,7 @@ class DictBasedObjectManager(object):
         data2 = copy.copy(data)
         metadata2 = copy.copy(metadata)
         name2 = name
-        # If pycl_object is provided, combine its data/metadata 
+        # If pycl_object is provided, combine its data/metadata
         # with provided data/metadata
         if pycl_object is not None:
             generated_object = self.GENERATE_OBJECT_FACTORY_METHOD(uge_version, add_required_data=False)
@@ -118,7 +118,7 @@ class DictBasedObjectManager(object):
         try:
             old_object = self.get_object(object_name)
             raise ObjectAlreadyExists('%s %s already exists.' % (self.OBJECT_CLASS_NAME, object_name))
-        except ObjectNotFound as ex:
+        except ObjectNotFound:
             # ok
             pass
         new_object.remove_optional_keys()
@@ -135,12 +135,10 @@ class DictBasedObjectManager(object):
         self.write_objects(object_list, dirname)
         self.add_objects_from_dir(dirname)
         self.rm_object_dir(dirname)
-        return
 
     def add_objects_from_dir(self, dirname):
         self.qconf_executor.execute_qconf_with_dir('-A%s' % self.OBJECT_CLASS_UGE_NAME, dirname,
                                                    self.QCONF_ERROR_REGEX_LIST)
-        return
 
     def verify_object_before_modify(self, pycl_object):
         return

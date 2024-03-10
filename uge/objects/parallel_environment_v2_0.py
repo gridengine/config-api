@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -18,14 +18,14 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
 from .qconf_object import QconfObject
 
 
 class ParallelEnvironment(QconfObject):
     """ This class encapsulates UGE parallel environment object. """
 
-    #: Object version. 
+    #: Object version.
     VERSION = '2.0'
 
     #: Object name key.

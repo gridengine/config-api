@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -18,7 +18,7 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
 import re
 from uge.exceptions.object_not_found import ObjectNotFound
 from uge.exceptions.invalid_request import InvalidRequest
@@ -50,14 +50,12 @@ class ClusterConfigurationManager(DictBasedObjectManager):
             raise InvalidRequest('Cluster configuration name must be specified.')
         if pycl_object.name == 'global':
             raise InvalidRequest('Global cluster configuration cannot be added.')
-        return
 
     def verify_object_before_delete(self, pycl_object):
         if not pycl_object.name:
             raise InvalidRequest('Cluster configuration name must be specified.')
         if pycl_object.name == 'global':
             raise InvalidRequest('Global cluster configuration cannot be deleted.')
-        return
 
     def get_object(self, name):
         if name == 'global':

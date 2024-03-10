@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
-# ___INFO__MARK_BEGIN__ 
+#
+# ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -17,10 +17,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #######################################################################################
-# ___INFO__MARK_END__ 
-# 
+# ___INFO__MARK_END__
+#
 import re
-import types
 from uge.exceptions.object_not_found import ObjectNotFound
 from uge.exceptions.invalid_request import InvalidRequest
 from uge.exceptions.invalid_argument import InvalidArgument
@@ -63,11 +62,11 @@ class ShareTreeManager(DictListBasedObjectManager):
     def object_exists(self):
         try:
             self.qconf_executor.execute_qconf('-sstree', self.QCONF_ERROR_SSTREE_REGEX_LIST)
-        except ObjectNotFound as ex:
+        except ObjectNotFound:
             return False
         return True
 
-    # The following methods implement behavior where no share tree 
+    # The following methods implement behavior where no share tree
     # is equivalent to empty list
     def get_object_if_exists(self):
         # Return empty list if share is not there
@@ -88,17 +87,15 @@ class ShareTreeManager(DictListBasedObjectManager):
         if type(data) == list and not len(data):
             self.delete_object_if_exists()
             return self.generate_object(data=[], add_required_data=False)
-        else:     
-            # If share tree exists, modify it
-            # If share tree is not there, add it.
-            if self.object_exists():
-                stree = self.modify_object(pycl_object=pycl_object, data=data, metadata=metadata, json_string=json_string)
-            else:
-                stree = self.add_object(pycl_object=pycl_object, data=data, metadata=metadata, json_string=json_string)
+        # If share tree exists, modify it
+        # If share tree is not there, add it.
+        if self.object_exists():
+            stree = self.modify_object(pycl_object=pycl_object, data=data, metadata=metadata, json_string=json_string)
+        else:
+            stree = self.add_object(pycl_object=pycl_object, data=data, metadata=metadata, json_string=json_string)
         return stree
 
 #############################################################################
 # Testing.
 if __name__ == '__main__':
     pass
-

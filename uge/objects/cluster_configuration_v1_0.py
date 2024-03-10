@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -18,17 +18,16 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
 import os
 import tempfile
-import string
 from .qconf_object import QconfObject
 
 
 class ClusterConfiguration(QconfObject):
     """ This class encapsulates UGE cluster configuration object. """
 
-    #: Object version. 
+    #: Object version.
     VERSION = '1.0'
 
     #: Object name key.
@@ -37,7 +36,7 @@ class ClusterConfiguration(QconfObject):
     #: Object keys that must be provided by user.
     USER_PROVIDED_KEYS = []
 
-    #: Default values for required data keys for the global configuration. 
+    #: Default values for required data keys for the global configuration.
     #: Value for execd_spool_dir key will depend on $SGE_ROOT and $SGE_CELL.
     REQUIRED_GLOBAL_DATA_DEFAULTS = {
         'execd_spool_dir': 'SGE_ROOT/SGE_CELL/spool',
@@ -99,7 +98,7 @@ class ClusterConfiguration(QconfObject):
         'enable_lost_job_reschedule': False,
     }
 
-    #: Default values for required data keys for the host configuration. 
+    #: Default values for required data keys for the host configuration.
     REQUIRED_HOST_DATA_DEFAULTS = {
         'mailer': '/bin/mail',
         'xterm': '/usr/bin/xterm',
@@ -154,7 +153,7 @@ class ClusterConfiguration(QconfObject):
                 self.name = 'global'
 
     def get_name_from_data(self):
-        for (key, value) in list(self.data.items()):
+        for (key, _) in list(self.data.items()):
             if key.startswith('#'):
                 return key[1:-1]  # remove comment and ending column characters
         return None
@@ -162,8 +161,7 @@ class ClusterConfiguration(QconfObject):
     def get_required_data_defaults(self):
         if self.name == 'global':
             return self.REQUIRED_GLOBAL_DATA_DEFAULTS
-        else:
-            return self.REQUIRED_HOST_DATA_DEFAULTS
+        return self.REQUIRED_HOST_DATA_DEFAULTS
 
     def get_tmp_file(self):
         tmp_dir_path = tempfile.mkdtemp()

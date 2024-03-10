@@ -1,0 +1,3 @@
+[MESSAGES CONTROL]
+# disable specific complaints
+disable=missing-module-docstring,missing-function-docstring,line-too-long,too-many-arguments,too-many-locals,too-many-public-methods,useless-object-inheritance,consider-using-f-string,invalid-name,unspecified-encoding,unidiomatic-typecheck

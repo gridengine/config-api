@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
-# ___INFO__MARK_BEGIN__ 
+#
+# ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -17,8 +17,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #######################################################################################
-# ___INFO__MARK_END__ 
-# 
+# ___INFO__MARK_END__
+#
 import copy
 
 UGE_RELEASE_OBJECT_MAP = {}
@@ -48,7 +48,7 @@ UGE_RELEASE_OBJECT_MAP['8.3.1p12'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.3.1p9']
 # 8.4.0
 UGE_RELEASE_OBJECT_MAP['8.4.0'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.3.1p9'])
 UGE_RELEASE_OBJECT_MAP['8.4.0']['ComplexConfiguration'] = '2.0'
-    
+
 # 8.4.3
 UGE_RELEASE_OBJECT_MAP['8.4.3'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.4.0'])
 
@@ -174,24 +174,16 @@ UGE_RELEASE_OBJECT_MAP['8.7.2prealpha3'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7
 # if new version string shall be used (see uge/api/impl/*executor.py#get_uge_version)
 # UGE_RELEASE_OBJECT_MAP['2022.1.0pre3'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0'])
 
-UGE_RELEASE_OBJECT_MAP['8.7.2beta'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.1'])
 UGE_RELEASE_OBJECT_MAP['8.7.2'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.1'])
 
 # 8.7.3
-UGE_RELEASE_OBJECT_MAP['8.7.3prealpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.2'])
+UGE_RELEASE_OBJECT_MAP['8.7.3'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.2'])
 
 # 8.8.0
-UGE_RELEASE_OBJECT_MAP['8.8.0prealpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0'])
-UGE_RELEASE_OBJECT_MAP['8.8.0prealpha2'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0'])
 UGE_RELEASE_OBJECT_MAP['8.8.0'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.7.0'])
 
 # 8.8.1
-UGE_RELEASE_OBJECT_MAP['8.8.1prealpha'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.8.0'])
 UGE_RELEASE_OBJECT_MAP['8.8.1'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.8.0'])
 
 # 8.9.0
-UGE_RELEASE_OBJECT_MAP['8.9.0prealpha1'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.8.1'])
-UGE_RELEASE_OBJECT_MAP['8.9.0prealpha2'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.8.1'])
-UGE_RELEASE_OBJECT_MAP['8.9.0prealpha3'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.8.1'])
-UGE_RELEASE_OBJECT_MAP['8.9.0beta'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.8.1'])
 UGE_RELEASE_OBJECT_MAP['8.9.0'] = copy.copy(UGE_RELEASE_OBJECT_MAP['8.8.1'])

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -18,9 +18,10 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
 import imp
 import json
+import re
 from uge.exceptions.qconf_exception import QconfException
 from uge.exceptions.invalid_request import InvalidRequest
 from .uge_release_object_map import UGE_RELEASE_OBJECT_MAP
@@ -30,7 +31,7 @@ class QconfObjectFactory(object):
 
     @classmethod
     def __get_object_base_module_name(cls, class_name):
-        # This method relies on convention: 
+        # This method relies on convention:
         #     ResourceQuotaSet=>resource_quota_set
         base_module_name = class_name[0].lower()
         for letter in class_name[1:]:
@@ -44,6 +45,7 @@ class QconfObjectFactory(object):
     def __get_object_class_from_uge_version(cls, uge_version, class_name, base_module_name=None):
         if not uge_version:
             raise InvalidRequest('Cannot generate %s object: UGE version must be specified.' % class_name)
+        uge_version = re.search(r'\d+.\d+.\d+', uge_version).group(0)
         if uge_version not in UGE_RELEASE_OBJECT_MAP:
             raise QconfException('Unsupported UGE version: %s.' % uge_version)
         release_map = UGE_RELEASE_OBJECT_MAP.get(uge_version)

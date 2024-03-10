@@ -1,5 +1,5 @@
 # Makefile for Sphinx documentation
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 
 
 # You can set these variables from the command line.

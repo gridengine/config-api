@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
-# ___INFO__MARK_BEGIN__ 
+#
+# ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -17,13 +17,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #######################################################################################
-# ___INFO__MARK_END__ 
-# 
+# ___INFO__MARK_END__
+#
 __docformat__ = 'reStructuredText'
 
 import os
-from functools import wraps
 from decorator import decorator
+from functools import wraps
 from uge.log.log_manager import LogManager
 from uge.exceptions.qconf_exception import QconfException
 from uge.exceptions.configuration_error import ConfigurationError
