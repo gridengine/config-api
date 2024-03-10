@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -18,11 +18,12 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
 
 import os
 import pwd
 import socket
+from uge import __version__
 
 try:
     import UserDict
@@ -121,7 +122,7 @@ class ConfigManager(UserDict.UserDict, object):
         """
         try:
             self[key] = os.environ[env_var]
-        except:
+        except: # pylint: disable=bare-except
             pass
 
     # This function will ignore errors if variable file is not present.
@@ -131,7 +132,6 @@ class ConfigManager(UserDict.UserDict, object):
         in the file is variable value.
         This functions ignores errors.
         """
-
         if os.path.exists(var_file):
             with open(var_file) as v:
                 self[key] = v.readline().lstrip().rstrip()
@@ -152,8 +152,10 @@ class ConfigManager(UserDict.UserDict, object):
         """ Clear config parser. """
         self.config_parser = None
 
-    def get_config_parser(self, defaults={}):
+    def get_config_parser(self, defaults=None):
         """ Return config parser, or none if config file cannot be found. """
+        if defaults is None:
+            defaults = {}
         if self.config_parser is None:
             config_file = self.get_config_file()
             self.config_parser = ConfigParser.ConfigParser(defaults)
@@ -263,8 +265,10 @@ class ConfigManager(UserDict.UserDict, object):
         """
         return self.__get_key_value('logDateFormat', default)
 
-    def set_config_defaults(self, defaults={}):
+    def set_config_defaults(self, defaults=None):
         """ Set configuration defaults. """
+        if defaults is None:
+            defaults = {}
         config_parser = self.get_config_parser()
         if config_parser is not None:
             config_parser.defaults = defaults
@@ -275,7 +279,7 @@ class ConfigManager(UserDict.UserDict, object):
         if self.has_config_section(config_section):
             try:
                 return config_parser.get(config_section, key, raw=True)
-            except ConfigParser.NoOptionError as ex:
+            except ConfigParser.NoOptionError:
                 # ok, return default
                 pass
         return default_value
@@ -300,12 +304,10 @@ class ConfigManager(UserDict.UserDict, object):
         if config_parser is not None and \
                 config_parser.has_section(config_section):
             return config_parser.items(config_section)
-        else:
-            return []
+        return []
 
     def get_version(self):
         """ Get software version."""
-        from uge import __version__
         return __version__
 
 

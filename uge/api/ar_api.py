@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -19,11 +19,15 @@
 #######################################################################################
 # ___INFO__MARK_END__
 #
-from uge.objects.ar_object_factory import AdvanceReservationObjectFactory
 
 __docformat__ = 'reStructuredText'
 
 import os
+import collections
+try:
+    collectionsAbc = collections.abc
+except AttributeError:
+    collectionsAbc = collections
 from functools import wraps
 from decorator import decorator
 from uge.log.log_manager import LogManager
@@ -33,7 +37,7 @@ from uge.api.impl.qrstat_executor import QrstatExecutor
 from uge.api.impl.qrsub_executor import QrsubExecutor
 from uge.api.impl.qrdel_executor import QrdelExecutor
 from uge.api.impl.ar_manager import AdvanceReservationManager
-import collections
+from uge.objects.ar_object_factory import AdvanceReservationObjectFactory
 
 
 class AdvanceReservationApi(object):
@@ -112,7 +116,7 @@ class AdvanceReservationApi(object):
             try:
                 result = func(*args, **kwargs)
                 return result
-            except AdvanceReservationException as ex:
+            except AdvanceReservationException:
                 raise
             except Exception as ex:
                 raise AdvanceReservationException(exception=ex)
@@ -135,10 +139,9 @@ class AdvanceReservationApi(object):
 
             return decorator(wrapped_call, func)
 
-        if len(dargs) == 1 and isinstance(dargs[0], collections.Callable):
+        if len(dargs) == 1 and isinstance(dargs[0], collectionsAbc.Callable):
             return internal_call(dargs[0])
-        else:
-            return internal_call
+        return internal_call
 
     def get_uge_version(self):
         """ Get version of UGE qmaster that API is connected to.

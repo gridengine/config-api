@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -18,10 +18,9 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
 import re
 import sys
-import types
 from uge.log.log_manager import LogManager
 from uge.exceptions.object_not_found import ObjectNotFound
 from uge.exceptions.invalid_request import InvalidRequest
@@ -91,7 +90,7 @@ class ListBasedObjectManager(object):
                                                              self.QCONF_ERROR_REGEX_LIST).get_stdout()
             name_list = QconfNameList(metadata={'description': 'List of %s names' % (self.OBJECT_NAME)},
                                       data=QconfObject.get_list_from_qconf_output(qconf_output))
-        except ObjectNotFound as ex:
+        except ObjectNotFound:
             name_list = QconfNameList(metadata={'description': 'List of %s names' % (self.OBJECT_NAME)}, data=[])
         return name_list
 

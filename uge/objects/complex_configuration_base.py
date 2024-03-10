@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -18,10 +18,9 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
-import types
-from .qconf_object import QconfObject
+#
 from uge.exceptions.invalid_argument import InvalidArgument
+from .qconf_object import QconfObject
 
 
 class ComplexConfigurationBase(QconfObject):
@@ -87,7 +86,7 @@ class ComplexConfigurationBase(QconfObject):
         return lines
 
     def convert_data_to_uge_keywords(self, data):
-        for (data_key, value_dict) in list(data.items()):
+        for (_, value_dict) in list(data.items()):
             for (key, value) in list(value_dict.items()):
                 value_dict[key] = self.py_to_uge(key, value, value_dict.get('default_is_bool', False))
 
@@ -115,7 +114,7 @@ class ComplexConfigurationBase(QconfObject):
 
     def is_uge_value_bool(self, value):
         uppercase_value = value.upper()
-        for (uge_value, py_value) in list(self.UGE_PYTHON_BOOL_VALUE_MAP.items()):
+        for (uge_value, _) in list(self.UGE_PYTHON_BOOL_VALUE_MAP.items()):
             if uge_value == uppercase_value:
                 return True
         return False

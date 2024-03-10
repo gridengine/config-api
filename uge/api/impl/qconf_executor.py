@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -18,10 +18,9 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
 import re
 import os
-import tempfile
 from uge.utility.uge_subprocess import UgeSubprocess
 from uge.log.log_manager import LogManager
 from uge.exceptions.qconf_exception import QconfException
@@ -29,7 +28,6 @@ from uge.exceptions.command_failed import CommandFailed
 from uge.exceptions.qmaster_unreachable import QmasterUnreachable
 from uge.exceptions.authorization_error import AuthorizationError
 from uge.exceptions.object_not_found import ObjectNotFound
-from uge.exceptions.object_already_exists import ObjectAlreadyExists
 
 
 class QconfExecutor(object):

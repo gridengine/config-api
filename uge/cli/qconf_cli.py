@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -18,7 +18,7 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
 from __future__ import print_function
 import abc
 import logging
@@ -155,13 +155,11 @@ class QconfCli(ABC):
     @abc.abstractmethod
     def run_command(self):
         """ This method must be implemented by the derived class. """
-        pass
 
     def check_input_args(self):
         """ 
         This method should verify required arguments in the derived class.
         """
-        pass
 
     def run(self):
         """

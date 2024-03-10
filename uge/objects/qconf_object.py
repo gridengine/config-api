@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -18,7 +18,7 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
+#
 import copy
 import datetime
 import json
@@ -154,7 +154,7 @@ class QconfObject(object):
             raise InvalidRequest('Data object is not a dictionary: %s.' % str(self.data))
 
         removed_keys = []
-        for (key, value) in list(self.data.items()):
+        for (key, _) in list(self.data.items()):
             if key not in self.get_required_data_defaults():
                 if key not in self.USER_PROVIDED_KEYS and not key.startswith('#'):
                     removed_keys.append(key)
@@ -283,8 +283,7 @@ class QconfObject(object):
             delimiter = self.LIST_KEY_MAP.get(key)
             if value.find(delimiter) > 0:
                 return value.split(delimiter)
-            else:
-                return [value]
+            return [value]
         elif key in self.DICT_KEY_MAP:
             # Key is designated as dict key.
             # Try to split by corresponding delimiter.

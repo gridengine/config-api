@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # ___INFO__MARK_BEGIN__
 #######################################################################################
-# Copyright 2016-2022 Altair Engineering Inc.
+# Copyright 2016-2024 Altair Engineering Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -18,8 +18,7 @@
 # limitations under the License.
 #######################################################################################
 # ___INFO__MARK_END__
-# 
-import re
+#
 import copy
 from uge.log.log_manager import LogManager
 from uge.exceptions.object_not_found import ObjectNotFound
@@ -29,6 +28,7 @@ from uge.exceptions.invalid_request import InvalidRequest
 from uge.objects.qconf_object_factory import QconfObjectFactory
 from uge.objects.qconf_object import QconfObject
 from uge.objects.qconf_name_list import QconfNameList
+
 
 
 class DictListBasedObjectManager(object):
@@ -62,11 +62,11 @@ class DictListBasedObjectManager(object):
         uge_version = self.qconf_executor.get_uge_version()
         data2 = copy.copy(data)
         metadata2 = copy.copy(metadata)
-        # If pycl_object is provided, combine its metadata 
+        # If pycl_object is provided, combine its metadata
         # with provided metadata
         if pycl_object is not None:
             generated_object = self.GENERATE_OBJECT_FACTORY_METHOD(uge_version, add_required_data=False)
-            if not str(type(pycl_object)) == str(type(generated_object)):
+            if str(type(pycl_object)) != str(type(generated_object)):
                 raise InvalidArgument(
                     'The pycl_object argument must be an instance of %s.' % generated_object.__class__.__name__)
             data2 = copy.copy(pycl_object.data)
