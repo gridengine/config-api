@@ -34,11 +34,10 @@ export PYCL_REL_STR       = Development
 #
 # $ PYCL_REL="UGE PyCL v1.0" make
 #
-# By default the file will contain the value of the UC_REL_STR makefile 
+# By default the file will contain the value of the UC_REL_STR makefile
 # variable bellow.
 ifneq ($(strip $(GIT_REV)),)
 export PYCL_REL_STR       = Development version ($(GIT_REV))
 endif
-export VERSION            = 8.12.1a0
+export VERSION            = 8.13.0a0
 export PYCL_PACKAGE_NAME  = uge-pycl
-
