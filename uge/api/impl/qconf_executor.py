@@ -1,22 +1,16 @@
 #!/usr/bin/env python
 #
 # ___INFO__MARK_BEGIN__
-#######################################################################################
-# Copyright 2016-2024 Altair Engineering Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not
-# use this file except in compliance with the License.
+#############################################################################
 #
-# You may obtain a copy of the License at
+# This material contains trade secrets or otherwise confidential information
+# owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# "Siemens"), or its licensors. Access to and use of this information is
+# strictly limited as set forth in the Customer's applicable agreements with
+# Siemens.
+# Unpublished work. © 2026 Siemens.
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#######################################################################################
+#############################################################################
 # ___INFO__MARK_END__
 #
 import re
@@ -49,6 +43,7 @@ class QconfExecutor(object):
             'SGE_CELL': sge_cell,
             'SGE_QMASTER_PORT': str(sge_qmaster_port),
             'SGE_EXECD_PORT': str(sge_execd_port),
+            'SGE_SHOW_INTERNAL_VERSION': '1',
             'SGE_SINGLE_LINE': '1',
         }
         self.uge_version = None
