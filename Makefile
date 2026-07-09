@@ -1,4 +1,24 @@
-
+# 
+# ___INFO__MARK_BEGIN__ 
+#######################################################################################
+# Published work. © 2026 Siemens.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License.
+#
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#######################################################################################
+# ___INFO__MARK_END__ 
+# 
 include ./util/include.mk
 
 # The command line arguments of pandoc were renamed between version 1.x and 2.x,
@@ -38,11 +58,11 @@ pdf:
 	(cd doc/UserDocumentation; pandoc $(PANDOC_OPTS) --template=template.tex \
 		--listings -H listings.tex \
 		--variable fontsize=10pt --variable version="$(VERSION)" \
-		--variable title="Grid Engine Configuration API User Guide" \
-		--variable author="Altair Engineering" --variable company="Altair Engineering Inc." \
+		--variable title="HPCWorks™ Grid Engine™ Configuration API User Guide" \
+		--variable author="Siemens Industry Software Inc." --variable company="Siemens Industry Software Inc." \
 		--variable GELongVersion="$(VERSION)" --variable GEShortVersion="$(VERSION)" \
-		--variable GEFullName="Altair Grid Engine" --variable GEShortName="Grid Engine" \
-		--variable doc-family="Altair Grid Engine Documentation" \
+		--variable GEFullName="HPCWorks™ Grid Engine™" --variable GEShortName="HPCWorks™ Grid Engine™" \
+		--variable doc-family="HPCWorks™ Grid Engine™ Documentation" \
 		--toc -s UGEConfigLibraryDoc.md -o UGEConfigLibraryDoc.pdf)
 
 dist: sdist wheel doc

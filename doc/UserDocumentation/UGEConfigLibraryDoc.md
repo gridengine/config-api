@@ -35,9 +35,9 @@ to another using the following Python script:
 
 
 ```
-qconf1 = QconfApi(sge_root=’/opt/uge’, sge_cell=’default’, sge_qmaster_port=11111, sge_execd_port=11112)
-qconf2 = QconfApi(sge_root=’/opt/uge2’, sge_cell=’default’, sge_qmaster_port=21111, sge_execd_port=21112)
-all_q = qconf1.get_queue(’all.q’)
+qconf1 = QconfApi(sge_root='/opt/uge', sge_cell='default', sge_qmaster_port=11111, sge_execd_port=11112)
+qconf2 = QconfApi(sge_root='/opt/uge2', sge_cell='default', sge_qmaster_port=21111, sge_execd_port=21112)
+all_q = qconf1.get_queue('all.q')
 qconf2.modify_queue(all_q)
 ```
 
@@ -210,7 +210,7 @@ added to PyCL objects are listed below:
 -   uge\_cluster
 -   uge\_version
 -   description
--   …
+-   ...
 
 Note that some of the above metadata keys may be added automatically by
 the PyCL library, while others may be added by configuration tools using
@@ -311,7 +311,7 @@ be able to instantiate appropriate versions of object wrapper classes,
 using either provided JSON string representation, or UGE object data
 (see Figure 13).
 
-```
+```python
 qconf = QconfApi(sge_root='/opt/uge', sge_cell='default')
 all_q = qconf.generate_queue(data={'qname' : 'all.q'})
 ```
@@ -451,8 +451,8 @@ As mentioned earlier, QconfApi class requires several variables for
 communication with qmaster: UGE root directory, cell name, and qmaster
 and execd ports:
 
-```
-qconf = QconfApi(sge_root=’/opt/uge’, sge_cell=’default’,
+```python
+qconf = QconfApi(sge_root='/opt/uge', sge_cell='default',
           sge_qmaster_port=11111, sge_execd_port=11112)
 ```
 
@@ -769,11 +769,11 @@ line interfaces have the following functionality:
 -   Logging on the screen is controlled either using environment
     variable PYCL\_LOG\_LEVEL, or by providing the following option:
 
-> --log=<log level>
+> --log=\<log level\>
 
 -   All command parameters may provide “single-dash” flags/options, 
     but they always offer the “double-dash” syntax
-    (--option=<option value>).
+    (--option=\<option value\>).
 
 All CLI classes derive from the base QconfCli class, which
 provides set of features and command line options common to all command
@@ -843,13 +843,13 @@ The same is true for corresponding JSON representations.
 QconfApi class constructor signature is shown below:
 
 ```
- __init__(self, sge_root=None, sge_cell=’default’,
+ __init__(self, sge_root=None, sge_cell='default',
   sge_qmaster_port=6444, sge_execd_port=6445)
 ```
 
 ## ClusterQueue
 
-UGE data for ClusterQueue objects (“-sq <queue name>”) is
+UGE data for ClusterQueue objects (“-sq \<queue name\>”) is
 represented as Python dictionaries. All of the keys below are required
 for add/update operations, and are returned by the get operation:
 
@@ -913,7 +913,7 @@ simplicity) is shown below:
 
 ```
 >>> all_q.to_json()
-'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "ClusterQueue", "modified_on": "2016-04-15T19:30:07.969048", "data": {"qname": "all.q", "hostlist": "@allhosts", "seq_no": 0, "load_thresholds": "np_load_avg=1.75",…}}'
+'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "ClusterQueue", "modified_on": "2016-04-15T19:30:07.969048", "data": {"qname": "all.q", "hostlist": "@allhosts", "seq_no": 0, "load_thresholds": "np_load_avg=1.75",...}}'
 ```
 
 UGE data for a list of queues (“-sql”) is returned within the
@@ -922,7 +922,7 @@ features. Sample JSON representation is shown below:
 
 ```
 >>> queue_list.to_json()
-'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of queues", "data": ["all.q", "long.q",…]}'
+'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of queues", "data": ["all.q", "long.q",...]}'
 ```
 
 QconfApi class method signatures relevant to ClusterQueue objects are as
@@ -947,8 +947,8 @@ can be specified either explicitly, or as part of other input data
 ## Cluster Configuration
 
 
-UGE data for ClusterConfiguration objects (“-sconf \[global | <host
-name>\]”) is represented as Python dictionaries. There are no
+UGE data for ClusterConfiguration objects
+(“-sconf \[global | \<host name\>\]”) is represented as Python dictionaries. There are no
 required keys, and arbitrary non-default keys are allowed for add/update
 operations. However, the default values are different for the “global”
 versus the host-specific configuration. This will be handled by two sets
@@ -1085,7 +1085,7 @@ ClusterConfiguration object (shortened for simplicity) is shown below:
 
 ```
 >>> global_conf.to_json()
-'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "ClusterConfiguration", "object_name": "global", "modified_on": "2016-04-15T19:30:07.969048", "data": {"execd_spool_dir": "/opt/tools/uge/default/spool",…}}'
+'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "ClusterConfiguration", "object_name": "global", "modified_on": "2016-04-15T19:30:07.969048", "data": {"execd_spool_dir": "/opt/tools/uge/default/spool",...}}'
 ```
 
 UGE data for a list of configurations (“-sconfl”) is returned
@@ -1093,7 +1093,7 @@ within the QconfNameList object (see sample JSON representation below):
 
 ```
 >>> conf_list.to_json()
-'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of configurations", "data": ["global", "uge-exec-001",…]}'
+'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of configurations", "data": ["global", "uge-exec-001",...]}'
 ```
 
 Relevant QconfApi class method signatures are as follows:
@@ -1217,7 +1217,7 @@ Sample JSON representation for a SchedulerConfiguration object
 
 ```
 >>> scheduler_conf.to_json()
-'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "SchedulerConfiguration", "modified_on": "2016-04-15T19:30:07.969048", "data": {"algorithm": "default", "schedule_interval": "0:0:15", "maxujobs": 0, …}}'
+'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "SchedulerConfiguration", "modified_on": "2016-04-15T19:30:07.969048", "data": {"algorithm": "default", "schedule_interval": "0:0:15", "maxujobs": 0, ...}}'
 ```
 
 Relevant QconfApi class method signatures are given as follows (no
@@ -1233,7 +1233,7 @@ SchedulerConfiguration get_sconf(self)
 
 ## Execution Host
 
-UGE data for ExecutionHost objects (“-se <host name>”) is
+UGE data for ExecutionHost objects (“-se \<host name\>”) is
 represented as Python dictionaries. All of the keys below are required
 for add/update operations:
 
@@ -1258,14 +1258,14 @@ object (shortened for simplicity) is given below:
 
 ```
 >>> execution_host.to_json()
-'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "ExecutionHost", "modified_on": "2016-04-15T19:30:07.969048", "data": {"hostname": "uge-exec-001", "load_scaling": null, "complex_values": "m_mem_free=2007.000000M",…}}'
+'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "ExecutionHost", "modified_on": "2016-04-15T19:30:07.969048", "data": {"hostname": "uge-exec-001", "load_scaling": null, "complex_values": "m_mem_free=2007.000000M",...}}'
 ```
 
 UGE data for a list of execution hosts (“-sel”) is returned within the QconfNameList object:
 
 ```
 >>> execution_host_list.to_json()
-'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of execution hosts", "data": ["uge-exec-001", "uge-exec-002",…]}'
+'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of execution hosts", "data": ["uge-exec-001", "uge-exec-002",...]}'
 ```
 
 QconfApi class method signatures relevant to ExecutionHost objects are as follows:
@@ -1287,7 +1287,7 @@ dictionary or JSON string).
 
 ## Host Group
 
-UGE data for HostGroup objects (“-shgrp <host_group_name>”) is
+UGE data for HostGroup objects (“-shgrp \<host_group_name\>”) is
 represented as Python dictionaries. There are two keys required for
 add/update operations, and are also returned by the get operations:
 
@@ -1301,14 +1301,14 @@ Sample JSON representation for a HostGroup object is shown below:
 
 ```
 >>> host_group.to_json()
-'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "HostGroup", "modified_on": "2016-04-15T19:30:07.969048", "data": {"group_name": "@allhosts", "hostlist": ["uge-exec-001", "uge-exec-002", "uge-exec-003",…]}}'
+'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "HostGroup", "modified_on": "2016-04-15T19:30:07.969048", "data": {"group_name": "@allhosts", "hostlist": ["uge-exec-001", "uge-exec-002", "uge-exec-003",...]}}'
 ```
 
 UGE data for a list of host groups (“-shgrpl”) is returned within the QconfNameList object:
 
 ```
 >>> host_group_list.to_json()
-'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of host groups", "data": ["@allhosts",…]}'
+'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of host groups", "data": ["@allhosts",...]}'
 ```
 
 QconfApi class method signatures relevant to HostGroup objects are as follows:
@@ -1333,81 +1333,82 @@ dictionary or JSON string).
 
 UGE data for ComplexConfiguration objects (“-sc”) is represented as Python dictionaries, where keys are complex attribute names and values are dictionaries of attribute data. Built-in complex attributes (shown below) are required, but optional attributes are allowed.
 
-name/PYTHON KEY  |   shortcut  |  type      |   relop |  requestable |   consumable |  default  |  urgency |  aapre  
------             |  -----      |  -----     | -----   | -----        |  -----       |   -----   |  -----   | -----  
+
+name/PYTHON KEY   |   shortcut  |  type      |   relop |  requestable |  consumable  |  default  |  urgency | aapre
+-----             |  -----      |  -----     | -----   | -----        |  -----       |  ------   |  -----   | -----
 arch              |   a         |  RESTRING  |   ==    |  YES         |   NO         |  NONE     |  0       |  NO
 calendar          |   c         |  RESTRING  |   ==    |  YES         |   NO         |  NONE     |  0       |  NO
 cpu               |   cpu       |  DOUBLE    |   >=    |  YES         |   NO         |  0        |  0       |  NO
-d\_rt              |   d\_rt      |  TIME      |   <=    |  YES         |   NO         |  0:0:0    |  0       |  NO
-display\_win\_gui   |   dwg       |  BOOL      |   ==    |  YES         |   NO         |  0        |  0       |  NO
-h\_core            |   h\_core    |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-h\_cpu             |   h\_cpu     |  TIME      |   <=    |  YES         |   NO         |  0:0:0    |  0       |  NO
-h\_data            |   h\_data    |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-h\_fsize           |   h\_fsize   |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-h\_rss             |   h\_rss     |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-h\_rt              |   h\_rt      |  TIME      |   <=    |  YES         |   NO         |  0:0:0    |  0       |  NO
-h\_stack           |   h\_stack   |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-h\_vmem            |   h\_vmem    |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+d\_rt             |   d\_rt     |  TIME      |   <=    |  YES         |   NO         |  0:0:0    |  0       |  NO
+display\_win\_gui |   dwg       |  BOOL      |   ==    |  YES         |   NO         |  0        |  0       |  NO
+h\_core           |   h\_core   |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+h\_cpu            |   h\_cpu    |  TIME      |   <=    |  YES         |   NO         |  0:0:0    |  0       |  NO
+h\_data           |   h\_data   |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+h\_fsize          |   h\_fsize  |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+h\_rss            |   h\_rss    |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+h\_rt             |   h\_rt     |  TIME      |   <=    |  YES         |   NO         |  0:0:0    |  0       |  NO
+h\_stack          |   h\_stack  |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+h\_vmem           |   h\_vmem   |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
 hostname          |   h         |  HOST      |   ==    |  YES         |   NO         |  NONE     |  0       |  NO
-load\_avg          |   la        |  DOUBLE    |   >=    |  NO          |   NO         |  0        |  0       |  NO
-load\_long         |   ll        |  DOUBLE    |   >=    |  NO          |   NO         |  0        |  0       |  NO
-load\_medium       |   lm        |  DOUBLE    |   >=    |  NO          |   NO         |  0        |  0       |  NO
-load\_short        |   ls        |  DOUBLE    |   >=    |  NO          |   NO         |  0        |  0       |  NO
-m\_cache\_l1        |   mcache1   |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-m\_cache\_l2        |   mcache2   |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-m\_cache\_l3        |   mcache3   |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-m\_core            |   core      |  INT       |   <=    |  YES         |   NO         |  0        |  0       |  NO
-m\_mem\_free        |   mfree     |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
-m\_mem\_free\_n0     |   mfree0    |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
-m\_mem\_free\_n1     |   mfree1    |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
-m\_mem\_free\_n2     |   mfree2    |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
-m\_mem\_free\_n3     |   mfree3    |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
-m\_mem\_total       |   mtotal    |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
-m\_mem\_total\_n0    |   mmem0     |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
-m\_mem\_total\_n1    |   mmem1     |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
-m\_mem\_total\_n2    |   mmem2     |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
-m\_mem\_total\_n3    |   mmem3     |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
-m\_mem\_used        |   mused     |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
-m\_mem\_used\_n0     |   mused0    |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
-m\_mem\_used\_n1     |   mused1    |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
-m\_mem\_used\_n2     |   mused2    |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
-m\_mem\_used\_n3     |   mused3    |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
-m\_numa\_nodes      |   nodes     |  INT       |   <=    |  YES         |   NO         |  0        |  0       |  NO
-m\_socket          |   socket    |  INT       |   <=    |  YES         |   NO         |  0        |  0       |  NO
-m\_thread          |   thread    |  INT       |   <=    |  YES         |   NO         |  0        |  0       |  NO
-m\_topology        |   topo      |  RESTRING  |   ==    |  YES         |   NO         |  NONE     |  0       |  NO
-m\_topology\_inuse  |   utopo     |  RESTRING  |   ==    |  YES         |   NO         |  NONE     |  0       |  NO
-m\_topology\_numa   |   unuma     |  RESTRING  |   ==    |  YES         |   NO         |  NONE     |  0       |  NO
-mem\_free          |   mf        |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-mem\_total         |   mt        |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-mem\_used          |   mu        |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
-min\_cpu\_interval  |   mci       |  TIME      |   <=    |  NO          |   NO         |  0:0:0    |  0       |  NO
-np\_load\_avg       |   nla       |  DOUBLE    |   >=    |  NO          |   NO         |  0        |  0       |  NO
-np\_load\_long      |   nll       |  DOUBLE    |   >=    |  NO          |   NO         |  0        |  0       |  NO
-np\_load\_medium    |   nlm       |  DOUBLE    |   >=    |  NO          |   NO         |  0        |  0       |  NO
-np\_load\_short     |   nls       |  DOUBLE    |   >=    |  NO          |   NO         |  0        |  0       |  NO
-num\_proc          |   p         |  INT       |   ==    |  YES         |   NO         |  0        |  0       |  NO
+load\_avg         |   la        |  DOUBLE    |   >=    |  NO          |   NO         |  0        |  0       |  NO
+load\_long        |   ll        |  DOUBLE    |   >=    |  NO          |   NO         |  0        |  0       |  NO
+load\_medium      |   lm        |  DOUBLE    |   >=    |  NO          |   NO         |  0        |  0       |  NO
+load\_short       |   ls        |  DOUBLE    |   >=    |  NO          |   NO         |  0        |  0       |  NO
+m\_cache\_l1      |   mcache1   |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+m\_cache\_l2      |   mcache2   |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+m\_cache\_l3      |   mcache3   |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+m\_core           |   core      |  INT       |   <=    |  YES         |   NO         |  0        |  0       |  NO
+m\_mem\_free      |   mfree     |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
+m\_mem\_free\_n0  |   mfree0    |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
+m\_mem\_free\_n1  |   mfree1    |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
+m\_mem\_free\_n2  |   mfree2    |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
+m\_mem\_free\_n3  |   mfree3    |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
+m\_mem\_total     |   mtotal    |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
+m\_mem\_total\_n0 |   mmem0     |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
+m\_mem\_total\_n1 |   mmem1     |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
+m\_mem\_total\_n2 |   mmem2     |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
+m\_mem\_total\_n3 |   mmem3     |  MEMORY    |   <=    |  YES         |   YES        |  0        |  0       |  YES
+m\_mem\_used      |   mused     |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
+m\_mem\_used\_n0  |   mused0    |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
+m\_mem\_used\_n1  |   mused1    |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
+m\_mem\_used\_n2  |   mused2    |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
+m\_mem\_used\_n3  |   mused3    |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
+m\_numa\_nodes    |   nodes     |  INT       |   <=    |  YES         |   NO         |  0        |  0       |  NO
+m\_socket         |   socket    |  INT       |   <=    |  YES         |   NO         |  0        |  0       |  NO
+m\_thread         |   thread    |  INT       |   <=    |  YES         |   NO         |  0        |  0       |  NO
+m\_topology       |   topo      |  RESTRING  |   ==    |  YES         |   NO         |  NONE     |  0       |  NO
+m\_topology\_inuse|   utopo     |  RESTRING  |   ==    |  YES         |   NO         |  NONE     |  0       |  NO
+m\_topology\_numa |   unuma     |  RESTRING  |   ==    |  YES         |   NO         |  NONE     |  0       |  NO
+mem\_free         |   mf        |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+mem\_total        |   mt        |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+mem\_used         |   mu        |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
+min\_cpu\_interval|   mci       |  TIME      |   <=    |  NO          |   NO         |  0:0:0    |  0       |  NO
+np\_load\_avg     |   nla       |  DOUBLE    |   >=    |  NO          |   NO         |  0        |  0       |  NO
+np\_load\_long    |   nll       |  DOUBLE    |   >=    |  NO          |   NO         |  0        |  0       |  NO
+np\_load\_medium  |   nlm       |  DOUBLE    |   >=    |  NO          |   NO         |  0        |  0       |  NO
+np\_load\_short   |   nls       |  DOUBLE    |   >=    |  NO          |   NO         |  0        |  0       |  NO
+num\_proc         |   p         |  INT       |   ==    |  YES         |   NO         |  0        |  0       |  NO
 qname             |   q         |  RESTRING  |   ==    |  YES         |   NO         |  NONE     |  0       |  NO
 rerun             |   re        |  BOOL      |   ==    |  NO          |   NO         |  0        |  0       |  NO
-s\_core            |   s\_core    |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-s\_cpu             |   s\_cpu     |  TIME      |   <=    |  YES         |   NO         |  0:0:0    |  0       |  NO
-s\_data            |   s\_data    |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-s\_fsize           |   s\_fsize   |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-s\_rss             |   s\_rss     |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-s\_rt              |   s\_rt      |  TIME      |   <=    |  YES         |   NO         |  0:0:0    |  0       |  NO
-s\_stack           |   s\_stack   |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-s\_vmem            |   s\_vmem    |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-seq\_no            |   seq       |  INT       |   ==    |  NO          |   NO         |  0        |  0       |  NO
+s\_core           |   s\_core   |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+s\_cpu            |   s\_cpu    |  TIME      |   <=    |  YES         |   NO         |  0:0:0    |  0       |  NO
+s\_data           |   s\_data   |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+s\_fsize          |   s\_fsize  |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+s\_rss            |   s\_rss    |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+s\_rt             |   s\_rt     |  TIME      |   <=    |  YES         |   NO         |  0:0:0    |  0       |  NO
+s\_stack          |   s\_stack  |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+s\_vmem           |   s\_vmem   |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+seq\_no           |   seq       |  INT       |   ==    |  NO          |   NO         |  0        |  0       |  NO
 slots             |   s         |  INT       |   <=    |  YES         |   YES        |  1        |  1000    |  YES
-swap\_free         |   sf        |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-swap\_rate         |   sr        |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
-swap\_rsvd         |   srsv      |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
-swap\_total        |   st        |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-swap\_used         |   su        |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
+swap\_free        |   sf        |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+swap\_rate        |   sr        |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
+swap\_rsvd        |   srsv      |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
+swap\_total       |   st        |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+swap\_used        |   su        |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
 tmpdir            |   tmp       |  RESTRING  |   ==    |  NO          |   NO         |  NONE     |  0       |  NO
-virtual\_free      |   vf        |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-virtual\_total     |   vt        |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
-virtual\_used      |   vu        |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
+virtual\_free     |   vf        |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+virtual\_total    |   vt        |  MEMORY    |   <=    |  YES         |   NO         |  0        |  0       |  NO
+virtual\_used     |   vu        |  MEMORY    |   >=    |  YES         |   NO         |  0        |  0       |  NO
 
 
 An example of a Python dictionary representing complex attribute data “slots” from the table above is as follows:
@@ -1420,7 +1421,7 @@ Sample JSON representation for a ComplexConfiguration object (shortened for simp
 
 ```
 >>> complex_configuration.to_json()
-'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "ComplexConfiguration", "modified_on": "2016-04-15T19:30:07.969048", "data": {"slots": {"shortcut" : "s", "type" : "INT", "relop" : "<=", "requestable" : true, "consumable" : true, "default" : 1, "urgency" : 1000, "aapre" : true},…}}'
+'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "ComplexConfiguration", "modified_on": "2016-04-15T19:30:07.969048", "data": {"slots": {"shortcut" : "s", "type" : "INT", "relop" : "<=", "requestable" : true, "consumable" : true, "default" : 1, "urgency" : 1000, "aapre" : true},...}}'
 ```
 
 QconfApi class method signatures relevant to ComplexConfiguration
@@ -1439,7 +1440,7 @@ ComplexConfiguration delete_cattr(self, name)
 
 ## Project
 
-UGE data for Project objects (“-sprj <project name>”) is
+UGE data for Project objects (“-sprj \<project name\>”) is
 represented as Python dictionaries. Optional keys are not allowed. The keys required for add/update operations, and also returned by the get operations are the following:
 
 UGE/PYTHON KEY   |   DEFAULT UGE VALUE   |        DEFAULT PYTHON VALUE
@@ -1462,7 +1463,7 @@ UGE data for a list of projects (“-sprjl”) is returned within the QconfNameL
 
 ```
 >>> project_list.to_json()
-'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of projects", "data": ["P1",…]}'
+'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of projects", "data": ["P1",...]}'
 ```
 
 QconfApi class method signatures relevant to Project objects are as
@@ -1485,7 +1486,7 @@ In order to generate, add, or modify project, its name can be specified either e
 ## User
 
 
-UGE data for User objects (“-suser <user name>”) is represented
+UGE data for User objects (“-suser \<user name\>”) is represented
 as Python dictionaries. Optional keys are not allowed. The keys required
 for add/update operations, and also returned by the get operations are
 the following:
@@ -1509,7 +1510,7 @@ UGE data for a list of users (“-suserl”) is returned within the QconfNameLis
 
 ```
 >>> user_list.to_json()
-'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of users", "data": ["U1",…]}'
+'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of users", "data": ["U1",...]}'
 ```
 
 QconfApi class method signatures relevant to User objects are as
@@ -1531,7 +1532,7 @@ In order to generate, add, or modify user, its name can be specified either expl
 
 ## Access List
 
-UGE data for AccessList objects (“-su <list name>”) is
+UGE data for AccessList objects (“-su \<list name\>”) is
 represented as Python dictionaries. Optional keys are not allowed. The keys required for add/update operations, and also returned by the get operations are the following:
 
 UGE/PYTHON KEY  |    DEFAULT UGE VALUE   |  DEFAULT PYTHON VALUE
@@ -1554,7 +1555,7 @@ UGE data for a list of access lists (“-sul”) is returned within the QconfNam
 
 ```
 >>> acl_list.to_json()
-'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of access lists", "data": ["arusers",…]}'
+'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of access lists", "data": ["arusers",...]}'
 ```
 
 QconfApi class method signatures relevant to AccessList objects are the following:
@@ -1579,7 +1580,7 @@ dictionary or JSON string).
 
 ## Job Class
 
-UGE data for JobClass objects (“-sjc <job class name>”) is
+UGE data for JobClass objects (“-sjc \<job class name\>”) is
 represented as Python dictionaries. Optional keys are not allowed. The
 keys required for add/update operations, and also returned by the get
 operations are the following:
@@ -1643,14 +1644,14 @@ simplicity) is shown below:
 
 ```
 >>> job_class.to_json()
-'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "JobClass", "modified_on": "2016-04-15T19:30:07.969048", "data": {"jcname": "JC1", "variant_list": null,…, "v": "{+}UNSPECIFIED"}}'
+'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "JobClass", "modified_on": "2016-04-15T19:30:07.969048", "data": {"jcname": "JC1", "variant_list": null,..., "v": "{+}UNSPECIFIED"}}'
 ```
 
 UGE data for a list of job classes (“-sjcl”) is returned within the QconfNameList object:
 
 ```
 >>> job_class_list.to_json()
-'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of job classes", "data": ["JC1",…]}'
+'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of job classes", "data": ["JC1",...]}'
 ```
 
 QconfApi class method signatures relevant to JobClass objects are the following:
@@ -1673,7 +1674,7 @@ dictionary or JSON string).
 
 ## Resource Quota Set
 
-UGE data for ResourceQuotaSet objects (“-srqs <set name>”) is
+UGE data for ResourceQuotaSet objects (“-srqs \<set name\>”) is
 represented as Python dictionaries. Optional keys are not allowed. The keys required for add/update operations, and also returned by the get operations are the following:
 
 UGE/PYTHON KEY  |   DEFAULT UGE VALUE     |      DEFAULT PYTHON VALUE
@@ -1697,7 +1698,7 @@ UGE data for a list of resource quota sets (“-srqsl”) is returned within the
 
 ```
 >>> rqs_list.to_json()
-'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of resource quota sets", "data": ["RQS1",…]}'
+'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of resource quota sets", "data": ["RQS1",...]}'
 ```
 
 QconfApi class method signatures relevant to ResourceQuotaSet objects are the following:
@@ -1718,7 +1719,7 @@ In order to generate, add, or modify resource quota set, its name can be specifi
 
 ## Parallel Environment
 
-UGE data for ParallelEnvironment objects (“-sp <pe name>”) is
+UGE data for ParallelEnvironment objects (“-sp \<pe name\>”) is
 represented as Python dictionaries. Optional keys are not allowed. The
 keys required for add/update operations, and also returned by the get
 operations are the following:
@@ -1746,14 +1747,14 @@ Sample JSON representation for a ParallelEnvironment object, shortened for simpl
 
 ```
 >>> pe.to_json()
-'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "ParallelEnvironment", "modified_on": "2016-04-15T19:30:07.969048", "data": {"pe_name": "PE1", "slots": 100,…, "master_forks_slaves": false}}'
+'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "ParallelEnvironment", "modified_on": "2016-04-15T19:30:07.969048", "data": {"pe_name": "PE1", "slots": 100,..., "master_forks_slaves": false}}'
 ```
 
 UGE data for a list of parallel environments (“-spl”) is returned within the QconfNameList object:
 
 ```
 >>> pe_list.to_json()
-'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of parallel environments", "data": ["PE1",…]}'
+'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of parallel environments", "data": ["PE1",...]}'
 ```
 
 QconfApi class method signatures relevant to ParallelEnvironment objects are the following:
@@ -1811,7 +1812,7 @@ exception if share tree does not exist.
 
 ## Calendar
 
-UGE data for Calendar objects (“-scal <calendar name>”) is
+UGE data for Calendar objects (“-scal \<calendar name\>”) is
 represented as Python dictionaries. Optional keys are not allowed. The
 keys required for add/update operations, and also returned by the get
 operations are the following:
@@ -1834,7 +1835,7 @@ UGE data for a list of calendars (“-scall”) is returned within the QconfName
 
 ```
 >>> calendar_list.to_json()
-'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of calendars", "data": ["CAL1",…]}'
+'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of calendars", "data": ["CAL1",...]}'
 ```
 
 QconfApi class method signatures relevant to Calendar objects are the following:
@@ -1855,7 +1856,7 @@ In order to generate, add, or modify calendar, its name can be specified either 
 
 ## Checkpointing Environment
 
-UGE data for CheckpointingEnvironment objects (“-sckpt <name>”)
+UGE data for CheckpointingEnvironment objects (“-sckpt \<name\>”)
 is represented as Python dictionaries. Optional keys are not allowed.
 The keys required for add/update operations, and also returned by the
 get operations are the following:
@@ -1877,14 +1878,14 @@ shown below:
 
 ```
 >>> ckpt.to_json()
-'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "CheckpointingEnvironment", "modified_on": "2016-04-15T19:30:07.969048", "data": {"ckpt_name": "CKPT1", "interface": "userdefined",…, "when": "sx"}}'
+'{"object_version": "1.0", "modified_by": "sveseli", "uge_cluster": "C1", "object_class": "CheckpointingEnvironment", "modified_on": "2016-04-15T19:30:07.969048", "data": {"ckpt_name": "CKPT1", "interface": "userdefined",..., "when": "sx"}}'
 ```
 
 UGE data for a list of checkpointing environments (“-sckptl”) is returned within the QconfNameList object:
 
 ```
 >>> ckpt_list.to_json()
-'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of checkpointing environments", "data": ["CKPT1",…]}'
+'{"object_version": "1.0", "uge_cluster": "C1", "object_class": "QconfNameList", "description": "list of checkpointing environments", "data": ["CKPT1",...]}'
 ```
 
 QconfApi class method signatures relevant to CheckpointingEnvironment objects are the following:

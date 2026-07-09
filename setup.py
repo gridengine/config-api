@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 # 
 # ___INFO__MARK_BEGIN__ 
 #######################################################################################
-# Copyright 2016-2024 Altair Engineering Inc.
+# Published work. © 2026 Siemens.
+#
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License.
 #
@@ -51,15 +53,15 @@ setup(name='uge-pycl',
       description='UGE Python Configuration Library',
       long_description=long_description,
       # long_description_content_type='text/markdown',
-      author='Altair Engineering Inc.',
-      author_email='support@altair.com',
+      author='Siemens Industry Software Inc.',
+      author_email='support@siemens.com',
       test_suite='test',
       entry_points={
         'console_scripts': [
             'qconf-convert=uge.cli.qconf_convert:run',
         ],
       },
-      url='https://www.altair.com',
+      url='https://www.siemens.com',
       packages=[
                 'uge', 
                 'uge/api', 

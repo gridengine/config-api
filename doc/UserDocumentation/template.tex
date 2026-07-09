@@ -14,11 +14,15 @@
 \usepackage{tikz}
 \usepackage[tikz]{bclogo}
 \usepackage[a4paper]{geometry}
+\usepackage{ragged2e}
+\usepackage{array}
+\usepackage{calc}
 \usepackage[raggedright]{titlesec}
 \usepackage{array} % provides \arraybackslash used in pandoc-generated table columns
 \usepackage{calc} % provides \real{} used for pandoc column width calculations
 \usepackage{booktabs}
 \usepackage{tcolorbox}
+\usepackage{listings}
 % use microtype if available
 \IfFileExists{microtype.sty}{\usepackage{microtype}}{}
 % use upquote if available, for straight quotes in verbatim environments
@@ -173,7 +177,8 @@ $else$
 
 % Upper part of the page. The '~' is needed because \\
 % only works if a paragraph has started.
-\includegraphics[width=0.15\textwidth]{./altair-360x360.png}~\\[1cm]
+%\includegraphics[width=0.15\textwidth]{siemens-logo.png}~\\[1cm]
+\includegraphics{siemens-logo.png}~\\[1cm]
 
 \textsc{\LARGE $company$}\\[1.5cm]
 
